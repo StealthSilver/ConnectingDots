@@ -4,7 +4,7 @@ export function SiteFooter() {
       <div className="mx-auto max-w-5xl px-4 sm:px-6">
         <div className="flex flex-col gap-8 sm:flex-row sm:items-start sm:justify-between">
           <div>
-            <p className="text-sm font-medium text-foreground">Connecting Dots</p>
+            <p className="font-brand text-sm font-medium text-foreground">Connecting Dots</p>
             <p className="mt-1 max-w-sm text-sm text-muted">
               Learning computer science by wiring ideas together — notes and courses, one
               project at a time.

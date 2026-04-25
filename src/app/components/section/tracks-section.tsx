@@ -39,7 +39,7 @@ export function TracksSection() {
         <div className="max-w-2xl">
           <h2
             id="tracks-heading"
-            className="text-2xl font-semibold tracking-tight text-foreground sm:text-3xl"
+            className="font-brand text-2xl font-semibold tracking-tight text-foreground sm:text-3xl"
           >
             What you can learn here
           </h2>
@@ -58,7 +58,7 @@ export function TracksSection() {
                 >
                   {t.status}
                 </span>
-                <h3 className="mt-4 text-lg font-medium text-foreground group-hover:text-accent">
+                <h3 className="font-brand mt-4 text-lg font-medium text-foreground group-hover:text-accent">
                   {t.title}
                 </h3>
                 <p className="mt-2 flex-1 text-sm leading-relaxed text-muted">

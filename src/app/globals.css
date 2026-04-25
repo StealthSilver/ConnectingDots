@@ -3,7 +3,7 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 :root {
-  /* Brand gradient (start → mid → end) */
+  /* Brand color stops (gold, orange, deep purple) */
   --gradient-start: #ffb21a;
   --gradient-mid: #f4420c;
   --gradient-end: #230c36;
@@ -17,8 +17,6 @@
   --accent: var(--gradient-mid);
   --accent-muted: #ffefe4;
   --ring: color-mix(in srgb, var(--gradient-mid) 38%, transparent);
-  /* Nodes / grid: deep purple */
-  --grid-dot: color-mix(in srgb, var(--gradient-end) 16%, transparent);
 }
 
 .dark {
@@ -30,7 +28,6 @@
   --accent: var(--gradient-mid);
   --accent-muted: color-mix(in srgb, var(--gradient-end) 45%, transparent);
   --ring: color-mix(in srgb, var(--gradient-start) 38%, transparent);
-  --grid-dot: color-mix(in srgb, var(--gradient-end) 22%, transparent);
 }
 
 @theme inline {
@@ -42,11 +39,12 @@
   --color-accent: var(--accent);
   --color-accent-muted: var(--accent-muted);
   --color-ring: var(--ring);
-  --color-gradient-start: var(--gradient-start);
-  --color-gradient-mid: var(--gradient-mid);
-  --color-gradient-end: var(--gradient-end);
-  --font-sans: var(--font-geist-sans);
+  /* SF Pro Display first on systems that ship it; then system UI fonts */
+  --font-sans:
+    "SF Pro Display", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue",
+    Helvetica, Arial, sans-serif;
   --font-mono: var(--font-geist-mono);
+  --font-brand: var(--font-plus-jakarta), ui-sans-serif, system-ui, sans-serif;
 }
 
 @layer base {
@@ -58,16 +56,3 @@
   }
 }
 
-@utility dot-grid {
-  background-image: radial-gradient(var(--grid-dot) 1px, transparent 1px);
-  background-size: 24px 24px;
-}
-
-@utility bg-hero-mesh {
-  background: linear-gradient(
-    128deg,
-    color-mix(in srgb, var(--gradient-start) 22%, transparent) 0%,
-    color-mix(in srgb, var(--gradient-mid) 10%, transparent) 45%,
-    color-mix(in srgb, var(--gradient-end) 20%, transparent) 100%
-  );
-}

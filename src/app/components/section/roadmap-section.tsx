@@ -26,7 +26,7 @@ export function RoadmapSection() {
       <div className="mx-auto max-w-5xl px-4 sm:px-6">
         <h2
           id="roadmap-heading"
-          className="text-2xl font-semibold tracking-tight text-foreground sm:text-3xl"
+          className="font-brand text-2xl font-semibold tracking-tight text-foreground sm:text-3xl"
         >
           How this place grows
         </h2>
@@ -47,7 +47,7 @@ export function RoadmapSection() {
               <p className="text-xs font-semibold uppercase tracking-wider text-accent">
                 {p.label}
               </p>
-              <h3 className="mt-1 text-lg font-medium text-foreground">{p.title}</h3>
+              <h3 className="font-brand mt-1 text-lg font-medium text-foreground">{p.title}</h3>
               <p className="mt-2 max-w-xl text-sm leading-relaxed text-muted sm:text-base">
                 {p.desc}
               </p>

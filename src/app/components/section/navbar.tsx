@@ -78,15 +78,25 @@ export function Navbar() {
           href="/"
           className="group flex items-center gap-2.5 text-foreground no-underline"
         >
-          <Image
-            src="/cd.png"
-            alt=""
-            width={32}
-            height={32}
-            className="h-8 w-8 shrink-0 rounded-lg object-contain"
-            priority
-          />
-          <span className="text-sm font-medium tracking-tight sm:text-base">
+          <span className="relative block h-8 w-8 shrink-0">
+            <Image
+              src="/cd.png"
+              alt=""
+              width={32}
+              height={32}
+              className="h-8 w-8 rounded-lg object-contain dark:hidden"
+              priority
+            />
+            <Image
+              src="/cdlight.png"
+              alt=""
+              width={32}
+              height={32}
+              className="hidden h-8 w-8 rounded-lg object-contain dark:block"
+              priority
+            />
+          </span>
+          <span className="font-brand text-sm font-medium tracking-tight sm:text-base">
             Connecting Dots
           </span>
         </Link>
@@ -110,7 +120,7 @@ export function Navbar() {
           <ThemeToggle />
           <a
             href="#hero-cta"
-            className="hidden rounded-lg bg-accent px-3.5 py-2 text-sm font-medium text-white shadow-sm transition hover:bg-accent/90 sm:inline-block dark:text-background"
+            className="font-brand hidden rounded-lg bg-accent px-3.5 py-2 text-sm font-medium text-white shadow-sm transition hover:bg-accent/90 sm:inline-block dark:text-background"
           >
             Start
           </a>
@@ -147,7 +157,7 @@ export function Navbar() {
             ))}
             <a
               href="#hero-cta"
-              className="mt-1 rounded-lg bg-accent px-3 py-2.5 text-center text-sm font-medium text-white dark:text-background"
+              className="font-brand mt-1 rounded-lg bg-accent px-3 py-2.5 text-center text-sm font-medium text-white dark:text-background"
               onClick={() => setOpen(false)}
             >
               Start learning

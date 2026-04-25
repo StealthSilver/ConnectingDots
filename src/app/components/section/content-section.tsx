@@ -8,7 +8,7 @@ export function ContentSection() {
       <div className="mx-auto max-w-5xl px-4 sm:px-6">
         <h2
           id="content-heading"
-          className="text-2xl font-semibold tracking-tight text-foreground sm:text-3xl"
+          className="font-brand text-2xl font-semibold tracking-tight text-foreground sm:text-3xl"
         >
           On the site today
         </h2>

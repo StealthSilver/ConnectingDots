@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist_Mono, Plus_Jakarta_Sans } from "next/font/google";
+import { Neurons } from "./components/background/neurons-lazy";
 import { ThemeProvider } from "./components/theme-provider";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const fontBrand = Plus_Jakarta_Sans({
+  variable: "--font-plus-jakarta",
   subsets: ["latin"],
+  display: "swap",
 });
 
 const geistMono = Geist_Mono({
@@ -28,10 +30,13 @@ export default function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${geistSans.variable} ${geistMono.variable} h-full`}
+      className={`${fontBrand.variable} ${geistMono.variable} h-full`}
     >
-      <body className="flex min-h-full flex-col">
-        <ThemeProvider>{children}</ThemeProvider>
+      <body className="relative flex min-h-full flex-col">
+        <Neurons />
+        <div className="relative z-10 flex min-h-full flex-1 flex-col">
+          <ThemeProvider>{children}</ThemeProvider>
+        </div>
       </body>
     </html>
   );
