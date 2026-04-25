@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useTheme } from "next-themes";
+import Image from "next/image";
 import Link from "next/link";
 
 const nav = [
@@ -77,16 +78,14 @@ export function Navbar() {
           href="/"
           className="group flex items-center gap-2.5 text-foreground no-underline"
         >
-          <span
-            className="flex h-8 w-8 items-center justify-center rounded-lg bg-accent/15 text-xs font-semibold text-accent ring-1 ring-inset ring-accent/25"
-            aria-hidden
-          >
-            <span className="flex gap-0.5">
-              <span className="h-1.5 w-1.5 rounded-full bg-accent" />
-              <span className="h-1.5 w-1.5 rounded-full bg-accent/60" />
-              <span className="h-1.5 w-1.5 rounded-full bg-accent/35" />
-            </span>
-          </span>
+          <Image
+            src="/cd.png"
+            alt=""
+            width={32}
+            height={32}
+            className="h-8 w-8 shrink-0 rounded-lg object-contain"
+            priority
+          />
           <span className="text-sm font-medium tracking-tight sm:text-base">
             Connecting Dots
           </span>
