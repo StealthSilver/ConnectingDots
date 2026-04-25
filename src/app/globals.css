@@ -3,27 +3,34 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 :root {
-  --background: #f7faf8;
+  /* Brand gradient (start → mid → end) */
+  --gradient-start: #ffb21a;
+  --gradient-mid: #f4420c;
+  --gradient-end: #230c36;
+
+  /* Page chrome — foreground & muted text unchanged */
+  --background: #f8f6fb;
   --foreground: #0c1812;
   --muted: #5c6d64;
   --card: #ffffff;
-  --border: rgba(22, 163, 74, 0.12);
-  --accent: #16a34a;
-  --accent-muted: #dcfce7;
-  --ring: rgba(22, 163, 74, 0.35);
-  --grid-dot: rgba(22, 163, 74, 0.15);
+  --border: color-mix(in srgb, var(--gradient-end) 14%, transparent);
+  --accent: var(--gradient-mid);
+  --accent-muted: #ffefe4;
+  --ring: color-mix(in srgb, var(--gradient-mid) 38%, transparent);
+  /* Nodes / grid: deep purple */
+  --grid-dot: color-mix(in srgb, var(--gradient-end) 16%, transparent);
 }
 
 .dark {
-  --background: #050a07;
+  --background: #06040a;
   --foreground: #e8f5ee;
   --muted: #8aa396;
-  --card: #0c1410;
-  --border: rgba(52, 211, 153, 0.12);
-  --accent: #4ade80;
-  --accent-muted: rgba(22, 101, 52, 0.35);
-  --ring: rgba(74, 222, 128, 0.4);
-  --grid-dot: rgba(74, 222, 128, 0.12);
+  --card: #0e0a14;
+  --border: color-mix(in srgb, var(--gradient-start) 12%, transparent);
+  --accent: var(--gradient-mid);
+  --accent-muted: color-mix(in srgb, var(--gradient-end) 45%, transparent);
+  --ring: color-mix(in srgb, var(--gradient-start) 38%, transparent);
+  --grid-dot: color-mix(in srgb, var(--gradient-end) 22%, transparent);
 }
 
 @theme inline {
@@ -35,6 +42,9 @@
   --color-accent: var(--accent);
   --color-accent-muted: var(--accent-muted);
   --color-ring: var(--ring);
+  --color-gradient-start: var(--gradient-start);
+  --color-gradient-mid: var(--gradient-mid);
+  --color-gradient-end: var(--gradient-end);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
@@ -51,4 +61,13 @@
 @utility dot-grid {
   background-image: radial-gradient(var(--grid-dot) 1px, transparent 1px);
   background-size: 24px 24px;
+}
+
+@utility bg-hero-mesh {
+  background: linear-gradient(
+    128deg,
+    color-mix(in srgb, var(--gradient-start) 22%, transparent) 0%,
+    color-mix(in srgb, var(--gradient-mid) 10%, transparent) 45%,
+    color-mix(in srgb, var(--gradient-end) 20%, transparent) 100%
+  );
 }

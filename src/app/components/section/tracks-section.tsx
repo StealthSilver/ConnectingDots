@@ -23,7 +23,7 @@ const tracks = [
 
 function statusStyles(s: (typeof tracks)[0]["status"]) {
   if (s === "Notes live") {
-    return "bg-emerald-500/15 text-emerald-800 dark:text-emerald-200 ring-emerald-500/25";
+    return "bg-accent/12 text-foreground ring-accent/25 dark:bg-accent/10";
   }
   return "bg-muted/40 text-muted ring-border";
 }

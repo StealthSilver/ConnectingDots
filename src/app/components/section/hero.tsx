@@ -9,11 +9,15 @@ export function Hero() {
         aria-hidden
       />
       <div
-        className="pointer-events-none absolute -right-32 top-0 h-96 w-96 rounded-full bg-accent/20 blur-3xl dark:bg-accent/10"
+        className="pointer-events-none absolute inset-0 bg-hero-mesh"
         aria-hidden
       />
       <div
-        className="pointer-events-none absolute -left-24 bottom-0 h-80 w-80 rounded-full bg-emerald-600/10 blur-3xl dark:bg-emerald-400/5"
+        className="pointer-events-none absolute -right-32 top-0 h-96 w-96 rounded-full bg-gradient-start/25 blur-3xl dark:bg-gradient-start/15"
+        aria-hidden
+      />
+      <div
+        className="pointer-events-none absolute -left-24 bottom-0 h-80 w-80 rounded-full bg-gradient-end/25 blur-3xl dark:bg-gradient-end/20"
         aria-hidden
       />
 
