@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist_Mono, Plus_Jakarta_Sans } from "next/font/google";
 import { Neurons } from "./components/background/neurons-lazy";
+import { PageGridLines } from "./components/page-grid-lines";
 import { ThemeProvider } from "./components/theme-provider";
 import "./globals.css";
 
@@ -16,7 +17,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Connecting Dots — Computer science through projects",
+  title: "Connecting Dots — Stuff about Computer Science ",
   description:
     "Learn DSA, web development, AI/ML, and system design with notes and courses. Projects-first teaching.",
 };
@@ -32,9 +33,10 @@ export default function RootLayout({
       suppressHydrationWarning
       className={`${fontBrand.variable} ${geistMono.variable} h-full`}
     >
-      <body className="relative flex min-h-full width-full flex-col">
+      <body className="relative flex min-h-full w-full flex-col">
         <Neurons />
-        <div className="relative z-10 flex min-h-full width-full flex-1 flex-col">
+        <PageGridLines />
+        <div className="relative z-10 flex min-h-full w-full flex-1 flex-col">
           <ThemeProvider>{children}</ThemeProvider>
         </div>
       </body>  

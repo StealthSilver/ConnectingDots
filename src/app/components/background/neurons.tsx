@@ -41,8 +41,8 @@ export function Neurons() {
       void main() {
         float r = length(gl_PointCoord - vec2(0.5, 0.5));
         if (r > 0.5) discard;
-        float alpha = smoothstep(0.5, 0.0, r);
-        gl_FragColor = vec4(vColor, alpha);
+        float alpha = smoothstep(0.5, 0.0, r) * 1.15;
+        gl_FragColor = vec4(vColor, min(alpha, 1.0));
       }
     `;
 
@@ -60,8 +60,9 @@ export function Neurons() {
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.75));
 
     const setSize = () => {
-      const w = el.clientWidth || window.innerWidth;
-      const h = el.clientHeight || window.innerHeight;
+      // Use viewport so the field always matches full page width/height, not a parent box.
+      const w = window.innerWidth;
+      const h = window.innerHeight;
       if (w < 1 || h < 1) return;
       camera.aspect = w / h;
       camera.updateProjectionMatrix();
@@ -80,7 +81,8 @@ export function Neurons() {
     const velocities = new Float32Array(particleCount * 3);
 
     const geometry = new THREE.BufferGeometry();
-    const maxDistance = 6;
+    /** Slightly lower than before → sparser links, more “air” between nodes. */
+    const maxDistance = 5.25;
 
     const colorPalette: [number, number, number][] = [
       [1, 0.7, 0.7],
@@ -93,7 +95,7 @@ export function Neurons() {
 
     for (let i = 0; i < particleCount; i++) {
       const i3 = i * 3;
-      const radius = 20 + Math.random() * 20;
+      const radius = 24 + Math.random() * 24;
       const theta = Math.random() * Math.PI * 2;
       const phi = Math.random() * Math.PI;
 
@@ -107,7 +109,7 @@ export function Neurons() {
       colors[i3 + 1] = color[1];
       colors[i3 + 2] = color[2];
 
-      sizes[i] = 0.5 + Math.random() * 0.5;
+      sizes[i] = 0.45 + Math.random() * 0.45;
 
       velocities[i3] = (Math.random() - 0.5) * 0.06;
       velocities[i3 + 1] = (Math.random() - 0.5) * 0.06;
@@ -142,7 +144,7 @@ export function Neurons() {
     const lineMaterial = new THREE.LineBasicMaterial({
       vertexColors: true,
       transparent: true,
-      opacity: 0.2,
+      opacity: 0.45,
       blending: THREE.AdditiveBlending,
     });
 
@@ -197,7 +199,7 @@ export function Neurons() {
         posBuf[i3 + 1] += velocities[i3 + 1] ?? 0;
         posBuf[i3 + 2] += velocities[i3 + 2] ?? 0;
         for (let j = 0; j < 3; j++) {
-          if (Math.abs(posBuf[i3 + j] ?? 0) > 25) {
+          if (Math.abs(posBuf[i3 + j] ?? 0) > 30) {
             const v = (velocities[i3 + j] ?? 0) * -0.8;
             velocities[i3 + j] = v;
           }
@@ -305,7 +307,7 @@ export function Neurons() {
   return (
     <div
       ref={mountRef}
-      className="pointer-events-none fixed inset-0 -z-10 m-0 box-border h-full min-h-[100dvh] w-full min-w-0 max-w-none overflow-hidden bg-transparent p-0 opacity-[0.92] dark:opacity-[0.28]"
+      className="pointer-events-none fixed inset-0 z-0 w-full min-w-full max-w-none overflow-hidden bg-transparent opacity-100 dark:opacity-[0.88]"
       aria-hidden
     />
   );
