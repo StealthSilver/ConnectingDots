@@ -32,12 +32,12 @@ export default function RootLayout({
       suppressHydrationWarning
       className={`${fontBrand.variable} ${geistMono.variable} h-full`}
     >
-      <body className="relative flex min-h-full flex-col">
+      <body className="relative flex min-h-full width-full flex-col">
         <Neurons />
-        <div className="relative z-10 flex min-h-full flex-1 flex-col">
+        <div className="relative z-10 flex min-h-full width-full flex-1 flex-col">
           <ThemeProvider>{children}</ThemeProvider>
         </div>
-      </body>
+      </body>  
     </html>
   );
-}
+} 
