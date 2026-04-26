@@ -11,7 +11,7 @@ function DottedGuide({
 }) {
   return (
     <div
-      className={`border-zinc-500/55 absolute top-0 bottom-0 w-0 border-l border-dotted dark:border-zinc-400/50 ${positionClass} ${className ?? ""}`}
+      className={`absolute top-0 bottom-0 w-px bg-[length:1px_14px] bg-repeat-y bg-[linear-gradient(to_bottom,rgb(113_113_122/0.28)_0_3px,transparent_3px_14px)] dark:bg-[linear-gradient(to_bottom,rgb(161_161_170/0.24)_0_3px,transparent_3px_14px)] ${positionClass} ${className ?? ""}`}
     />
   );
 }

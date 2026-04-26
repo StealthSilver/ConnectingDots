@@ -6,6 +6,50 @@ import { getOptimalParticleCount } from "@/utils/deviceLOD";
 
 const MAX_CAP = 600;
 
+/** Fisher–Yates shuffle in-place. */
+function shuffleInPlace<T>(arr: T[]): void {
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j]!, arr[i]!];
+  }
+}
+
+/**
+ * Shuffled jittered grid: one sample per cell (random offset inside the cell) so
+ * points cover volume evenly without Halton/low-discrepancy streaks that read as lines.
+ */
+function fillJitteredGridPositions(
+  positions: Float32Array,
+  particleCount: number,
+  spanX: number,
+  spanY: number,
+  spanZ: number,
+): void {
+  const n = Math.max(2, Math.ceil(Math.cbrt(particleCount)));
+  const cells: [number, number, number][] = [];
+  for (let ix = 0; ix < n; ix++) {
+    for (let iy = 0; iy < n; iy++) {
+      for (let iz = 0; iz < n; iz++) {
+        cells.push([ix, iy, iz]);
+      }
+    }
+  }
+  shuffleInPlace(cells);
+
+  const halfX = spanX / 2;
+  const halfY = spanY / 2;
+  const halfZ = spanZ / 2;
+
+  for (let i = 0; i < particleCount; i++) {
+    const cell = cells[i] ?? [0, 0, 0];
+    const [ix, iy, iz] = cell;
+    const i3 = i * 3;
+    positions[i3] = ((ix + Math.random()) / n) * spanX - halfX;
+    positions[i3 + 1] = ((iy + Math.random()) / n) * spanY - halfY;
+    positions[i3 + 2] = ((iz + Math.random()) / n) * spanZ - halfZ;
+  }
+}
+
 /**
  * Full-viewport WebGL point + line “neuron” field. Intended as a non-interactive
  * page background: transparent canvas, no controls, throttled for visibility and
@@ -81,8 +125,21 @@ export function Neurons() {
     const velocities = new Float32Array(particleCount * 3);
 
     const geometry = new THREE.BufferGeometry();
-    /** Slightly lower than before → sparser links, more “air” between nodes. */
-    const maxDistance = 5.25;
+
+    const aspect =
+      window.innerWidth / Math.max(1, window.innerHeight);
+    const spanY = 60;
+    const spanZ = 60;
+    /** Wider X extent matches viewport so the field uses horizontal screen space evenly. */
+    const spanX = 60 * Math.max(1.15, aspect);
+    const halfX = spanX / 2;
+    const halfY = spanY / 2;
+    const halfZ = spanZ / 2;
+    const volume = spanX * spanY * spanZ;
+    const avgSpacing = Math.cbrt(volume / particleCount);
+    const maxSpan = Math.max(spanX, spanY, spanZ);
+    /** Neighbor links: ~2× mean spacing, capped so graphs stay local. */
+    const maxDistance = Math.min(maxSpan * 0.28, Math.max(4.2, avgSpacing * 2.15));
 
     const colorPalette: [number, number, number][] = [
       [1, 0.7, 0.7],
@@ -93,15 +150,10 @@ export function Neurons() {
       [0.7, 1, 1],
     ];
 
+    fillJitteredGridPositions(positions, particleCount, spanX, spanY, spanZ);
+
     for (let i = 0; i < particleCount; i++) {
       const i3 = i * 3;
-      const radius = 24 + Math.random() * 24;
-      const theta = Math.random() * Math.PI * 2;
-      const phi = Math.random() * Math.PI;
-
-      positions[i3] = radius * Math.sin(phi) * Math.cos(theta);
-      positions[i3 + 1] = radius * Math.sin(phi) * Math.sin(theta);
-      positions[i3 + 2] = radius * Math.cos(phi);
 
       const color =
         colorPalette[Math.floor(Math.random() * colorPalette.length)]!;
@@ -144,7 +196,7 @@ export function Neurons() {
     const lineMaterial = new THREE.LineBasicMaterial({
       vertexColors: true,
       transparent: true,
-      opacity: 0.45,
+      opacity: 0.5,
       blending: THREE.AdditiveBlending,
     });
 
@@ -188,6 +240,9 @@ export function Neurons() {
       rafId = requestAnimationFrame(tick);
       if (document.hidden) return;
 
+      const isDark = document.documentElement.classList.contains("dark");
+      lineMaterial.opacity = isDark ? 0.26 : 0.55;
+
       let lineIndex = 0;
       checked.clear();
 
@@ -198,8 +253,9 @@ export function Neurons() {
         posBuf[i3] += velocities[i3] ?? 0;
         posBuf[i3 + 1] += velocities[i3 + 1] ?? 0;
         posBuf[i3 + 2] += velocities[i3 + 2] ?? 0;
+        const lim = [halfX, halfY, halfZ];
         for (let j = 0; j < 3; j++) {
-          if (Math.abs(posBuf[i3 + j] ?? 0) > 30) {
+          if (Math.abs(posBuf[i3 + j] ?? 0) > (lim[j] ?? 30)) {
             const v = (velocities[i3 + j] ?? 0) * -0.8;
             velocities[i3 + j] = v;
           }
@@ -307,7 +363,7 @@ export function Neurons() {
   return (
     <div
       ref={mountRef}
-      className="pointer-events-none fixed inset-0 z-0 w-full min-w-full max-w-none overflow-hidden bg-transparent opacity-100 dark:opacity-[0.88]"
+      className="pointer-events-none fixed inset-0 z-0 w-full min-w-full max-w-none overflow-hidden bg-transparent opacity-100 dark:opacity-[0.38]"
       aria-hidden
     />
   );

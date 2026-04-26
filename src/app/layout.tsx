@@ -1,19 +1,26 @@
 import type { Metadata } from "next";
-import { Geist_Mono, Plus_Jakarta_Sans } from "next/font/google";
+import { Chakra_Petch, Geist_Mono, Noto_Sans } from "next/font/google";
 import { Neurons } from "./components/background/neurons-lazy";
 import { PageGridLines } from "./components/page-grid-lines";
 import { ThemeProvider } from "./components/theme-provider";
 import "./globals.css";
 
-const fontBrand = Plus_Jakarta_Sans({
-  variable: "--font-plus-jakarta",
+const notoSans = Noto_Sans({
   subsets: ["latin"],
   display: "swap",
+  variable: "--font-noto-sans",
 });
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
+});
+
+const chakraPetch = Chakra_Petch({
+  subsets: ["latin"],
+  weight: ["500", "600", "700"],
+  display: "swap",
+  variable: "--font-chakra-petch",
 });
 
 export const metadata: Metadata = {
@@ -31,7 +38,7 @@ export default function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${fontBrand.variable} ${geistMono.variable} h-full`}
+      className={`${notoSans.variable} ${geistMono.variable} ${chakraPetch.variable} h-full`}
     >
       <body className="relative flex min-h-full w-full flex-col">
         <Neurons />
