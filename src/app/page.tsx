@@ -1,4 +1,5 @@
 import { AboutSection } from "./components/section/about-section";
+import { FeaturesSection } from "./components/section/features-section";
 import { Hero } from "./components/section/hero";
 import { Navbar } from "./components/section/navbar";
 import { Footer } from "./components/section/site-footer";
@@ -10,6 +11,7 @@ export default function Home() {
       <main className="w-full min-w-0">
         <Hero />
         <AboutSection />
+        <FeaturesSection />
       </main>
       <Footer />
     </>

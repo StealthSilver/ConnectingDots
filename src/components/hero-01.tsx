@@ -8,9 +8,11 @@ export function Hero01() {
   return (
     <div className="w-screen max-w-full pb-12 pt-8 sm:pb-16 sm:pt-10">
       <div
-        className={`${pageContentShellClassName} flex min-h-[min(70vh,52rem)] flex-col justify-center py-14 text-left sm:py-16 lg:py-20`}
+        className={`${pageContentShellClassName} flex min-h-[min(70vh,52rem)] flex-col justify-center gap-12 py-14 text-left sm:gap-14 sm:py-16 lg:py-20 xl:gap-14`}
       >
-        <MainContent />
+        <div className="min-w-0 max-w-[min(100%,38rem)] xl:max-w-[42rem]">
+          <MainContent />
+        </div>
       </div>
     </div>
   );
