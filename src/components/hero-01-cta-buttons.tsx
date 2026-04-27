@@ -11,8 +11,12 @@ const navChakra = "[font-family:var(--font-chakra-petch)]" as const;
 export function Hero01CtaButtons() {
   return (
     <div className="flex flex-col items-stretch gap-3 sm:flex-row sm:flex-wrap sm:items-center">
-      <HoverBorderGradient as={Link} href="/sign-up" className={navChakra}>
-        Sign up
+      <HoverBorderGradient
+        as={Link}
+        href="/sign-up"
+        className={cn(navChakra, "px-6 sm:px-7")}
+      >
+        Sign up now
       </HoverBorderGradient>
 
       <Link

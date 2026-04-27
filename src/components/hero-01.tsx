@@ -27,7 +27,7 @@ function MainContent() {
       </h1>
 
       <p className="!leading-relaxed text-base text-muted-foreground sm:text-xl sm:text-balance md:text-lg lg:text-xl">
-        Connecting Dots is the written companion to the channel—blogs and notes
+        Connecting Dots is the written companion to the channel blogs and notes
         when a topic needs room to breathe, and courses when it helps to learn
         step by step.
       </p>

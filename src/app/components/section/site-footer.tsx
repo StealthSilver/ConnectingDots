@@ -1,84 +1,128 @@
+import Image from "next/image";
 import Link from "next/link";
 import { newTabProps, siteLinks } from "@/lib/site-links";
+import { pageContentShellClassName } from "@/lib/page-content-shell";
+import { pillChromeClass, subtleNavLinkClass } from "@/lib/pill-chrome";
+import { socialConnectItems } from "@/lib/social-connect-items";
+import { cn } from "@/lib/utils";
 
-const brandFont = "[font-family:var(--font-chakra-petch)]" as const;
+const navChakra = "[font-family:var(--font-chakra-petch)]" as const;
 
-const nav = [
+const navItems = [
   { href: "/blogs", label: "Blogs" },
   { href: "/learning", label: "Learning" },
   { href: "/courses", label: "Courses" },
   { href: "/#about", label: "About" },
 ] as const;
 
-const external = [
-  { href: siteLinks.x, label: "X" },
-  { href: siteLinks.youtube, label: "YouTube" },
-  { href: siteLinks.discord, label: "Discord" },
-  { href: siteLinks.email, label: "Email" },
-  { href: siteLinks.portfolio, label: "Portfolio" },
-] as const;
-
-const linkClass =
-  "text-sm text-muted transition hover:text-foreground focus-visible:outline focus-visible:ring-2 focus-visible:ring-ring/40 focus-visible:ring-offset-2 focus-visible:ring-offset-background";
+const portfolioHost = siteLinks.portfolio.replace(/^https?:\/\//, "");
 
 export function Footer() {
   return (
-    <footer
-      className="border-t border-zinc-200/70 bg-zinc-50/40 dark:border-zinc-800/80 dark:bg-zinc-950/40"
-      role="contentinfo"
-    >
-      <div className="mx-auto max-w-5xl px-4 py-14 sm:px-6 sm:py-16">
-        <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-3 lg:gap-12">
-          <div className="max-w-sm">
-            <p className={`${brandFont} text-xl font-semibold tracking-tight text-foreground`}>
-              Connecting Dots
-            </p>
-            <p className="mt-2 text-sm leading-relaxed text-muted">
-              Learn computer science by connecting the dots—notes, stories, and courses with room to
-              think.
+    <footer role="contentinfo">
+      <div
+        className={`${pageContentShellClassName} flex flex-col gap-8 py-10 sm:gap-10 sm:py-12`}
+      >
+        <div className="flex w-full min-w-0 flex-col gap-8 sm:flex-row sm:items-start sm:justify-between sm:gap-8 lg:gap-12">
+          <div className="flex min-w-0 flex-1 flex-col gap-3">
+            <Link
+              href="/"
+              className="inline-flex max-w-full"
+              aria-label="Home — Connecting Dots"
+            >
+              <div className="flex min-w-0 items-center gap-2.5 sm:gap-3">
+                <Image
+                  src="/light.png"
+                  alt=""
+                  width={200}
+                  height={52}
+                  className="h-9 w-auto shrink-0 dark:hidden sm:h-10"
+                />
+                <Image
+                  src="/cddark.png"
+                  alt=""
+                  width={200}
+                  height={52}
+                  className="hidden h-9 w-auto shrink-0 dark:block sm:h-10"
+                />
+                <span
+                  className={cn(
+                    navChakra,
+                    "truncate text-lg font-normal tracking-tight text-foreground sm:text-xl md:text-2xl",
+                  )}
+                >
+                  Connecting Dots
+                </span>
+              </div>
+            </Link>
+            <p className="max-w-xl text-sm leading-relaxed text-muted-foreground sm:text-base sm:text-balance">
+              Learn computer science by connecting the dots notes, stories, and
+              courses with room to think.
             </p>
           </div>
-          <div>
-            <p className="text-xs font-medium uppercase tracking-[0.18em] text-zinc-500 dark:text-zinc-400">
+          <div className="shrink-0 text-right sm:ml-8">
+            <h2 className="text-xs font-medium uppercase tracking-[0.2em] text-muted-foreground">
               On this site
-            </p>
-            <ul className="mt-3 flex flex-col gap-2">
-              {nav.map((item) => (
-                <li key={item.href}>
-                  <Link href={item.href} className={linkClass}>
-                    {item.label}
-                  </Link>
-                </li>
+            </h2>
+            <nav
+              aria-label="Footer"
+              className="mt-4 flex flex-col items-end gap-0.5 sm:gap-1"
+            >
+              {navItems.map((item) => (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className={cn(
+                    navChakra,
+                    subtleNavLinkClass,
+                    "justify-end",
+                  )}
+                >
+                  {item.label}
+                </Link>
               ))}
-            </ul>
-          </div>
-          <div>
-            <p className="text-xs font-medium uppercase tracking-[0.18em] text-zinc-500 dark:text-zinc-400">
-              Connect
-            </p>
-            <ul className="mt-3 flex flex-col gap-2">
-              {external.map((item) => (
-                <li key={item.label}>
-                  <a href={item.href} {...newTabProps} className={linkClass}>
-                    {item.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
+            </nav>
           </div>
         </div>
-        <div className="mt-12 flex flex-col gap-2 border-t border-zinc-200/60 pt-8 dark:border-zinc-800/70 sm:flex-row sm:items-center sm:justify-between">
-          <p className="text-xs text-muted">
-            &copy; {new Date().getFullYear()} Connecting Dots. All rights reserved.
+
+        <div className="text-left">
+          <h2 className="text-xs font-medium uppercase tracking-[0.2em] text-muted-foreground">
+            Connect
+          </h2>
+          <div className="mt-4 flex flex-wrap items-center justify-start gap-2.5 sm:gap-3">
+            {socialConnectItems.map(({ label, href, icon: Icon }) => (
+              <a
+                key={label}
+                href={href}
+                {...newTabProps}
+                className={pillChromeClass}
+              >
+                <Icon
+                  className="h-[1.1rem] w-[1.1rem] shrink-0 text-muted-foreground transition group-hover:text-foreground"
+                  aria-hidden
+                />
+                <span className="truncate">{label}</span>
+              </a>
+            ))}
+          </div>
+        </div>
+
+        <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+          <p className="text-xs text-muted-foreground">
+            &copy; {new Date().getFullYear()} Connecting Dots. All rights
+            reserved.
           </p>
-          <p className="text-xs text-muted/90">
-            Built with care·{" "}
+          <p className="text-xs text-muted-foreground">
+            Built with care ·{" "}
             <a
               href={siteLinks.portfolio}
               {...newTabProps}
-              className="underline decoration-zinc-400/50 underline-offset-2 transition hover:text-foreground dark:decoration-zinc-500"
+              className={cn(
+                navChakra,
+                "underline decoration-border underline-offset-2 transition hover:text-foreground",
+              )}
             >
-              silver-jer.vercel.app
+              {portfolioHost}
             </a>
           </p>
         </div>
