@@ -1,20 +1,6 @@
-import {
-  IconBrandDiscord,
-  IconBrandX,
-  IconBrandYoutube,
-  IconLink,
-  IconMail,
-} from "@tabler/icons-react";
-import { newTabProps, siteLinks } from "@/lib/site-links";
+import { socialConnectItems } from "@/lib/social-connect-items";
+import { newTabProps } from "@/lib/site-links";
 import { SectionHeading } from "./section-heading";
-
-const items = [
-  { label: "X", href: siteLinks.x, icon: IconBrandX },
-  { label: "YouTube", href: siteLinks.youtube, icon: IconBrandYoutube },
-  { label: "Email", href: siteLinks.email, icon: IconMail },
-  { label: "Discord", href: siteLinks.discord, icon: IconBrandDiscord },
-  { label: "Portfolio", href: siteLinks.portfolio, icon: IconLink },
-] as const;
 
 const shell =
   "group flex min-h-11 min-w-0 items-center justify-center gap-2 rounded-full border border-zinc-200/90 bg-white/60 px-4 py-2.5 text-sm font-medium text-foreground shadow-sm transition will-change-transform hover:-translate-y-0.5 hover:border-zinc-300 hover:shadow dark:border-zinc-700/80 dark:bg-zinc-900/50 dark:hover:border-zinc-600" as const;
@@ -28,7 +14,7 @@ export function SocialLinksSection() {
       <div className="mx-auto max-w-3xl">
         <SectionHeading id="social-heading">Connect</SectionHeading>
         <div className="flex flex-wrap items-center justify-center gap-2.5 sm:gap-3">
-          {items.map(({ label, href, icon: Icon }) => (
+          {socialConnectItems.map(({ label, href, icon: Icon }) => (
             <a
               key={label}
               href={href}
