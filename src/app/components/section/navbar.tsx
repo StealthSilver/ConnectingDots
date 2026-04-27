@@ -6,10 +6,13 @@ import {
   MobileNavMenu,
   MobileNavToggle,
   Navbar as ResizableNavbar,
-  NavbarButton,
   NavBody,
   NavItems,
 } from "@/app/components/section/resizable-navbar";
+import {
+  GradientPill,
+  HoverBorderGradient,
+} from "@/components/ui/hover-border-gradient";
 import Image from "next/image";
 import Link from "next/link";
 import { useTheme } from "next-themes";
@@ -67,6 +70,7 @@ function MoonGlyph(props: SVGProps<SVGSVGElement>) {
 function ThemeToggle() {
   const { resolvedTheme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
+  const [shellHovered, setShellHovered] = useState(false);
 
   useEffect(() => {
     setMounted(true);
@@ -74,8 +78,8 @@ function ThemeToggle() {
 
   if (!mounted) {
     return (
-      <span
-        className="inline-block h-9 w-14 shrink-0 rounded-full border border-zinc-300/50 bg-zinc-100 dark:border-zinc-600/50 dark:bg-zinc-800/80"
+      <div
+        className="h-10 w-[3.75rem] shrink-0 rounded-full border border-black/15 bg-black/[0.06] dark:border-white/20 dark:bg-white/20"
         aria-hidden
       />
     );
@@ -84,29 +88,39 @@ function ThemeToggle() {
   const isDark = resolvedTheme === "dark";
 
   return (
-    <button
-      type="button"
-      role="switch"
-      aria-checked={isDark}
-      onClick={() => setTheme(isDark ? "light" : "dark")}
-      className="group relative inline-flex h-9 w-14 shrink-0 items-center rounded-full border border-zinc-300/90 bg-zinc-100 p-0.5 shadow-sm transition hover:border-zinc-400/90 focus-visible:ring-2 focus-visible:ring-zinc-400/40 focus-visible:ring-offset-2 focus-visible:outline-none focus-visible:ring-offset-background dark:border-zinc-600/80 dark:bg-zinc-900/90 dark:hover:border-zinc-500/80"
-      aria-label={isDark ? "Switch to light theme" : "Switch to dark theme"}
+    <GradientPill
+      as="div"
+      containerClassName="shrink-0 cursor-default"
+      className="!px-0.5 !py-0.5"
+      rotateEnabled={false}
+      emphasizeBorder={shellHovered}
+      onMouseEnter={() => setShellHovered(true)}
+      onMouseLeave={() => setShellHovered(false)}
     >
-      <span
-        className="pointer-events-none absolute inset-0 flex items-center justify-between px-1.5"
-        aria-hidden
+      <button
+        type="button"
+        role="switch"
+        aria-checked={isDark}
+        onClick={() => setTheme(isDark ? "light" : "dark")}
+        className="group relative z-20 inline-flex h-8 w-[3.25rem] shrink-0 items-center rounded-full border-0 bg-transparent p-0.5 shadow-none transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#3275F8]/45 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-black"
+        aria-label={isDark ? "Switch to light theme" : "Switch to dark theme"}
       >
-        <SunGlyph
-          className={`h-3.5 w-3.5 text-zinc-800 transition dark:text-zinc-500 ${isDark ? "opacity-50" : "opacity-100"}`}
+        <span
+          className="pointer-events-none absolute inset-0 flex items-center justify-between px-1.5"
+          aria-hidden
+        >
+          <SunGlyph
+            className={`h-3.5 w-3.5 text-zinc-700 transition dark:text-zinc-400 ${isDark ? "opacity-50" : "opacity-100"}`}
+          />
+          <MoonGlyph
+            className={`h-3.5 w-3.5 text-zinc-500 transition dark:text-zinc-100 ${isDark ? "opacity-100" : "opacity-50"}`}
+          />
+        </span>
+        <span
+          className={`pointer-events-none relative z-10 h-7 w-7 rounded-full border border-zinc-200/90 bg-white shadow-sm ring-1 ring-black/5 transition-transform duration-200 ease-out will-change-transform dark:border-zinc-600/60 dark:bg-zinc-200 dark:ring-white/10 ${isDark ? "translate-x-5" : "translate-x-0"}`}
         />
-        <MoonGlyph
-          className={`h-3.5 w-3.5 text-zinc-400 transition dark:text-zinc-100 ${isDark ? "opacity-100" : "opacity-50"}`}
-        />
-      </span>
-      <span
-        className={`pointer-events-none relative z-10 h-7 w-7 rounded-full border border-zinc-200/90 bg-white shadow-sm ring-1 ring-black/5 transition-transform duration-200 ease-out will-change-transform dark:border-zinc-600/60 dark:bg-zinc-200 dark:ring-white/10 ${isDark ? "translate-x-6" : "translate-x-0"}`}
-      />
-    </button>
+      </button>
+    </GradientPill>
   );
 }
 
@@ -153,14 +167,23 @@ function MobileLink({
   children: ReactNode;
   onClick: () => void;
 }) {
+  const [hovered, setHovered] = useState(false);
+
   return (
-    <Link
+    <GradientPill
+      as={Link}
       href={href}
       onClick={onClick}
-      className="rounded-xl px-3 py-2.5 text-sm font-medium tracking-tight text-black transition hover:bg-black/5 active:bg-black/10 dark:text-white dark:hover:bg-white/10 dark:active:bg-white/[0.14]"
+      borderGlowActive={hovered}
+      rotateEnabled={hovered}
+      emphasizeBorder={hovered}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      containerClassName="w-full cursor-pointer"
+      className={`flex w-full justify-center !px-3 !py-2.5 text-sm font-medium tracking-tight !font-medium ${navChakra}`}
     >
       {children}
-    </Link>
+    </GradientPill>
   );
 }
 
@@ -183,14 +206,13 @@ export function Navbar() {
           />
           <div className="relative z-20 flex shrink-0 items-center gap-2 pl-1">
             <ThemeToggle />
-            <NavbarButton
+            <HoverBorderGradient
               as={Link}
               href="/sign-up"
-              variant="primary"
               className={navChakra}
             >
               Sign up
-            </NavbarButton>
+            </HoverBorderGradient>
           </div>
         </NavBody>
 
@@ -224,15 +246,15 @@ export function Navbar() {
                 ))}
               </nav>
               <div className="mt-1 border-t border-black/10 pt-3 dark:border-white/10">
-                <NavbarButton
+                <HoverBorderGradient
                   as={Link}
                   href="/sign-up"
                   onClick={closeMobile}
-                  variant="primary"
-                  className={`w-full ${navChakra}`}
+                  containerClassName="w-full"
+                  className={`flex w-full justify-center ${navChakra}`}
                 >
                   Sign up
-                </NavbarButton>
+                </HoverBorderGradient>
               </div>
             </MobileNavMenu>
           </div>

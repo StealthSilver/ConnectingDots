@@ -1,5 +1,6 @@
 "use client";
 
+import { GradientPill } from "@/components/ui/hover-border-gradient";
 import { cn } from "@/lib/utils";
 import { IconMenu2, IconX } from "@tabler/icons-react";
 import {
@@ -108,22 +109,20 @@ export const NavItems = ({ items, className, onItemClick }: NavItemsProps) => {
       )}
     >
       {items.map((item, idx) => (
-        <a
+        <GradientPill
+          key={`link-${item.link}`}
+          as="a"
+          href={item.link}
           onMouseEnter={() => setHovered(idx)}
           onClick={onItemClick}
-          className="relative rounded-full px-4 py-2 text-black transition-colors dark:text-white"
-          key={`link-${item.link}`}
-          href={item.link}
+          borderGlowActive={hovered === idx}
+          rotateEnabled={hovered === idx}
+          emphasizeBorder={hovered === idx}
+          containerClassName="relative"
+          className="relative z-20 px-4 py-2 text-sm font-medium tracking-tight text-black !font-medium dark:text-white"
         >
-          {hovered === idx && (
-            <motion.div
-              layoutId="nav-hover"
-              className="absolute inset-0 rounded-full bg-black/[0.06] dark:bg-white/10"
-              transition={{ type: "spring", stiffness: 380, damping: 30 }}
-            />
-          )}
-          <span className="relative z-20">{item.name}</span>
-        </a>
+          {item.name}
+        </GradientPill>
       ))}
     </motion.div>
   );
