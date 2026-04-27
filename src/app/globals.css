@@ -17,17 +17,20 @@
   --accent: var(--gradient-mid);
   --accent-muted: #ffefe4;
   --ring: color-mix(in srgb, var(--gradient-mid) 38%, transparent);
+  /* Neutral chrome border (was #8aa396 family) */
+  --chrome-border: oklch(0.708 0 0);
 }
 
 .dark {
   --background: #06040a;
-  --foreground: #e8f5ee;
-  --muted: #8aa396;
+  --foreground: #fafafa;
+  --muted: #a1a1aa;
   --card: #0e0a14;
   --border: color-mix(in srgb, var(--gradient-start) 12%, transparent);
   --accent: var(--gradient-mid);
   --accent-muted: color-mix(in srgb, var(--gradient-end) 45%, transparent);
   --ring: color-mix(in srgb, var(--gradient-start) 38%, transparent);
+  --chrome-border: oklch(0.708 0 0);
 }
 
 @theme inline {
@@ -41,6 +44,7 @@
   --color-accent: var(--accent);
   --color-accent-muted: var(--accent-muted);
   --color-ring: var(--ring);
+  --color-chrome-border: var(--chrome-border);
   --width-xs: 20rem;
   --font-sans: var(--font-noto-sans), "Noto Sans", ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-geist-mono);

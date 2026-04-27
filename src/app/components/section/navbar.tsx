@@ -1,18 +1,13 @@
 "use client";
 
 import {
-  MobileNav,
-  MobileNavHeader,
-  MobileNavMenu,
-  MobileNavToggle,
-  Navbar as ResizableNavbar,
-  NavBody,
-  NavItems,
-} from "@/app/components/section/resizable-navbar";
-import {
   GradientPill,
   HoverBorderGradient,
 } from "@/components/ui/hover-border-gradient";
+import { pageContentShellClassName } from "@/lib/page-content-shell";
+import { mobileMenuButtonClass, subtleNavLinkClass } from "@/lib/pill-chrome";
+import { cn } from "@/lib/utils";
+import { IconMenu2, IconX } from "@tabler/icons-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useTheme } from "next-themes";
@@ -31,6 +26,8 @@ const navItems = [
   { name: "Learning", link: "/learning" },
   { name: "Courses", link: "/courses" },
 ] as const;
+
+const navLinkClass = cn(navChakra, subtleNavLinkClass);
 
 function SunGlyph(props: SVGProps<SVGSVGElement>) {
   return (
@@ -167,23 +164,14 @@ function MobileLink({
   children: ReactNode;
   onClick: () => void;
 }) {
-  const [hovered, setHovered] = useState(false);
-
   return (
-    <GradientPill
-      as={Link}
+    <Link
       href={href}
       onClick={onClick}
-      borderGlowActive={hovered}
-      rotateEnabled={hovered}
-      emphasizeBorder={hovered}
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
-      containerClassName="w-full cursor-pointer"
-      className={`flex w-full justify-center !px-3 !py-2.5 text-sm font-medium tracking-tight !font-medium ${navChakra}`}
+      className={cn(navChakra, subtleNavLinkClass, "w-full justify-center text-center")}
     >
       {children}
-    </GradientPill>
+    </Link>
   );
 }
 
@@ -192,20 +180,40 @@ export function Navbar() {
   const closeMobile = useCallback(() => setMobileOpen(false), []);
   const toggleMobile = useCallback(() => setMobileOpen((o) => !o), []);
 
+  useEffect(() => {
+    if (!mobileOpen) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setMobileOpen(false);
+    };
+    document.addEventListener("keydown", onKey);
+    return () => document.removeEventListener("keydown", onKey);
+  }, [mobileOpen]);
+
   return (
-    <header className="px-3 sm:px-4">
-      <ResizableNavbar>
-        <NavBody>
-          <div className="relative z-20 min-w-0 shrink pl-0.5">
-            <BrandLink className="inline-flex max-w-full" />
-          </div>
-          <NavItems
-            className={navChakra}
-            items={[...navItems]}
-            onItemClick={() => {}}
-          />
-          <div className="relative z-20 flex shrink-0 items-center gap-2 pl-1">
+    <header
+      className={`${pageContentShellClassName} flex flex-col gap-0 py-3 sm:py-4`}
+    >
+      <div className="relative z-20 flex w-full min-h-12 items-center justify-between gap-3">
+        <div className="min-w-0 shrink">
+          <BrandLink className="inline-flex max-w-full" />
+        </div>
+
+        <nav
+          aria-label="Main"
+          className="hidden min-w-0 items-center justify-center gap-0.5 lg:flex"
+        >
+          {navItems.map((item) => (
+            <Link key={item.link} href={item.link} className={navLinkClass}>
+              {item.name}
+            </Link>
+          ))}
+        </nav>
+
+        <div className="flex shrink-0 items-center justify-end gap-2">
+          <div className="hidden lg:block">
             <ThemeToggle />
+          </div>
+          <div className="hidden lg:block">
             <HoverBorderGradient
               as={Link}
               href="/sign-up"
@@ -214,52 +222,53 @@ export function Navbar() {
               Sign up
             </HoverBorderGradient>
           </div>
-        </NavBody>
-
-        <MobileNav>
-          <div className="relative w-full">
-            <MobileNavHeader>
-              <div className="min-w-0 pr-1">
-                <BrandLink className="inline-flex min-w-0" />
-              </div>
-              <div className="flex shrink-0 items-center gap-1.5">
-                <ThemeToggle />
-                <MobileNavToggle
-                  isOpen={mobileOpen}
-                  onClick={toggleMobile}
-                />
-              </div>
-            </MobileNavHeader>
-            <MobileNavMenu
-              isOpen={mobileOpen}
-              onClose={closeMobile}
+          <div className="flex items-center gap-1.5 lg:hidden">
+            <ThemeToggle />
+            <button
+              type="button"
+              className={mobileMenuButtonClass}
+              onClick={toggleMobile}
+              aria-expanded={mobileOpen}
+              aria-label={mobileOpen ? "Close menu" : "Open menu"}
             >
-              <nav aria-label="Main" className="flex flex-col">
-                {navItems.map((item) => (
-                  <MobileLink
-                    key={item.link}
-                    href={item.link}
-                    onClick={closeMobile}
-                  >
-                    {item.name}
-                  </MobileLink>
-                ))}
-              </nav>
-              <div className="mt-1 border-t border-black/10 pt-3 dark:border-white/10">
-                <HoverBorderGradient
-                  as={Link}
-                  href="/sign-up"
-                  onClick={closeMobile}
-                  containerClassName="w-full"
-                  className={`flex w-full justify-center ${navChakra}`}
-                >
-                  Sign up
-                </HoverBorderGradient>
-              </div>
-            </MobileNavMenu>
+              {mobileOpen ? (
+                <IconX className="h-5 w-5" />
+              ) : (
+                <IconMenu2 className="h-5 w-5" />
+              )}
+            </button>
           </div>
-        </MobileNav>
-      </ResizableNavbar>
+        </div>
+      </div>
+
+      {mobileOpen && (
+        <div
+          className="border-t border-line pt-3 lg:hidden"
+          id="mobile-nav-panel"
+        >
+          <nav aria-label="Main" className="flex flex-col gap-0.5">
+            {navItems.map((item) => (
+              <MobileLink
+                key={item.link}
+                href={item.link}
+                onClick={closeMobile}
+              >
+                {item.name}
+              </MobileLink>
+            ))}
+          </nav>
+          <div className="mt-2 border-t border-line pt-3">
+            <HoverBorderGradient
+              as={Link}
+              href="/sign-up"
+              onClick={closeMobile}
+              className={`${navChakra} flex w-full justify-center`}
+            >
+              Sign up
+            </HoverBorderGradient>
+          </div>
+        </div>
+      )}
     </header>
   );
 }

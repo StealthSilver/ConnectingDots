@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { NavbarButton } from "@/app/components/section/resizable-navbar";
+import { NavbarButton } from "@/app/components/section/navbar-button";
 import { cn } from "@/lib/utils";
 
 const chakraPetch = "[font-family:var(--font-chakra-petch)]" as const;
