@@ -119,7 +119,7 @@ function BrandLink({ className }: { className?: string }) {
     >
       <div className="flex min-w-0 items-center gap-2.5 sm:gap-3">
         <Image
-          src="/cdlight.png"
+          src="/light.png"
           alt=""
           width={200}
           height={52}

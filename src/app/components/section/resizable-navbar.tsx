@@ -8,7 +8,7 @@ import {
   useMotionValueEvent,
   useScroll,
 } from "motion/react";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 
 /* Monochrome shell shadows (black / white only) */
 const shellShadow =
@@ -50,11 +50,7 @@ interface MobileNavMenuProps {
 }
 
 export const Navbar = ({ children, className }: NavbarProps) => {
-  const ref = useRef<HTMLDivElement>(null);
-  const { scrollY } = useScroll({
-    target: ref,
-    offset: ["start start", "end start"],
-  });
+  const { scrollY } = useScroll();
   const [visible, setVisible] = useState(false);
 
   useMotionValueEvent(scrollY, "change", (latest) => {
@@ -62,10 +58,7 @@ export const Navbar = ({ children, className }: NavbarProps) => {
   });
 
   return (
-    <motion.div
-      ref={ref}
-      className={cn("sticky inset-x-0 top-0 z-40 w-full", className)}
-    >
+    <div className={cn("relative z-40 w-full", className)}>
       {React.Children.map(children, (child) =>
         React.isValidElement(child)
           ? React.cloneElement(
@@ -74,7 +67,7 @@ export const Navbar = ({ children, className }: NavbarProps) => {
             )
           : child,
       )}
-    </motion.div>
+    </div>
   );
 };
 
@@ -85,7 +78,7 @@ export const NavBody = ({ children, className, visible }: NavBodyProps) => {
         backdropFilter: visible ? "blur(10px)" : "none",
         boxShadow: visible ? shellShadow : "none",
         width: visible ? "40%" : "100%",
-        y: visible ? 20 : 0,
+        marginTop: visible ? 20 : 0,
       }}
       transition={{
         type: "spring",
@@ -146,7 +139,7 @@ export const MobileNav = ({ children, className, visible }: MobileNavProps) => {
         paddingRight: visible ? "12px" : "0px",
         paddingLeft: visible ? "12px" : "0px",
         borderRadius: visible ? "0.5rem" : "2rem",
-        y: visible ? 20 : 0,
+        marginTop: visible ? 20 : 0,
       }}
       transition={{
         type: "spring",

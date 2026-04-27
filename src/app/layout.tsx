@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
-import { Chakra_Petch, Geist_Mono, Noto_Sans } from "next/font/google";
-import { Neurons } from "./components/background/neurons-lazy";
+import { Caveat, Chakra_Petch, Geist_Mono, Noto_Sans } from "next/font/google";
 import { PageGridLines } from "./components/page-grid-lines";
 import { ThemeProvider } from "./components/theme-provider";
 import "./globals.css";
@@ -23,6 +22,13 @@ const chakraPetch = Chakra_Petch({
   variable: "--font-chakra-petch",
 });
 
+const caveat = Caveat({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-caveat",
+  weight: ["400", "600"],
+});
+
 export const metadata: Metadata = {
   title: "Connecting Dots — Stuff about Computer Science ",
   description:
@@ -38,10 +44,9 @@ export default function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${notoSans.variable} ${geistMono.variable} ${chakraPetch.variable} h-full`}
+      className={`${notoSans.variable} ${geistMono.variable} ${chakraPetch.variable} ${caveat.variable} h-full`}
     >
       <body className="relative flex min-h-full w-full flex-col">
-        <Neurons />
         <PageGridLines />
         <div className="relative z-10 flex min-h-full w-full flex-1 flex-col">
           <ThemeProvider>{children}</ThemeProvider>
