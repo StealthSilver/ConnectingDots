@@ -59,6 +59,25 @@ export function Footer() {
               Learn computer science by connecting the dots notes, stories, and
               courses with room to think.
             </p>
+            <div className="text-left">
+             
+              <div className="mt-4 flex flex-wrap items-center justify-start gap-2.5 sm:gap-3">
+                {socialConnectItems.map(({ label, href, icon: Icon }) => (
+                  <a
+                    key={label}
+                    href={href}
+                    {...newTabProps}
+                    className={pillChromeClass}
+                  >
+                    <Icon
+                      className="h-[1.1rem] w-[1.1rem] shrink-0 text-muted-foreground transition group-hover:text-foreground"
+                      aria-hidden
+                    />
+                    <span className="truncate">{label}</span>
+                  </a>
+                ))}
+              </div>
+            </div>
           </div>
           <div className="shrink-0 text-right sm:ml-8">
             <h2 className="text-xs font-medium uppercase tracking-[0.2em] text-muted-foreground">
@@ -82,28 +101,6 @@ export function Footer() {
                 </Link>
               ))}
             </nav>
-          </div>
-        </div>
-
-        <div className="text-left">
-          <h2 className="text-xs font-medium uppercase tracking-[0.2em] text-muted-foreground">
-            Connect
-          </h2>
-          <div className="mt-4 flex flex-wrap items-center justify-start gap-2.5 sm:gap-3">
-            {socialConnectItems.map(({ label, href, icon: Icon }) => (
-              <a
-                key={label}
-                href={href}
-                {...newTabProps}
-                className={pillChromeClass}
-              >
-                <Icon
-                  className="h-[1.1rem] w-[1.1rem] shrink-0 text-muted-foreground transition group-hover:text-foreground"
-                  aria-hidden
-                />
-                <span className="truncate">{label}</span>
-              </a>
-            ))}
           </div>
         </div>
 
