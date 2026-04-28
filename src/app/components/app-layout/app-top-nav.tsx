@@ -82,7 +82,7 @@ export function AppTopNav({
     <header
       className={cn(
         "sticky top-0 z-30 flex h-12 items-center gap-2 border-b border-[color:var(--color-line)]",
-        "bg-background/85 px-3 backdrop-blur-md supports-[backdrop-filter]:bg-background/70 sm:gap-3 sm:px-5",
+        "bg-background/85 px-5 backdrop-blur-md supports-[backdrop-filter]:bg-background/70 sm:gap-3 sm:px-8",
       )}
     >
       {/* Mobile sidebar toggle */}

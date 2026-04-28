@@ -56,7 +56,7 @@ export function AppPageShell({
       >
         <Suspense
           fallback={
-            <div className="sticky top-0 z-30 h-12 border-b border-[color:var(--color-line)] bg-background/85 backdrop-blur-md" />
+            <div className="sticky top-0 z-30 h-12 border-b border-[color:var(--color-line)] bg-background/85 px-5 backdrop-blur-md sm:px-8" />
           }
         >
           <AppTopNav
