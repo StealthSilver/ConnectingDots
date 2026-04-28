@@ -169,7 +169,7 @@ function SidebarNavItem({
       className={cn(
         navChakra,
         "group relative flex items-center rounded-xl text-sm font-medium transition-colors duration-200",
-        expanded ? "gap-3 px-3 py-2.5" : "justify-center px-3 py-2.5",
+        expanded ? "gap-3 px-3 py-2" : "justify-center px-3 py-2",
         isActive
           ? "bg-black/[0.06] text-foreground dark:bg-white/[0.08]"
           : "text-muted-foreground hover:bg-black/[0.04] hover:text-foreground dark:hover:bg-white/[0.06]",
@@ -242,7 +242,7 @@ export function AppSidebar({
           aria-label={expanded ? "Collapse sidebar" : "Expand sidebar"}
           title={expanded ? "Collapse sidebar" : "Expand sidebar"}
           className={cn(
-            "absolute -right-3 top-6 z-50 hidden lg:inline-flex",
+            "absolute -right-3 top-3 z-50 hidden lg:inline-flex",
             "h-6 w-6 items-center justify-center rounded-full",
             "border border-[color:var(--color-line)] bg-background",
             "text-muted-foreground shadow-sm transition-colors duration-200",
@@ -257,7 +257,10 @@ export function AppSidebar({
         </button>
 
         {/* Nav items including logo */}
-        <nav aria-label="App navigation" className="flex-1 overflow-hidden overflow-y-auto px-3 py-4">
+        <nav
+          aria-label="App navigation"
+          className="flex-1 overflow-hidden overflow-y-auto px-3 pb-4 pt-1.5 sm:pt-2"
+        >
           <ul className="flex flex-col gap-0.5" role="list">
             {/* Logo / Home — styled like a nav item */}
             <li>
@@ -268,7 +271,7 @@ export function AppSidebar({
                 className={cn(
                   navChakra,
                   "group relative flex items-center rounded-xl text-sm font-medium transition-colors duration-200",
-                  expanded ? "gap-3 px-3 py-2.5" : "justify-center px-3 py-2.5",
+                  expanded ? "gap-3 px-3 py-2" : "justify-center px-3 py-2",
                   "text-muted-foreground hover:bg-black/[0.04] hover:text-foreground dark:hover:bg-white/[0.06]",
                 )}
               >
