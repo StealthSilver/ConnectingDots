@@ -172,10 +172,10 @@ export function Navbar() {
     <header
       data-grid-start
       className={cn(
-        "sticky top-0 z-40 w-full transition-colors duration-200",
+        "sticky top-0 z-40 w-full border-b border-[color:var(--color-line)] transition-colors duration-200",
         scrolled || mobileOpen
-          ? "border-b border-[color:var(--color-line)] bg-background/80 backdrop-blur-md supports-[backdrop-filter]:bg-background/65"
-          : "border-b border-transparent bg-transparent",
+          ? "bg-background/80 backdrop-blur-md supports-[backdrop-filter]:bg-background/65"
+          : "bg-transparent",
       )}
     >
       <div
