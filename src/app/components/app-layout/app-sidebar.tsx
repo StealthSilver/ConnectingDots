@@ -68,14 +68,21 @@ function ThemeToggle() {
   )
 }
 
-function UserPopover({ onClose }: { onClose: () => void }) {
+function UserPopover({
+  onClose,
+  triggerRef,
+}: {
+  onClose: () => void
+  triggerRef: React.RefObject<HTMLButtonElement | null>
+}) {
   const popoverRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     function onOutsideClick(e: MouseEvent) {
-      if (popoverRef.current && !popoverRef.current.contains(e.target as Node)) {
-        onClose()
-      }
+      const target = e.target as Node
+      if (popoverRef.current?.contains(target)) return
+      if (triggerRef.current?.contains(target)) return
+      onClose()
     }
     function onKey(e: KeyboardEvent) {
       if (e.key === "Escape") onClose()
@@ -86,7 +93,7 @@ function UserPopover({ onClose }: { onClose: () => void }) {
       document.removeEventListener("mousedown", onOutsideClick)
       document.removeEventListener("keydown", onKey)
     }
-  }, [onClose])
+  }, [onClose, triggerRef])
 
   return (
     <motion.div
@@ -125,12 +132,20 @@ function UserPopover({ onClose }: { onClose: () => void }) {
       <div className="mx-1 my-1 h-px bg-[color:var(--color-line)]" />
 
       {/* Upcoming features */}
-      <div className="flex items-center gap-3 rounded-xl px-3 py-2.5">
-        <IconRocket className="size-4 shrink-0 text-muted-foreground/60" aria-hidden />
-        <span className="text-xs font-medium text-muted-foreground/60 tracking-[0.15em]">
+      <Link
+        href="/upcoming"
+        onClick={onClose}
+        className={cn(
+          "group flex items-center gap-3 rounded-xl px-3 py-2.5",
+          "text-muted-foreground transition-colors duration-200",
+          "hover:bg-black/[0.04] hover:text-foreground dark:hover:bg-white/[0.06]",
+        )}
+      >
+        <IconRocket className="size-4 shrink-0" aria-hidden />
+        <span className="text-xs font-medium tracking-[0.15em]">
           Upcoming features
         </span>
-      </div>
+      </Link>
     </motion.div>
   )
 }
@@ -182,6 +197,7 @@ export function AppSidebar({ expanded, onToggle }: AppSidebarProps) {
   const pathname = usePathname()
   const [userOpen, setUserOpen] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
+  const userTriggerRef = useRef<HTMLButtonElement>(null)
 
   useEffect(() => {
     setMobileOpen(false)
@@ -245,6 +261,27 @@ export function AppSidebar({ expanded, onToggle }: AppSidebarProps) {
           mobileOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0",
         )}
       >
+        {/* Expand / collapse toggle — small circle on the right border at the top */}
+        <button
+          type="button"
+          onClick={onToggle}
+          aria-label={expanded ? "Collapse sidebar" : "Expand sidebar"}
+          title={expanded ? "Collapse sidebar" : "Expand sidebar"}
+          className={cn(
+            "absolute -right-3 top-6 z-50 hidden lg:inline-flex",
+            "h-6 w-6 items-center justify-center rounded-full",
+            "border border-[color:var(--color-line)] bg-background",
+            "text-muted-foreground shadow-sm transition-colors duration-200",
+            "hover:text-foreground hover:bg-black/[0.04] dark:hover:bg-white/[0.06]",
+          )}
+        >
+          {expanded ? (
+            <IconChevronLeft className="size-3.5" aria-hidden />
+          ) : (
+            <IconChevronRight className="size-3.5" aria-hidden />
+          )}
+        </button>
+
         {/* Nav items including logo */}
         <nav aria-label="App navigation" className="flex-1 overflow-hidden overflow-y-auto px-3 py-4">
           <ul className="flex flex-col gap-0.5" role="list">
@@ -319,43 +356,26 @@ export function AppSidebar({ expanded, onToggle }: AppSidebarProps) {
           </ul>
         </nav>
 
-        {/* Expand / collapse toggle */}
-        <div className="border-t border-[color:var(--color-line)] px-3 py-3">
-          <button
-            type="button"
-            onClick={onToggle}
-            aria-label={expanded ? "Collapse sidebar" : "Expand sidebar"}
-            title={!expanded ? "Expand sidebar" : undefined}
-            className={cn(
-              "group flex w-full items-center rounded-xl px-3 py-2.5 text-sm font-medium",
-              expanded ? "gap-3" : "justify-center",
-              "text-muted-foreground transition-colors duration-200",
-              "hover:bg-black/[0.04] hover:text-foreground dark:hover:bg-white/[0.06]",
+        {/* User button at bottom — height matches the right-side footer */}
+        <div className="relative flex h-14 items-center border-t border-[color:var(--color-line)] px-3">
+          <AnimatePresence>
+            {userOpen && (
+              <UserPopover
+                onClose={() => setUserOpen(false)}
+                triggerRef={userTriggerRef}
+              />
             )}
-          >
-            {expanded ? (
-              <>
-                <IconChevronLeft className="size-4 shrink-0" aria-hidden />
-                <span className={navChakra}>Collapse</span>
-              </>
-            ) : (
-              <IconChevronRight className="size-4 shrink-0" aria-hidden />
-            )}
-          </button>
-        </div>
-
-        {/* User button at bottom */}
-        <div className="relative border-t border-[color:var(--color-line)] px-3 py-3">
-          <AnimatePresence>{userOpen && <UserPopover onClose={() => setUserOpen(false)} />}</AnimatePresence>
+          </AnimatePresence>
 
           <button
+            ref={userTriggerRef}
             type="button"
             onClick={() => setUserOpen((o) => !o)}
             aria-expanded={userOpen}
             aria-label="Account menu"
             title={!expanded ? "Account" : undefined}
             className={cn(
-              "group flex w-full items-center rounded-xl px-3 py-2.5 text-sm font-medium",
+              "group flex w-full items-center rounded-xl px-3 py-2 text-sm font-medium",
               expanded ? "gap-3" : "justify-center",
               "text-muted-foreground transition-colors duration-200",
               "hover:bg-black/[0.04] hover:text-foreground dark:hover:bg-white/[0.06]",

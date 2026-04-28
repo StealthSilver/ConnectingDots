@@ -21,7 +21,7 @@ export function AppMiniFooter() {
   return (
     <footer
       role="contentinfo"
-      className="flex items-center justify-between border-t border-[color:var(--color-line)] px-5 py-3 sm:px-6"
+      className="flex h-14 items-center justify-between border-t border-[color:var(--color-line)] px-5 sm:px-6"
     >
       {/* Social links */}
       <div className="flex flex-wrap items-center gap-2">
