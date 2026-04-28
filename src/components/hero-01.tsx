@@ -72,7 +72,7 @@ function MainContent() {
               className={pillChromeClass}
             >
               <Icon
-                className="h-[1.1rem] w-[1.1rem] shrink-0 text-muted-foreground transition group-hover:text-foreground"
+                className="h-[0.9rem] w-[0.9rem] shrink-0 text-muted-foreground transition group-hover:text-foreground sm:h-[1.1rem] sm:w-[1.1rem]"
                 aria-hidden
               />
               <span className="truncate">{label}</span>

@@ -18,7 +18,9 @@ export function TestimonialsSection() {
           Testimonials
         </SectionHeading>
       </div>
-      <Testimonials01 />
+      <div className="mx-auto w-full max-w-7xl overflow-hidden">
+        <Testimonials01 />
+      </div>
     </section>
   );
 }

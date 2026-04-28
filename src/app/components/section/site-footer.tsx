@@ -48,7 +48,7 @@ export function Footer() {
                 <span
                   className={cn(
                     navChakra,
-                    "hidden truncate text-base font-normal tracking-tight text-foreground sm:inline sm:text-xl md:text-2xl",
+                    "truncate text-sm font-normal tracking-tight text-foreground sm:text-xl md:text-2xl",
                   )}
                 >
                   Connecting Dots
@@ -98,7 +98,7 @@ export function Footer() {
                 className={pillChromeClass}
               >
                 <Icon
-                  className="h-[1.1rem] w-[1.1rem] shrink-0 text-muted-foreground transition group-hover:text-foreground"
+                  className="h-[0.9rem] w-[0.9rem] shrink-0 text-muted-foreground transition group-hover:text-foreground sm:h-[1.1rem] sm:w-[1.1rem]"
                   aria-hidden
                 />
                 <span className="truncate">{label}</span>

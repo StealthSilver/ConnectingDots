@@ -5,6 +5,7 @@ import { pageContentShellClassName } from "@/lib/page-content-shell";
 import { mobileMenuButtonClass, subtleNavLinkClass } from "@/lib/pill-chrome";
 import { cn } from "@/lib/utils";
 import { IconMenu2, IconX } from "@tabler/icons-react";
+import { AnimatePresence, motion } from "motion/react";
 import Image from "next/image";
 import Link from "next/link";
 import { useTheme } from "@/lib/theme";
@@ -176,18 +177,13 @@ export function Navbar() {
     <header
       data-grid-start
       className={cn(
-        "sticky top-0 z-40 w-full border-b border-[color:var(--color-line)] transition-colors duration-200",
+        "sticky top-0 z-40 w-full border-b border-[color:var(--color-line)] transition-colors duration-200 relative",
         scrolled || mobileOpen
           ? "bg-background/80 backdrop-blur-md supports-[backdrop-filter]:bg-background/65"
           : "bg-transparent",
       )}
     >
-      <div
-        className={cn(
-          pageContentShellClassName,
-          "flex flex-col gap-0 py-3 sm:py-4",
-        )}
-      >
+      <div className={cn(pageContentShellClassName, "py-3 sm:py-4")}>
         <div className="relative z-20 flex w-full min-h-12 items-center justify-between gap-3">
           <div className="min-w-0 shrink">
             <BrandLink className="inline-flex max-w-full" />
@@ -223,53 +219,83 @@ export function Navbar() {
                 type="button"
                 className={cn(
                   mobileMenuButtonClass,
-                  "h-10 w-10 border border-[color:var(--color-line)]/60",
+                  "h-10 w-10 border border-[color:var(--color-line)] bg-background supports-[backdrop-filter]:bg-background/95 backdrop-blur-md text-foreground hover:text-foreground",
+                  mobileOpen &&
+                    "bg-background text-foreground",
                 )}
                 onClick={toggleMobile}
                 aria-expanded={mobileOpen}
                 aria-controls="mobile-nav-panel"
                 aria-label={mobileOpen ? "Close menu" : "Open menu"}
               >
-                {mobileOpen ? (
-                  <IconX className="h-5 w-5" />
-                ) : (
-                  <IconMenu2 className="h-5 w-5" />
-                )}
+                <AnimatePresence mode="wait" initial={false}>
+                  {mobileOpen ? (
+                    <motion.span
+                      key="close"
+                      className="flex items-center justify-center"
+                      initial={{ rotate: -90, scale: 0.4, opacity: 0 }}
+                      animate={{ rotate: 0, scale: 1, opacity: 1 }}
+                      exit={{ rotate: 90, scale: 0.4, opacity: 0 }}
+                      transition={{ type: "spring", stiffness: 380, damping: 22 }}
+                    >
+                      <IconX className="h-5 w-5" />
+                    </motion.span>
+                  ) : (
+                    <motion.span
+                      key="open"
+                      className="flex items-center justify-center"
+                      initial={{ rotate: 90, scale: 0.4, opacity: 0 }}
+                      animate={{ rotate: 0, scale: 1, opacity: 1 }}
+                      exit={{ rotate: -90, scale: 0.4, opacity: 0 }}
+                      transition={{ type: "spring", stiffness: 380, damping: 22 }}
+                    >
+                      <IconMenu2 className="h-5 w-5" />
+                    </motion.span>
+                  )}
+                </AnimatePresence>
               </button>
             </div>
           </div>
         </div>
-
-        {mobileOpen && (
-          <div
-            className="mt-3 border-t border-[color:var(--color-line)] pb-2 pt-3 lg:hidden"
-            id="mobile-nav-panel"
-          >
-            <nav aria-label="Main" className="flex flex-col gap-1">
-              {navItems.map((item) => (
-                <MobileLink
-                  key={item.link}
-                  href={item.link}
-                  onClick={closeMobile}
-                >
-                  {item.name}
-                </MobileLink>
-              ))}
-            </nav>
-            <div className="mt-3 border-t border-[color:var(--color-line)] pt-4">
-              <HoverBorderGradient
-                as={Link}
-                href="/sign-up"
-                onClick={closeMobile}
-                containerClassName="w-full"
-                className={`${navChakra} flex w-full justify-center`}
-              >
-                Sign up
-              </HoverBorderGradient>
-            </div>
-          </div>
-        )}
       </div>
+
+      <AnimatePresence>
+        {mobileOpen ? (
+          <motion.div
+            id="mobile-nav-panel"
+            className="absolute inset-x-0 top-full z-30 border-b border-[color:var(--color-line)] bg-background/92 backdrop-blur-md supports-[backdrop-filter]:bg-background/78 lg:hidden"
+            initial={{ opacity: 0, y: -10, scale: 0.985 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: -8, scale: 0.99 }}
+            transition={{ type: "spring", stiffness: 520, damping: 42, mass: 0.8 }}
+          >
+            <div className={cn(pageContentShellClassName, "pb-3 pt-3")}>
+              <nav aria-label="Main" className="flex flex-col gap-1">
+                {navItems.map((item) => (
+                  <MobileLink
+                    key={item.link}
+                    href={item.link}
+                    onClick={closeMobile}
+                  >
+                    {item.name}
+                  </MobileLink>
+                ))}
+              </nav>
+              <div className="mt-3 border-t border-[color:var(--color-line)] pt-4">
+                <HoverBorderGradient
+                  as={Link}
+                  href="/sign-up"
+                  onClick={closeMobile}
+                  containerClassName="w-full"
+                  className={`${navChakra} flex w-full justify-center`}
+                >
+                  Sign up
+                </HoverBorderGradient>
+              </div>
+            </div>
+          </motion.div>
+        ) : null}
+      </AnimatePresence>
     </header>
   );
 }

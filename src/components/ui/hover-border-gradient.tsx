@@ -121,7 +121,7 @@ export function GradientPill({
         className={cn(
           "z-10 w-auto rounded-[inherit] leading-snug tracking-tight text-black dark:text-white",
           borderGlowActive
-            ? "bg-white px-5 py-2.5 text-base font-semibold dark:bg-black"
+            ? "bg-white px-4 py-2 text-sm font-semibold dark:bg-black sm:px-5 sm:py-2.5 sm:text-base"
             : "bg-transparent px-4 py-2 text-sm font-medium",
           className,
         )}
