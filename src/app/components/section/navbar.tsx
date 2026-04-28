@@ -1,9 +1,6 @@
 "use client";
 
-import {
-  GradientPill,
-  HoverBorderGradient,
-} from "@/components/ui/hover-border-gradient";
+import { HoverBorderGradient } from "@/components/ui/hover-border-gradient";
 import { pageContentShellClassName } from "@/lib/page-content-shell";
 import { mobileMenuButtonClass, subtleNavLinkClass } from "@/lib/pill-chrome";
 import { cn } from "@/lib/utils";
@@ -67,57 +64,31 @@ function MoonGlyph(props: SVGProps<SVGSVGElement>) {
 function ThemeToggle() {
   const { resolvedTheme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
-  const [shellHovered, setShellHovered] = useState(false);
 
   useEffect(() => {
     setMounted(true);
   }, []);
 
   if (!mounted) {
-    return (
-      <div
-        className="h-10 w-[3.75rem] shrink-0 rounded-full border border-black/15 bg-black/[0.06] dark:border-white/20 dark:bg-white/20"
-        aria-hidden
-      />
-    );
+    return <div className="h-9 w-9 shrink-0" aria-hidden />;
   }
 
   const isDark = resolvedTheme === "dark";
 
   return (
-    <GradientPill
-      as="div"
-      containerClassName="shrink-0 cursor-default"
-      className="!px-0.5 !py-0.5"
-      rotateEnabled={false}
-      emphasizeBorder={shellHovered}
-      onMouseEnter={() => setShellHovered(true)}
-      onMouseLeave={() => setShellHovered(false)}
+    <button
+      type="button"
+      onClick={() => setTheme(isDark ? "light" : "dark")}
+      className={cn(mobileMenuButtonClass, "shrink-0")}
+      aria-label={isDark ? "Switch to light theme" : "Switch to dark theme"}
+      title={isDark ? "Switch to light theme" : "Switch to dark theme"}
     >
-      <button
-        type="button"
-        role="switch"
-        aria-checked={isDark}
-        onClick={() => setTheme(isDark ? "light" : "dark")}
-        className="group relative z-20 inline-flex h-8 w-[3.25rem] shrink-0 items-center rounded-full border-0 bg-transparent p-0.5 shadow-none transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
-        aria-label={isDark ? "Switch to light theme" : "Switch to dark theme"}
-      >
-        <span
-          className="pointer-events-none absolute inset-0 flex items-center justify-between px-1.5"
-          aria-hidden
-        >
-          <SunGlyph
-            className={`h-3.5 w-3.5 text-zinc-700 transition dark:text-zinc-400 ${isDark ? "opacity-50" : "opacity-100"}`}
-          />
-          <MoonGlyph
-            className={`h-3.5 w-3.5 text-zinc-500 transition dark:text-zinc-100 ${isDark ? "opacity-100" : "opacity-50"}`}
-          />
-        </span>
-        <span
-          className={`pointer-events-none relative z-10 h-7 w-7 rounded-full border border-zinc-200/90 bg-white shadow-sm ring-1 ring-black/5 transition-transform duration-200 ease-out will-change-transform dark:border-zinc-600/60 dark:bg-zinc-200 dark:ring-white/10 ${isDark ? "translate-x-5" : "translate-x-0"}`}
-        />
-      </button>
-    </GradientPill>
+      {isDark ? (
+        <SunGlyph className="h-[1.05rem] w-[1.05rem]" />
+      ) : (
+        <MoonGlyph className="h-[1.05rem] w-[1.05rem]" />
+      )}
+    </button>
   );
 }
 
