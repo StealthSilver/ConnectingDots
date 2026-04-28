@@ -3,38 +3,34 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 :root {
-  /* Brand color stops (gold, orange, deep purple) */
-  --gradient-start: #ffb21a;
-  --gradient-mid: #f4420c;
-  --gradient-end: #230c36;
+  /* Neutral monochrome scale */
+  --gradient-start: #d4d4d8;
+  --gradient-mid: #71717a;
+  --gradient-end: #27272a;
 
-  /* Page chrome — foreground & muted text unchanged */
-  --background: #f8f6fb;
-  --foreground: #0c1812;
-  --muted: #5c6d64;
+  --background: #fafafa;
+  --foreground: #09090b;
+  --muted: #71717a;
   --card: #ffffff;
   --border: color-mix(in srgb, var(--gradient-end) 14%, transparent);
   --accent: var(--gradient-mid);
-  --accent-muted: #ffefe4;
+  --accent-muted: #f4f4f5;
   --ring: color-mix(in srgb, var(--gradient-mid) 38%, transparent);
-  /* Neutral chrome border (was #8aa396 family) */
   --chrome-border: oklch(0.708 0 0);
-  /* Neutral (hue-free) fill used for glow cards */
-  --glow-card-fill: #f2f2f2;
+  --glow-card-fill: #f4f4f5;
 }
 
 .dark {
-  --background: #06040a;
+  --background: #09090b;
   --foreground: #fafafa;
   --muted: #a1a1aa;
-  --card: #0e0a14;
-  --border: color-mix(in srgb, var(--gradient-start) 12%, transparent);
+  --card: #111111;
+  --border: color-mix(in srgb, var(--gradient-start) 14%, transparent);
   --accent: var(--gradient-mid);
-  --accent-muted: color-mix(in srgb, var(--gradient-end) 45%, transparent);
+  --accent-muted: color-mix(in srgb, var(--gradient-end) 40%, transparent);
   --ring: color-mix(in srgb, var(--gradient-start) 38%, transparent);
   --chrome-border: oklch(0.708 0 0);
-  /* Neutral (hue-free) fill used for glow cards */
-  --glow-card-fill: #0d0d0d;
+  --glow-card-fill: #111111;
 }
 
 @theme inline {

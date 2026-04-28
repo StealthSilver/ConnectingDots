@@ -99,7 +99,7 @@ function ThemeToggle() {
         role="switch"
         aria-checked={isDark}
         onClick={() => setTheme(isDark ? "light" : "dark")}
-        className="group relative z-20 inline-flex h-8 w-[3.25rem] shrink-0 items-center rounded-full border-0 bg-transparent p-0.5 shadow-none transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#3275F8]/45 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-black"
+        className="group relative z-20 inline-flex h-8 w-[3.25rem] shrink-0 items-center rounded-full border-0 bg-transparent p-0.5 shadow-none transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
         aria-label={isDark ? "Switch to light theme" : "Switch to dark theme"}
       >
         <span

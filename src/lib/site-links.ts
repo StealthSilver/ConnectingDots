@@ -1,9 +1,8 @@
-/** Update these to your real profiles when ready. */
 export const siteLinks = {
-  x: "https://x.com",
-  youtube: "https://www.youtube.com",
-  email: "mailto:hello@example.com",
-  discord: "https://discord.gg",
+  x: "https://x.com/silver_srs",
+  youtube: "https://www.youtube.com/channel/UCzBMm1NyjUM7IOay4A_GE9w",
+  email: "mailto:saraswatrajat12@gmail.com",
+  discord: "https://discord.com/users/rajat_28969",
   portfolio: "https://silver-jet.vercel.app",
 } as const;
 

@@ -58,7 +58,7 @@ function MainContent() {
         aria-label="Connect"
       >
         <h2
-          className="text-xs font-medium uppercase tracking-[0.2em] text-muted-foreground"
+          className="text-xs font-medium uppercase tracking-[0.2em] text-zinc-500 dark:text-zinc-200/70"
           id="hero-connect-heading"
         >
           Connect

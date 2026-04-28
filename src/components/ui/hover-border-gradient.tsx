@@ -8,27 +8,27 @@ import React, { useCallback, useEffect, useState } from "react";
 export type GradientDirection = "TOP" | "LEFT" | "BOTTOM" | "RIGHT";
 
 const movingMapLight: Record<GradientDirection, string> = {
-  TOP: "radial-gradient(20.7% 50% at 50% 0%, rgba(244, 66, 12, 0.65) 0%, rgba(0, 0, 0, 0) 100%)",
+  TOP: "radial-gradient(20.7% 50% at 50% 0%, rgba(82, 82, 91, 0.6) 0%, rgba(0, 0, 0, 0) 100%)",
   LEFT:
-    "radial-gradient(16.6% 43.1% at 0% 50%, rgba(244, 66, 12, 0.65) 0%, rgba(0, 0, 0, 0) 100%)",
+    "radial-gradient(16.6% 43.1% at 0% 50%, rgba(82, 82, 91, 0.6) 0%, rgba(0, 0, 0, 0) 100%)",
   BOTTOM:
-    "radial-gradient(20.7% 50% at 50% 100%, rgba(244, 66, 12, 0.65) 0%, rgba(0, 0, 0, 0) 100%)",
+    "radial-gradient(20.7% 50% at 50% 100%, rgba(82, 82, 91, 0.6) 0%, rgba(0, 0, 0, 0) 100%)",
   RIGHT:
-    "radial-gradient(16.2% 41.2% at 100% 50%, rgba(244, 66, 12, 0.65) 0%, rgba(0, 0, 0, 0) 100%)",
+    "radial-gradient(16.2% 41.2% at 100% 50%, rgba(82, 82, 91, 0.6) 0%, rgba(0, 0, 0, 0) 100%)",
 };
 
 const movingMapDark: Record<GradientDirection, string> = {
-  TOP: "radial-gradient(20.7% 50% at 50% 0%, rgba(255, 178, 26, 0.8) 0%, rgba(255, 255, 255, 0) 100%)",
+  TOP: "radial-gradient(20.7% 50% at 50% 0%, rgba(255, 255, 255, 0.85) 0%, rgba(255, 255, 255, 0) 100%)",
   LEFT:
-    "radial-gradient(16.6% 43.1% at 0% 50%, rgba(255, 178, 26, 0.8) 0%, rgba(255, 255, 255, 0) 100%)",
+    "radial-gradient(16.6% 43.1% at 0% 50%, rgba(255, 255, 255, 0.85) 0%, rgba(255, 255, 255, 0) 100%)",
   BOTTOM:
-    "radial-gradient(20.7% 50% at 50% 100%, rgba(255, 178, 26, 0.8) 0%, rgba(255, 255, 255, 0) 100%)",
+    "radial-gradient(20.7% 50% at 50% 100%, rgba(255, 255, 255, 0.85) 0%, rgba(255, 255, 255, 0) 100%)",
   RIGHT:
-    "radial-gradient(16.2% 41.2% at 100% 50%, rgba(255, 178, 26, 0.8) 0%, rgba(255, 255, 255, 0) 100%)",
+    "radial-gradient(16.2% 41.2% at 100% 50%, rgba(255, 255, 255, 0.85) 0%, rgba(255, 255, 255, 0) 100%)",
 };
 
 const highlight =
-  "radial-gradient(75% 181.15942028985506% at 50% 50%, #f4420c 0%, rgba(255, 255, 255, 0) 100%)";
+  "radial-gradient(75% 181.15942028985506% at 50% 50%, rgb(113, 113, 122) 0%, rgba(255, 255, 255, 0) 100%)";
 
 function useThemeMovingMap() {
   const [mounted, setMounted] = useState(false);
@@ -181,7 +181,7 @@ export function HoverBorderGradient<C extends React.ElementType = "button">({
       as={as ?? "button"}
       borderGlowActive
       containerClassName={cn(
-        "cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#3275F8]/45 focus-visible:ring-offset-2 focus-visible:ring-offset-background dark:focus-visible:ring-offset-background",
+        "cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background",
         containerClassName,
       )}
       className={className}
