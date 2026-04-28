@@ -1,0 +1,385 @@
+"use client"
+
+import Image from "next/image"
+import Link from "next/link"
+import { usePathname } from "next/navigation"
+import {
+  IconArticle,
+  IconBookmark,
+  IconBrain,
+  IconChevronLeft,
+  IconChevronRight,
+  IconChevronUp,
+  IconMoon,
+  IconRocket,
+  IconSchool,
+  IconSun,
+  IconTerminal2,
+  IconUserCircle,
+  IconX,
+} from "@tabler/icons-react"
+import { AnimatePresence, motion } from "motion/react"
+import { useEffect, useRef, useState } from "react"
+
+import { HoverBorderGradient } from "@/components/ui/hover-border-gradient"
+import { useTheme } from "@/lib/theme"
+import { cn } from "@/lib/utils"
+
+const navChakra = "[font-family:var(--font-chakra-petch)]" as const
+
+const navItems = [
+  { label: "Blogs", href: "/blogs", icon: IconArticle },
+  { label: "Learning", href: "/learning", icon: IconBrain },
+  { label: "Courses", href: "/courses", icon: IconSchool },
+  { label: "Bookmarks", href: "/bookmarks", icon: IconBookmark },
+  { label: "Playground", href: "/playground", icon: IconTerminal2 },
+] as const
+
+function ThemeToggle() {
+  const { resolvedTheme, setTheme } = useTheme()
+  const [mounted, setMounted] = useState(false)
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
+
+  if (!mounted) return null
+
+  const isDark = resolvedTheme === "dark"
+
+  return (
+    <button
+      type="button"
+      onClick={() => setTheme(isDark ? "light" : "dark")}
+      aria-label={isDark ? "Switch to light theme" : "Switch to dark theme"}
+      className={cn(
+        "group inline-flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium",
+        "text-muted-foreground transition-colors duration-200",
+        "hover:bg-black/[0.04] hover:text-foreground dark:hover:bg-white/[0.06]",
+      )}
+    >
+      {isDark ? (
+        <IconSun className="size-4 shrink-0" aria-hidden />
+      ) : (
+        <IconMoon className="size-4 shrink-0" aria-hidden />
+      )}
+      <span>{isDark ? "Light mode" : "Dark mode"}</span>
+    </button>
+  )
+}
+
+function UserPopover({ onClose }: { onClose: () => void }) {
+  const popoverRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    function onOutsideClick(e: MouseEvent) {
+      if (popoverRef.current && !popoverRef.current.contains(e.target as Node)) {
+        onClose()
+      }
+    }
+    function onKey(e: KeyboardEvent) {
+      if (e.key === "Escape") onClose()
+    }
+    document.addEventListener("mousedown", onOutsideClick)
+    document.addEventListener("keydown", onKey)
+    return () => {
+      document.removeEventListener("mousedown", onOutsideClick)
+      document.removeEventListener("keydown", onKey)
+    }
+  }, [onClose])
+
+  return (
+    <motion.div
+      ref={popoverRef}
+      initial={{ opacity: 0, y: 8, scale: 0.97 }}
+      animate={{ opacity: 1, y: 0, scale: 1 }}
+      exit={{ opacity: 0, y: 6, scale: 0.98 }}
+      transition={{ type: "spring", stiffness: 500, damping: 35 }}
+      className={cn(
+        "absolute bottom-full left-2 z-50 mb-2 w-52",
+        "rounded-2xl border border-[color:var(--color-line)]",
+        "bg-background/95 shadow-lg backdrop-blur-md",
+        "p-2",
+      )}
+    >
+      {/* Sign up */}
+      <div className="px-1 pb-2 pt-1">
+        <HoverBorderGradient
+          as={Link}
+          href="/sign-up"
+          containerClassName="w-full"
+          className={cn(navChakra, "flex w-full justify-center text-xs")}
+          onClick={onClose}
+        >
+          Sign up
+        </HoverBorderGradient>
+      </div>
+
+      {/* Divider */}
+      <div className="mx-1 mb-1 h-px bg-[color:var(--color-line)]" />
+
+      {/* Theme toggle */}
+      <ThemeToggle />
+
+      {/* Divider */}
+      <div className="mx-1 my-1 h-px bg-[color:var(--color-line)]" />
+
+      {/* Upcoming features */}
+      <div className="flex items-center gap-3 rounded-xl px-3 py-2.5">
+        <IconRocket className="size-4 shrink-0 text-muted-foreground/60" aria-hidden />
+        <span className="text-xs font-medium text-muted-foreground/60 tracking-[0.15em]">
+          Upcoming features
+        </span>
+      </div>
+    </motion.div>
+  )
+}
+
+function SidebarNavItem({
+  href,
+  label,
+  icon: Icon,
+  isActive,
+  expanded,
+}: {
+  href: string
+  label: string
+  icon: React.ComponentType<{ className?: string; "aria-hidden"?: boolean }>
+  isActive: boolean
+  expanded: boolean
+}) {
+  return (
+    <Link
+      href={href}
+      title={!expanded ? label : undefined}
+      className={cn(
+        navChakra,
+        "group relative flex items-center rounded-xl text-sm font-medium transition-colors duration-200",
+        expanded ? "gap-3 px-3 py-2.5" : "justify-center px-3 py-2.5",
+        isActive
+          ? "bg-black/[0.06] text-foreground dark:bg-white/[0.08]"
+          : "text-muted-foreground hover:bg-black/[0.04] hover:text-foreground dark:hover:bg-white/[0.06]",
+      )}
+    >
+      {isActive && expanded && (
+        <span
+          aria-hidden
+          className="absolute left-0 top-1/2 h-4 w-0.5 -translate-y-1/2 rounded-full bg-foreground/50"
+        />
+      )}
+      <Icon className="size-4 shrink-0" aria-hidden />
+      {expanded && <span className="truncate">{label}</span>}
+    </Link>
+  )
+}
+
+interface AppSidebarProps {
+  expanded: boolean
+  onToggle: () => void
+}
+
+export function AppSidebar({ expanded, onToggle }: AppSidebarProps) {
+  const pathname = usePathname()
+  const [userOpen, setUserOpen] = useState(false)
+  const [mobileOpen, setMobileOpen] = useState(false)
+
+  useEffect(() => {
+    setMobileOpen(false)
+  }, [pathname])
+
+  return (
+    <>
+      {/* Mobile overlay */}
+      <AnimatePresence>
+        {mobileOpen && (
+          <motion.div
+            key="overlay"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.15 }}
+            className="fixed inset-0 z-30 bg-black/40 backdrop-blur-[2px] lg:hidden"
+            onClick={() => setMobileOpen(false)}
+          />
+        )}
+      </AnimatePresence>
+
+      {/* Mobile toggle button */}
+      <button
+        type="button"
+        onClick={() => setMobileOpen((o) => !o)}
+        aria-label={mobileOpen ? "Close sidebar" : "Open sidebar"}
+        className={cn(
+          "fixed left-4 top-4 z-50 lg:hidden",
+          "inline-flex h-9 w-9 items-center justify-center rounded-full",
+          "border border-[color:var(--color-line)] bg-background/90 backdrop-blur-md",
+          "text-muted-foreground shadow-sm transition-colors hover:text-foreground",
+        )}
+      >
+        {mobileOpen ? (
+          <IconX className="size-4" />
+        ) : (
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            className="size-4"
+            aria-hidden
+          >
+            <line x1="4" y1="7" x2="20" y2="7" />
+            <line x1="4" y1="12" x2="20" y2="12" />
+            <line x1="4" y1="17" x2="20" y2="17" />
+          </svg>
+        )}
+      </button>
+
+      {/* Sidebar */}
+      <aside
+        className={cn(
+          "fixed inset-y-0 left-0 z-40 flex flex-col",
+          expanded ? "w-60" : "w-16",
+          "border-r border-[color:var(--color-line)] bg-background/95 backdrop-blur-md",
+          "transition-[width] duration-300 ease-in-out",
+          mobileOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0",
+        )}
+      >
+        {/* Nav items including logo */}
+        <nav aria-label="App navigation" className="flex-1 overflow-hidden overflow-y-auto px-3 py-4">
+          <ul className="flex flex-col gap-0.5" role="list">
+            {/* Logo / Home — styled like a nav item */}
+            <li>
+              <Link
+                href="/"
+                title={!expanded ? "Home — Connecting Dots" : undefined}
+                aria-label="Home — Connecting Dots"
+                className={cn(
+                  navChakra,
+                  "group relative flex items-center rounded-xl text-sm font-medium transition-colors duration-200",
+                  expanded ? "gap-3 px-3 py-2.5" : "justify-center px-3 py-2.5",
+                  "text-muted-foreground hover:bg-black/[0.04] hover:text-foreground dark:hover:bg-white/[0.06]",
+                )}
+              >
+                {/* Contracted: small cropped logo; Expanded: full logo */}
+                {expanded ? (
+                  <>
+                    <Image
+                      src="/light.png"
+                      alt=""
+                      width={120}
+                      height={32}
+                      className="h-5 w-auto shrink-0 dark:hidden"
+                      priority
+                    />
+                    <Image
+                      src="/cddark.png"
+                      alt=""
+                      width={120}
+                      height={32}
+                      className="hidden h-5 w-auto shrink-0 dark:block"
+                      priority
+                    />
+                    <span className="truncate text-foreground">Connecting Dots</span>
+                  </>
+                ) : (
+                  <span className="flex h-5 w-5 shrink-0 items-center overflow-hidden">
+                    <Image
+                      src="/light.png"
+                      alt=""
+                      width={120}
+                      height={32}
+                      className="h-full w-auto shrink-0 dark:hidden"
+                      priority
+                    />
+                    <Image
+                      src="/cddark.png"
+                      alt=""
+                      width={120}
+                      height={32}
+                      className="hidden h-full w-auto shrink-0 dark:block"
+                      priority
+                    />
+                  </span>
+                )}
+              </Link>
+            </li>
+
+            {navItems.map((item) => (
+              <li key={item.href}>
+                <SidebarNavItem
+                  href={item.href}
+                  label={item.label}
+                  icon={item.icon}
+                  isActive={pathname === item.href}
+                  expanded={expanded}
+                />
+              </li>
+            ))}
+          </ul>
+        </nav>
+
+        {/* Expand / collapse toggle */}
+        <div className="border-t border-[color:var(--color-line)] px-3 py-3">
+          <button
+            type="button"
+            onClick={onToggle}
+            aria-label={expanded ? "Collapse sidebar" : "Expand sidebar"}
+            title={!expanded ? "Expand sidebar" : undefined}
+            className={cn(
+              "group flex w-full items-center rounded-xl px-3 py-2.5 text-sm font-medium",
+              expanded ? "gap-3" : "justify-center",
+              "text-muted-foreground transition-colors duration-200",
+              "hover:bg-black/[0.04] hover:text-foreground dark:hover:bg-white/[0.06]",
+            )}
+          >
+            {expanded ? (
+              <>
+                <IconChevronLeft className="size-4 shrink-0" aria-hidden />
+                <span className={navChakra}>Collapse</span>
+              </>
+            ) : (
+              <IconChevronRight className="size-4 shrink-0" aria-hidden />
+            )}
+          </button>
+        </div>
+
+        {/* User button at bottom */}
+        <div className="relative border-t border-[color:var(--color-line)] px-3 py-3">
+          <AnimatePresence>{userOpen && <UserPopover onClose={() => setUserOpen(false)} />}</AnimatePresence>
+
+          <button
+            type="button"
+            onClick={() => setUserOpen((o) => !o)}
+            aria-expanded={userOpen}
+            aria-label="Account menu"
+            title={!expanded ? "Account" : undefined}
+            className={cn(
+              "group flex w-full items-center rounded-xl px-3 py-2.5 text-sm font-medium",
+              expanded ? "gap-3" : "justify-center",
+              "text-muted-foreground transition-colors duration-200",
+              "hover:bg-black/[0.04] hover:text-foreground dark:hover:bg-white/[0.06]",
+              userOpen && "bg-black/[0.06] text-foreground dark:bg-white/[0.08]",
+            )}
+          >
+            <IconUserCircle className="size-5 shrink-0" aria-hidden />
+            {expanded && (
+              <>
+                <span className={cn(navChakra, "flex-1 truncate text-left text-sm")}>
+                  Account
+                </span>
+                <IconChevronUp
+                  className={cn(
+                    "size-3.5 shrink-0 text-muted-foreground/50 transition-transform duration-200",
+                    userOpen && "rotate-180",
+                  )}
+                  aria-hidden
+                />
+              </>
+            )}
+          </button>
+        </div>
+      </aside>
+    </>
+  )
+}
