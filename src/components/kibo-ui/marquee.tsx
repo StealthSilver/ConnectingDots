@@ -12,7 +12,7 @@ export function MarqueeFade({ side }: { side: "left" | "right" }) {
   return (
     <div
       className={cn(
-        "pointer-events-none absolute inset-y-0 z-20 w-16 to-transparent from-background",
+        "pointer-events-none absolute inset-y-0 z-20 w-28 to-transparent from-background",
         side === "left" ? "left-0 bg-gradient-to-r" : "right-0 bg-gradient-to-l",
       )}
       aria-hidden
@@ -23,12 +23,20 @@ export function MarqueeFade({ side }: { side: "left" | "right" }) {
 export function MarqueeContent({
   children,
   direction = "left",
+  pauseOnHover = true,
 }: {
   children: ReactNode;
   direction?: "right" | "left";
+  pauseOnHover?: boolean;
 }) {
   return (
-    <Rfm direction={direction} gradient={false} className="relative z-0 w-full" play>
+    <Rfm
+      direction={direction}
+      gradient={false}
+      className="relative z-0 w-full"
+      play
+      pauseOnHover={pauseOnHover}
+    >
       {children}
     </Rfm>
   );

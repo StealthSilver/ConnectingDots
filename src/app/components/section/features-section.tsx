@@ -1,192 +1,195 @@
-import type { TablerIcon } from "@tabler/icons-react";
+import type { TablerIcon } from "@tabler/icons-react"
 import {
   IconArticle,
-  IconBooks,
   IconBrain,
-  IconCode,
   IconNotebook,
-  IconPalette,
   IconPuzzle,
   IconRoad,
-  IconSchool,
   IconTerminal2,
-} from "@tabler/icons-react";
+} from "@tabler/icons-react"
 
-import {
-  Testimonial,
-  TestimonialAuthor,
-  TestimonialAuthorName,
-  TestimonialAuthorTagline,
-  TestimonialAvatar,
-  TestimonialAvatarRing,
-  TestimonialQuote,
-} from "@/components/ui/testimonial";
-import { pageContentShellClassName } from "@/lib/page-content-shell";
-import { cn } from "@/lib/utils";
+import { GlowCard, GlowCardGrid } from "@/components/glow-card-grid"
+import { pageContentShellClassName } from "@/lib/page-content-shell"
+import { cn } from "@/lib/utils"
 
-import { SectionHeading } from "./section-heading";
-
-const navChakra = "[font-family:var(--font-chakra-petch)]" as const;
-
-const focusRing =
-  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#3275F8]/45 focus-visible:ring-offset-2 focus-visible:ring-offset-background dark:focus-visible:ring-offset-background";
-
-const featureSurfaceClass = cn(
-  "overflow-hidden rounded-2xl border border-chrome-border bg-card/50 shadow-sm transition will-change-transform",
-  "hover:-translate-y-0.5 hover:text-foreground dark:bg-card/40",
-  focusRing,
-);
+const navChakra = "[font-family:var(--font-chakra-petch)]" as const
 
 type FeatureDef = {
-  title: string;
-  tagline: string;
-  description: string;
-  icon: TablerIcon;
-  /** Responsive bento spans: dense 6-col layout at `lg`, 2-col at `md`. */
-  bentoClass: string;
-};
+  title: string
+  description: string
+  icon: TablerIcon
+  bentoClass: string
+  isHero?: boolean
+}
+
+const roadmapSteps = ["Foundations", "Core Skills", "Projects", "Job Ready"]
 
 const features: FeatureDef[] = [
   {
-    title: "Blogs",
-    tagline: "Reading & depth",
+    title: "Learning Roadmaps",
     description:
-      "Long-form articles when a topic deserves depth beyond a video.",
-    icon: IconArticle,
-    bentoClass:
-      "md:col-span-2 md:row-span-2 lg:col-span-4 lg:row-span-2 lg:min-h-[240px]",
-  },
-  {
-    title: "Notes for DSA",
-    tagline: "Interview-ready",
-    description: "Structures, patterns, and interview-ready summaries.",
-    icon: IconNotebook,
-    bentoClass: "md:col-span-1 lg:col-span-2 lg:row-span-1 lg:min-h-[120px]",
-  },
-  {
-    title: "AI / ML",
-    tagline: "Projects & notebooks",
-    description: "Foundations through notebooks and applied mini-projects.",
-    icon: IconBrain,
-    bentoClass: "md:col-span-1 lg:col-span-2 lg:row-span-1 lg:min-h-[120px]",
-  },
-  {
-    title: "Web Dev",
-    tagline: "Frontend to backend",
-    description: "Frontend, backend, and full-stack paths in one place.",
-    icon: IconCode,
-    bentoClass:
-      "md:col-span-2 md:row-span-2 lg:col-span-4 lg:row-span-2 lg:min-h-[240px]",
-  },
-  {
-    title: "Designing",
-    tagline: "UI & product thinking",
-    description: "UI craft, layout, and product thinking for builders.",
-    icon: IconPalette,
-    bentoClass: "md:col-span-1 lg:col-span-2 lg:row-span-1 lg:min-h-[120px]",
-  },
-  {
-    title: "Upcoming courses",
-    tagline: "Step-by-step tracks",
-    description: "Structured tracks you can follow step by step.",
-    icon: IconSchool,
-    bentoClass: "md:col-span-1 lg:col-span-2 lg:row-span-1 lg:min-h-[120px]",
-  },
-  {
-    title: "Roadmaps to learn",
-    tagline: "Paths from zero to hire",
-    description: "Clear paths from first concepts to job-ready skills.",
+      "Structured paths from first principles to job-ready. No guessing, no dead ends — just a clear direction forward.",
     icon: IconRoad,
-    bentoClass: "md:col-span-2 lg:col-span-3 lg:row-span-1 lg:min-h-[120px]",
+    bentoClass: "md:col-span-2 md:row-span-2 lg:col-span-4 lg:row-span-2",
+    isHero: true,
   },
   {
-    title: "Playground to test code",
-    tagline: "Snippets in-browser",
-    description: "Try snippets and experiments without leaving the site.",
+    title: "In-depth Blogs",
+    description: "Long-form reads that explain the why, not just the how.",
+    icon: IconArticle,
+    bentoClass: "md:col-span-1 lg:col-span-2",
+  },
+  {
+    title: "DSA for Interviews",
+    description: "Pattern-first notes to crack any technical interview.",
+    icon: IconNotebook,
+    bentoClass: "md:col-span-1 lg:col-span-2",
+  },
+  {
+    title: "Code Playground",
+    description: "Write, run, and test code right in your browser — no setup.",
     icon: IconTerminal2,
-    bentoClass: "md:col-span-2 lg:col-span-3 lg:row-span-1 lg:min-h-[120px]",
+    bentoClass: "md:col-span-1 lg:col-span-2",
   },
   {
-    title: "Problem sets to practice",
-    tagline: "Hints & explanations",
-    description: "Curated exercises with hints and worked explanations.",
+    title: "AI & ML",
+    description: "Hands-on notebooks from fundamentals to real-world projects.",
+    icon: IconBrain,
+    bentoClass: "md:col-span-1 lg:col-span-2",
+  },
+  {
+    title: "Problem Sets",
+    description:
+      "Curated exercises with progressive hints and full explanations.",
     icon: IconPuzzle,
-    bentoClass: "md:col-span-2 lg:col-span-3 lg:row-span-1 lg:min-h-[120px]",
+    bentoClass: "md:col-span-2 lg:col-span-2",
   },
-  {
-    title: "CS concepts",
-    tagline: "Systems & theory",
-    description: "OS, networks, databases, and theory made practical.",
-    icon: IconBooks,
-    bentoClass: "md:col-span-2 lg:col-span-3 lg:row-span-1 lg:min-h-[120px]",
-  },
-];
+]
 
 export function FeaturesSection() {
   return (
     <section
       id="features"
       aria-labelledby="features-heading"
-      className="w-screen max-w-full pb-12 pt-12 sm:pb-16 sm:pt-14"
+      className="w-screen max-w-full pb-16 pt-12 sm:pb-20 sm:pt-16"
     >
-      <div className={`${pageContentShellClassName} text-left`}>
-        <SectionHeading id="features-heading" className="mb-7 text-left sm:mb-8">
-          Features
-        </SectionHeading>
+      <div className={pageContentShellClassName}>
+        {/* Section header */}
+        <div className="mb-9 sm:mb-11">
+          <p className="mb-3 text-xs font-medium uppercase tracking-[0.2em] text-zinc-500 dark:text-zinc-200/70">
+            What&apos;s inside
+          </p>
+          <h2
+            id="features-heading"
+            className={cn(
+              navChakra,
+              "text-2xl font-semibold tracking-tight text-foreground sm:text-3xl",
+            )}
+          >
+            Built for learners who mean it.
+          </h2>
+        </div>
 
-        <ul
+        {/* Bento grid */}
+        <GlowCardGrid
           className={cn(
-            "grid list-none gap-3 md:auto-rows-[minmax(112px,auto)] md:grid-cols-2 md:gap-3.5 lg:grid-cols-6 lg:gap-4 lg:auto-rows-[minmax(120px,auto)]",
-            "grid-cols-1",
+            "grid-cols-1 md:grid-cols-2 lg:grid-cols-6",
+            "md:auto-rows-[minmax(128px,auto)] lg:auto-rows-[minmax(140px,auto)]",
           )}
         >
-          {features.map(
-            ({ title, tagline, description, icon: Icon, bentoClass }) => (
-              <li key={title} className={cn("min-h-0", bentoClass)}>
-                <FeatureTestimonialCard
-                  title={title}
-                  tagline={tagline}
-                  description={description}
-                  icon={Icon}
-                />
-              </li>
+          {features.map(({ title, description, icon: Icon, bentoClass, isHero }) =>
+            isHero ? (
+              <GlowCard key={title} className={cn("min-h-[220px]", bentoClass)}>
+                <HeroCardContent title={title} description={description} Icon={Icon} />
+              </GlowCard>
+            ) : (
+              <GlowCard key={title} className={bentoClass}>
+                <SmallCardContent title={title} description={description} Icon={Icon} />
+              </GlowCard>
             ),
           )}
-        </ul>
+        </GlowCardGrid>
       </div>
     </section>
-  );
+  )
 }
 
-function FeatureTestimonialCard({
+function HeroCardContent({
   title,
-  tagline,
   description,
-  icon: Icon,
+  Icon,
 }: {
-  title: string;
-  tagline: string;
-  description: string;
-  icon: TablerIcon;
+  title: string
+  description: string
+  Icon: TablerIcon
 }) {
   return (
-    <Testimonial
-      className={cn(featureSurfaceClass, "h-full")}
-      aria-label={title}
-    >
-      <TestimonialQuote className="text-muted-foreground">
-        <p className="leading-relaxed">{description}</p>
-      </TestimonialQuote>
-      <TestimonialAuthor className="bg-card/30 dark:bg-card/20">
-        <TestimonialAvatar className="flex items-center justify-center rounded-full border border-chrome-border bg-background/90 text-muted-foreground dark:bg-background/50">
-          <Icon className="size-4 shrink-0" aria-hidden />
-          <TestimonialAvatarRing />
-        </TestimonialAvatar>
-        <TestimonialAuthorName className={cn(navChakra, "text-base")}>
-          {title}
-        </TestimonialAuthorName>
-        <TestimonialAuthorTagline>{tagline}</TestimonialAuthorTagline>
-      </TestimonialAuthor>
-    </Testimonial>
-  );
+    <div className="flex h-full flex-col p-6 sm:p-8">
+      {/* Icon */}
+      <div className="mb-5 flex h-11 w-11 items-center justify-center rounded-xl border border-chrome-border bg-background/70 shadow-sm">
+        <Icon className="size-5 shrink-0 text-muted-foreground" aria-hidden />
+      </div>
+
+      {/* Text */}
+      <h3
+        className={cn(
+          navChakra,
+          "mb-2.5 text-xl font-semibold tracking-tight text-foreground sm:text-2xl",
+        )}
+      >
+        {title}
+      </h3>
+      <p className="max-w-sm text-sm leading-relaxed text-muted-foreground sm:text-base">
+        {description}
+      </p>
+
+      {/* Step progression visual */}
+      <div className="mt-auto flex flex-wrap items-center gap-x-2 gap-y-2 pt-6">
+        {roadmapSteps.map((step, i) => (
+          <div key={step} className="flex items-center gap-2">
+            <span className="rounded-full border border-chrome-border bg-background/60 px-3 py-1 text-xs font-medium text-muted-foreground">
+              {step}
+            </span>
+            {i < roadmapSteps.length - 1 && (
+              <span className="text-xs text-muted-foreground/40" aria-hidden>
+                →
+              </span>
+            )}
+          </div>
+        ))}
+      </div>
+    </div>
+  )
+}
+
+function SmallCardContent({
+  title,
+  description,
+  Icon,
+}: {
+  title: string
+  description: string
+  Icon: TablerIcon
+}) {
+  return (
+    <div className="flex h-full flex-col p-5 sm:p-6">
+      {/* Icon */}
+      <div className="mb-3.5 flex h-9 w-9 items-center justify-center rounded-lg border border-chrome-border bg-background/70 shadow-sm">
+        <Icon className="size-4 shrink-0 text-muted-foreground" aria-hidden />
+      </div>
+
+      {/* Text */}
+      <h3
+        className={cn(
+          navChakra,
+          "mb-1.5 text-base font-semibold text-foreground",
+        )}
+      >
+        {title}
+      </h3>
+      <p className="text-sm leading-relaxed text-muted-foreground">
+        {description}
+      </p>
+    </div>
+  )
 }

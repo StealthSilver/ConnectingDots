@@ -23,13 +23,13 @@ export function AboutSection() {
             className={`${letterFont} min-w-0 max-w-2xl text-lg leading-relaxed text-muted-foreground sm:text-xl sm:leading-relaxed lg:max-w-none`}
           >
             <p className="mb-7 sm:mb-8">
-              I built this site as a quiet companion to my YouTube channel—somewhere
+              I built this site as a quiet companion to my YouTube channel somewhere
               the same ideas can settle into words, with a little more room to breathe
               than a video title or a comment box allows.
             </p>
             <p className="mb-7 sm:mb-8">
               Here, I want to share what I learn in a more formal, lasting way: articles
-              and notes when a topic needs depth, and—down the line—structured courses
+              and notes when a topic needs depth, and down the line structured courses
               when it helps to learn step by step. The channel starts the conversation;
               this place is for the slower, written half of that story.
             </p>

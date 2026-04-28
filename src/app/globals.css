@@ -19,6 +19,8 @@
   --ring: color-mix(in srgb, var(--gradient-mid) 38%, transparent);
   /* Neutral chrome border (was #8aa396 family) */
   --chrome-border: oklch(0.708 0 0);
+  /* Neutral (hue-free) fill used for glow cards */
+  --glow-card-fill: #f2f2f2;
 }
 
 .dark {
@@ -31,6 +33,8 @@
   --accent-muted: color-mix(in srgb, var(--gradient-end) 45%, transparent);
   --ring: color-mix(in srgb, var(--gradient-start) 38%, transparent);
   --chrome-border: oklch(0.708 0 0);
+  /* Neutral (hue-free) fill used for glow cards */
+  --glow-card-fill: #0d0d0d;
 }
 
 @theme inline {

@@ -1,4 +1,5 @@
 import { Hero01CtaButtons } from "@/components/hero-01-cta-buttons";
+import { NeuronsBackground } from "@/components/neurons-background";
 import { newTabProps } from "@/lib/site-links";
 import { pageContentShellClassName } from "@/lib/page-content-shell";
 import { pillChromeClass } from "@/lib/pill-chrome";
@@ -8,12 +9,28 @@ export function Hero01() {
   return (
     <div className="w-screen max-w-full pb-12 pt-8 sm:pb-16 sm:pt-10">
       <div
-        className={`${pageContentShellClassName} flex min-h-[min(70vh,52rem)] flex-col justify-center gap-12 py-14 text-left sm:gap-14 sm:py-16 lg:py-20 xl:gap-14`}
+        className={`${pageContentShellClassName} grid min-h-[min(70vh,52rem)] grid-cols-1 items-center gap-12 py-14 text-left sm:gap-14 sm:py-16 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:gap-10 lg:py-20 xl:gap-14`}
       >
         <div className="min-w-0 max-w-[min(100%,38rem)] xl:max-w-[42rem]">
           <MainContent />
         </div>
+
+        <NeuronsVisual />
       </div>
+    </div>
+  );
+}
+
+function NeuronsVisual() {
+  return (
+    <div
+      aria-hidden
+      className="pointer-events-none relative hidden h-full min-h-[28rem] w-full overflow-hidden lg:block"
+    >
+      <NeuronsBackground className="absolute inset-0" />
+      <div
+        className="absolute inset-y-0 left-0 w-1/3 bg-gradient-to-r from-background via-background/60 to-transparent"
+      />
     </div>
   );
 }

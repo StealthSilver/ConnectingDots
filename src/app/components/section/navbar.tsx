@@ -10,7 +10,7 @@ import { cn } from "@/lib/utils";
 import { IconMenu2, IconX } from "@tabler/icons-react";
 import Image from "next/image";
 import Link from "next/link";
-import { useTheme } from "next-themes";
+import { useTheme } from "@/lib/theme";
 import {
   useCallback,
   useEffect,
@@ -146,7 +146,7 @@ function BrandLink({ className }: { className?: string }) {
           priority
         />
         <span
-          className={`${navChakra} truncate text-xl font-normal tracking-tight text-black sm:text-2xl md:text-3xl dark:text-white`}
+          className={`${navChakra} truncate text-xl font-normal tracking-tight text-foreground sm:text-2xl md:text-3xl`}
         >
           Connecting Dots
         </span>

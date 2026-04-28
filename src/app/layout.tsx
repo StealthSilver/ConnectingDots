@@ -46,6 +46,14 @@ export default function RootLayout({
       suppressHydrationWarning
       className={`${notoSans.variable} ${geistMono.variable} ${chakraPetch.variable} ${kalam.variable} h-full`}
     >
+      <head>
+        {/* Runs synchronously before React hydrates — no client-side script warning */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){try{var t=localStorage.getItem('theme');var d=document.documentElement;if(t==='dark'||(t!=='light'&&window.matchMedia('(prefers-color-scheme:dark)').matches)){d.classList.add('dark')}else{d.classList.remove('dark')}}catch(e){}})()`,
+          }}
+        />
+      </head>
       <body className="relative flex min-h-full w-full flex-col">
         <PageGridLines />
         <div className="relative z-10 flex min-h-full w-full flex-1 flex-col">
