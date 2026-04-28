@@ -148,6 +148,7 @@ function MobileLink({
 
 export function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const closeMobile = useCallback(() => setMobileOpen(false), []);
   const toggleMobile = useCallback(() => setMobileOpen((o) => !o), []);
 
@@ -160,86 +161,105 @@ export function Navbar() {
     return () => document.removeEventListener("keydown", onKey);
   }, [mobileOpen]);
 
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 8);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
   return (
     <header
-      className={`${pageContentShellClassName} flex flex-col gap-0 py-3 sm:py-4`}
+      className={cn(
+        "sticky top-0 z-40 w-full transition-colors duration-200",
+        scrolled || mobileOpen
+          ? "border-b border-[color:var(--color-line)] bg-background/80 backdrop-blur-md supports-[backdrop-filter]:bg-background/65"
+          : "border-b border-transparent bg-transparent",
+      )}
     >
-      <div className="relative z-20 flex w-full min-h-12 items-center justify-between gap-3">
-        <div className="min-w-0 shrink">
-          <BrandLink className="inline-flex max-w-full" />
-        </div>
-
-        <nav
-          aria-label="Main"
-          className="hidden min-w-0 items-center justify-center gap-0.5 lg:flex"
-        >
-          {navItems.map((item) => (
-            <Link key={item.link} href={item.link} className={navLinkClass}>
-              {item.name}
-            </Link>
-          ))}
-        </nav>
-
-        <div className="flex shrink-0 items-center justify-end gap-2">
-          <div className="hidden lg:block">
-            <ThemeToggle />
+      <div
+        className={cn(
+          pageContentShellClassName,
+          "flex flex-col gap-0 py-3 sm:py-4",
+        )}
+      >
+        <div className="relative z-20 flex w-full min-h-12 items-center justify-between gap-3">
+          <div className="min-w-0 shrink">
+            <BrandLink className="inline-flex max-w-full" />
           </div>
-          <div className="hidden lg:block">
-            <HoverBorderGradient
-              as={Link}
-              href="/sign-up"
-              className={navChakra}
-            >
-              Sign up
-            </HoverBorderGradient>
-          </div>
-          <div className="flex items-center gap-1.5 lg:hidden">
-            <ThemeToggle />
-            <button
-              type="button"
-              className={mobileMenuButtonClass}
-              onClick={toggleMobile}
-              aria-expanded={mobileOpen}
-              aria-label={mobileOpen ? "Close menu" : "Open menu"}
-            >
-              {mobileOpen ? (
-                <IconX className="h-5 w-5" />
-              ) : (
-                <IconMenu2 className="h-5 w-5" />
-              )}
-            </button>
-          </div>
-        </div>
-      </div>
 
-      {mobileOpen && (
-        <div
-          className="border-t border-line pt-3 lg:hidden"
-          id="mobile-nav-panel"
-        >
-          <nav aria-label="Main" className="flex flex-col gap-0.5">
+          <nav
+            aria-label="Main"
+            className="hidden min-w-0 items-center justify-center gap-0.5 lg:flex"
+          >
             {navItems.map((item) => (
-              <MobileLink
-                key={item.link}
-                href={item.link}
-                onClick={closeMobile}
-              >
+              <Link key={item.link} href={item.link} className={navLinkClass}>
                 {item.name}
-              </MobileLink>
+              </Link>
             ))}
           </nav>
-          <div className="mt-2 border-t border-line pt-3">
-            <HoverBorderGradient
-              as={Link}
-              href="/sign-up"
-              onClick={closeMobile}
-              className={`${navChakra} flex w-full justify-center`}
-            >
-              Sign up
-            </HoverBorderGradient>
+
+          <div className="flex shrink-0 items-center justify-end gap-2">
+            <div className="hidden lg:block">
+              <ThemeToggle />
+            </div>
+            <div className="hidden lg:block">
+              <HoverBorderGradient
+                as={Link}
+                href="/sign-up"
+                className={navChakra}
+              >
+                Sign up
+              </HoverBorderGradient>
+            </div>
+            <div className="flex items-center gap-1.5 lg:hidden">
+              <ThemeToggle />
+              <button
+                type="button"
+                className={mobileMenuButtonClass}
+                onClick={toggleMobile}
+                aria-expanded={mobileOpen}
+                aria-label={mobileOpen ? "Close menu" : "Open menu"}
+              >
+                {mobileOpen ? (
+                  <IconX className="h-5 w-5" />
+                ) : (
+                  <IconMenu2 className="h-5 w-5" />
+                )}
+              </button>
+            </div>
           </div>
         </div>
-      )}
+
+        {mobileOpen && (
+          <div
+            className="border-t border-[color:var(--color-line)] pt-3 lg:hidden"
+            id="mobile-nav-panel"
+          >
+            <nav aria-label="Main" className="flex flex-col gap-0.5">
+              {navItems.map((item) => (
+                <MobileLink
+                  key={item.link}
+                  href={item.link}
+                  onClick={closeMobile}
+                >
+                  {item.name}
+                </MobileLink>
+              ))}
+            </nav>
+            <div className="mt-2 border-t border-[color:var(--color-line)] pt-3">
+              <HoverBorderGradient
+                as={Link}
+                href="/sign-up"
+                onClick={closeMobile}
+                className={`${navChakra} flex w-full justify-center`}
+              >
+                Sign up
+              </HoverBorderGradient>
+            </div>
+          </div>
+        )}
+      </div>
     </header>
   );
 }
