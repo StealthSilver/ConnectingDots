@@ -7,9 +7,9 @@ import { socialConnectItems } from "@/lib/social-connect-items";
 
 export function Hero01() {
   return (
-    <div className="w-screen max-w-full pb-12 pt-8 sm:pb-16 sm:pt-10">
+    <div className="w-screen max-w-full pb-10 pt-6 sm:pb-16 sm:pt-10">
       <div
-        className={`${pageContentShellClassName} grid min-h-[min(70vh,52rem)] grid-cols-1 items-center gap-12 py-14 text-left sm:gap-14 sm:py-16 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:gap-10 lg:py-20 xl:gap-14`}
+        className={`${pageContentShellClassName} grid min-h-[min(60vh,52rem)] grid-cols-1 items-center gap-10 py-8 text-left sm:gap-14 sm:py-16 lg:min-h-[min(70vh,52rem)] lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:gap-10 lg:py-20 xl:gap-14`}
       >
         <div className="min-w-0 max-w-[min(100%,38rem)] xl:max-w-[42rem]">
           <MainContent />
@@ -37,15 +37,15 @@ function NeuronsVisual() {
 
 function MainContent() {
   return (
-    <div className="flex flex-col justify-center gap-7 sm:gap-9">
+    <div className="flex flex-col justify-center gap-6 sm:gap-9">
       <h1
         id="hero-heading"
-        className="font-heading text-[2.5rem] leading-tight font-semibold tracking-tight text-foreground sm:text-6xl md:text-5xl lg:text-6xl xl:text-7xl"
+        className="font-heading text-4xl leading-[1.05] font-semibold tracking-tight text-foreground sm:text-5xl md:text-6xl lg:text-6xl xl:text-7xl"
       >
         Connect what you learn.
       </h1>
 
-      <p className="!leading-relaxed text-base text-muted-foreground sm:text-xl sm:text-balance md:text-lg lg:text-xl">
+      <p className="!leading-relaxed text-base text-muted-foreground sm:text-lg sm:text-balance lg:text-xl">
         Connecting Dots is the written companion to the channel blogs and notes
         when a topic needs room to breathe, and courses when it helps to learn
         step by step.
@@ -54,7 +54,7 @@ function MainContent() {
       <Hero01CtaButtons />
 
       <div
-        className="mt-20 flex flex-col gap-5 text-left sm:mt-28"
+        className="mt-10 flex flex-col gap-4 text-left sm:mt-20 sm:gap-5 lg:mt-28"
         aria-label="Connect"
       >
         <h2
@@ -63,7 +63,7 @@ function MainContent() {
         >
           Connect
         </h2>
-        <div className="flex flex-wrap items-center justify-start gap-2.5 sm:gap-3">
+        <div className="flex flex-wrap items-center justify-start gap-2 sm:gap-3">
           {socialConnectItems.map(({ label, href, icon: Icon }) => (
             <a
               key={label}

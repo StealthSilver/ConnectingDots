@@ -18,37 +18,37 @@ const navItems = [
 export function Footer() {
   return (
       <footer role="contentinfo" data-grid-stop className="w-screen max-w-full">
-      <div className={`${pageContentShellClassName} flex flex-col gap-10 py-12 sm:py-8`}>
+      <div className={`${pageContentShellClassName} flex flex-col gap-8 py-10 sm:gap-10 sm:py-8`}>
 
         {/* Top row: brand + nav */}
-        <div className="flex w-full min-w-0 flex-col gap-10 sm:flex-row sm:items-start sm:justify-between sm:gap-8 lg:gap-12">
+        <div className="flex w-full min-w-0 flex-col gap-8 sm:flex-row sm:items-start sm:justify-between sm:gap-8 lg:gap-12">
 
           {/* Brand + tagline */}
-          <div className="flex min-w-0 flex-1 flex-col gap-4">
+          <div className="flex min-w-0 flex-1 flex-col gap-3 sm:gap-4">
             <Link
               href="/"
               className="inline-flex max-w-full"
               aria-label="Home — Connecting Dots"
             >
-              <div className="flex min-w-0 items-center gap-2.5 sm:gap-3">
+              <div className="flex min-w-0 items-center gap-2 sm:gap-3">
                 <Image
                   src="/light.png"
                   alt=""
                   width={200}
                   height={52}
-                  className="h-9 w-auto shrink-0 dark:hidden sm:h-10"
+                  className="h-8 w-auto shrink-0 dark:hidden sm:h-10"
                 />
                 <Image
                   src="/cddark.png"
                   alt=""
                   width={200}
                   height={52}
-                  className="hidden h-9 w-auto shrink-0 dark:block sm:h-10"
+                  className="hidden h-8 w-auto shrink-0 dark:block sm:h-10"
                 />
                 <span
                   className={cn(
                     navChakra,
-                    "truncate text-lg font-normal tracking-tight text-foreground sm:text-xl md:text-2xl",
+                    "hidden truncate text-base font-normal tracking-tight text-foreground sm:inline sm:text-xl md:text-2xl",
                   )}
                 >
                   Connecting Dots
@@ -64,12 +64,12 @@ export function Footer() {
 
           {/* Site nav */}
           <div className="shrink-0 sm:text-right">
-            <p className="mb-4 text-xs font-medium uppercase tracking-[0.2em] text-muted-foreground">
+            <p className="mb-3 text-xs font-medium uppercase tracking-[0.2em] text-muted-foreground sm:mb-4">
               On this site
             </p>
             <nav
               aria-label="Footer"
-              className="flex flex-row flex-wrap gap-0.5 sm:flex-col sm:items-end sm:gap-1"
+              className="-ml-3 flex flex-row flex-wrap gap-0.5 sm:ml-0 sm:flex-col sm:items-end sm:gap-1"
             >
               {navItems.map((item) => (
                 <Link
@@ -86,10 +86,10 @@ export function Footer() {
 
         {/* Social links row */}
         <div>
-          <p className="mb-4 text-xs font-medium uppercase tracking-[0.2em] text-muted-foreground">
+          <p className="mb-3 text-xs font-medium uppercase tracking-[0.2em] text-muted-foreground sm:mb-4">
             Connect
           </p>
-          <div className="flex flex-wrap items-center gap-2.5 sm:gap-3">
+          <div className="flex flex-wrap items-center gap-2 sm:gap-3">
             {socialConnectItems.map(({ label, href, icon: Icon }) => (
               <a
                 key={label}
@@ -108,7 +108,7 @@ export function Footer() {
         </div>
 
         {/* Bottom bar */}
-        <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+        <div className="flex flex-col gap-1.5 sm:flex-row sm:items-center sm:justify-between sm:gap-2">
           <p className="text-xs text-muted-foreground">
             &copy; {new Date().getFullYear()} Connecting Dots. All rights reserved.
           </p>

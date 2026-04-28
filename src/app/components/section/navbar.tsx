@@ -99,13 +99,13 @@ function BrandLink({ className }: { className?: string }) {
       className={className}
       aria-label="Home — Connecting Dots"
     >
-      <div className="flex min-w-0 items-center gap-2.5 sm:gap-3">
+      <div className="flex min-w-0 items-center gap-2 sm:gap-3">
         <Image
           src="/light.png"
           alt=""
           width={200}
           height={52}
-          className="h-10 w-auto shrink-0 dark:hidden sm:h-11"
+          className="h-8 w-auto shrink-0 dark:hidden sm:h-11"
           priority
         />
         <Image
@@ -113,11 +113,11 @@ function BrandLink({ className }: { className?: string }) {
           alt=""
           width={200}
           height={52}
-          className="hidden h-10 w-auto shrink-0 dark:block sm:h-11"
+          className="hidden h-8 w-auto shrink-0 dark:block sm:h-11"
           priority
         />
         <span
-          className={`${navChakra} truncate text-xl font-normal tracking-tight text-foreground sm:text-2xl md:text-3xl`}
+          className={`${navChakra} hidden truncate text-lg font-normal tracking-tight text-foreground sm:inline sm:text-2xl md:text-3xl`}
         >
           Connecting Dots
         </span>
@@ -139,7 +139,11 @@ function MobileLink({
     <Link
       href={href}
       onClick={onClick}
-      className={cn(navChakra, subtleNavLinkClass, "w-full justify-center text-center")}
+      className={cn(
+        navChakra,
+        subtleNavLinkClass,
+        "w-full justify-start px-4 py-3 text-base text-left",
+      )}
     >
       {children}
     </Link>
@@ -213,13 +217,17 @@ export function Navbar() {
                 Sign up
               </HoverBorderGradient>
             </div>
-            <div className="flex items-center gap-1.5 lg:hidden">
+            <div className="flex items-center gap-1 lg:hidden">
               <ThemeToggle />
               <button
                 type="button"
-                className={mobileMenuButtonClass}
+                className={cn(
+                  mobileMenuButtonClass,
+                  "h-10 w-10 border border-[color:var(--color-line)]/60",
+                )}
                 onClick={toggleMobile}
                 aria-expanded={mobileOpen}
+                aria-controls="mobile-nav-panel"
                 aria-label={mobileOpen ? "Close menu" : "Open menu"}
               >
                 {mobileOpen ? (
@@ -234,10 +242,10 @@ export function Navbar() {
 
         {mobileOpen && (
           <div
-            className="border-t border-[color:var(--color-line)] pt-3 lg:hidden"
+            className="mt-3 border-t border-[color:var(--color-line)] pb-2 pt-3 lg:hidden"
             id="mobile-nav-panel"
           >
-            <nav aria-label="Main" className="flex flex-col gap-0.5">
+            <nav aria-label="Main" className="flex flex-col gap-1">
               {navItems.map((item) => (
                 <MobileLink
                   key={item.link}
@@ -248,11 +256,12 @@ export function Navbar() {
                 </MobileLink>
               ))}
             </nav>
-            <div className="mt-2 border-t border-[color:var(--color-line)] pt-3">
+            <div className="mt-3 border-t border-[color:var(--color-line)] pt-4">
               <HoverBorderGradient
                 as={Link}
                 href="/sign-up"
                 onClick={closeMobile}
+                containerClassName="w-full"
                 className={`${navChakra} flex w-full justify-center`}
               >
                 Sign up

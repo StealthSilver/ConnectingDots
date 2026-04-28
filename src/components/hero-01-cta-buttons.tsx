@@ -14,7 +14,8 @@ export function Hero01CtaButtons() {
       <HoverBorderGradient
         as={Link}
         href="/sign-up"
-        className={cn(navChakra, "px-6 sm:px-7")}
+        containerClassName="w-full sm:w-fit"
+        className={cn(navChakra, "flex w-full justify-center px-6 sm:w-auto sm:px-7")}
       >
         Sign up now
       </HoverBorderGradient>

@@ -71,19 +71,19 @@ export function FeaturesSection() {
     <section
       id="features"
       aria-labelledby="features-heading"
-      className="w-screen max-w-full pb-16 pt-12 sm:pb-20 sm:pt-16"
+      className="w-screen max-w-full pb-12 pt-10 sm:pb-20 sm:pt-16"
     >
       <div className={pageContentShellClassName}>
         {/* Section header */}
-        <div className="mb-9 sm:mb-11">
-          <p className="mb-3 text-xs font-medium uppercase tracking-[0.2em] text-zinc-500 dark:text-zinc-200/70">
+        <div className="mb-7 sm:mb-11">
+          <p className="mb-2 text-xs font-medium uppercase tracking-[0.2em] text-zinc-500 dark:text-zinc-200/70 sm:mb-3">
             What&apos;s inside
           </p>
           <h2
             id="features-heading"
             className={cn(
               navChakra,
-              "text-2xl font-semibold tracking-tight text-foreground sm:text-3xl",
+              "text-xl font-semibold tracking-tight text-foreground sm:text-3xl",
             )}
           >
             Built for learners who mean it.
@@ -93,13 +93,13 @@ export function FeaturesSection() {
         {/* Bento grid */}
         <GlowCardGrid
           className={cn(
-            "grid-cols-1 md:grid-cols-2 lg:grid-cols-6",
+            "grid-cols-1 gap-3 sm:gap-4 md:grid-cols-2 lg:grid-cols-6",
             "md:auto-rows-[minmax(128px,auto)] lg:auto-rows-[minmax(140px,auto)]",
           )}
         >
           {features.map(({ title, description, icon: Icon, bentoClass, isHero }) =>
             isHero ? (
-              <GlowCard key={title} className={cn("min-h-[220px]", bentoClass)}>
+              <GlowCard key={title} className={cn("min-h-[200px] sm:min-h-[220px]", bentoClass)}>
                 <HeroCardContent title={title} description={description} Icon={Icon} />
               </GlowCard>
             ) : (
@@ -124,9 +124,9 @@ function HeroCardContent({
   Icon: TablerIcon
 }) {
   return (
-    <div className="flex h-full flex-col p-6 sm:p-8">
+    <div className="flex h-full flex-col p-5 sm:p-8">
       {/* Icon */}
-      <div className="mb-5 flex h-11 w-11 items-center justify-center rounded-xl border border-chrome-border bg-background/70 shadow-sm">
+      <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-xl border border-chrome-border bg-background/70 shadow-sm sm:mb-5 sm:h-11 sm:w-11">
         <Icon className="size-5 shrink-0 text-muted-foreground" aria-hidden />
       </div>
 
@@ -134,7 +134,7 @@ function HeroCardContent({
       <h3
         className={cn(
           navChakra,
-          "mb-2.5 text-xl font-semibold tracking-tight text-foreground sm:text-2xl",
+          "mb-2 text-lg font-semibold tracking-tight text-foreground sm:mb-2.5 sm:text-2xl",
         )}
       >
         {title}
@@ -144,10 +144,10 @@ function HeroCardContent({
       </p>
 
       {/* Step progression visual */}
-      <div className="mt-auto flex flex-wrap items-center gap-x-2 gap-y-2 pt-6">
+      <div className="mt-auto flex flex-wrap items-center gap-x-1.5 gap-y-2 pt-5 sm:gap-x-2 sm:pt-6">
         {roadmapSteps.map((step, i) => (
-          <div key={step} className="flex items-center gap-2">
-            <span className="rounded-full border border-chrome-border bg-background/60 px-3 py-1 text-xs font-medium text-muted-foreground">
+          <div key={step} className="flex items-center gap-1.5 sm:gap-2">
+            <span className="rounded-full border border-chrome-border bg-background/60 px-2.5 py-1 text-[11px] font-medium text-muted-foreground sm:px-3 sm:text-xs">
               {step}
             </span>
             {i < roadmapSteps.length - 1 && (
@@ -172,9 +172,9 @@ function SmallCardContent({
   Icon: TablerIcon
 }) {
   return (
-    <div className="flex h-full flex-col p-5 sm:p-6">
+    <div className="flex h-full flex-col p-4 sm:p-6">
       {/* Icon */}
-      <div className="mb-3.5 flex h-9 w-9 items-center justify-center rounded-lg border border-chrome-border bg-background/70 shadow-sm">
+      <div className="mb-3 flex h-9 w-9 items-center justify-center rounded-lg border border-chrome-border bg-background/70 shadow-sm sm:mb-3.5">
         <Icon className="size-4 shrink-0 text-muted-foreground" aria-hidden />
       </div>
 

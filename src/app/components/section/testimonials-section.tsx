@@ -8,17 +8,17 @@ export function TestimonialsSection() {
     <section
       id="testimonials"
       aria-labelledby="testimonials-heading"
-      className="py-12 sm:py-16"
+      className="py-10 sm:py-16"
     >
       <div className={pageContentShellClassName}>
         <SectionHeading
           id="testimonials-heading"
-          className="mb-8 text-left sm:mb-10"
+          className="mb-6 text-left sm:mb-10"
         >
           Testimonials
         </SectionHeading>
-        <Testimonials01 />
       </div>
+      <Testimonials01 />
     </section>
   );
 }

@@ -12,7 +12,7 @@ export function MarqueeFade({ side }: { side: "left" | "right" }) {
   return (
     <div
       className={cn(
-        "pointer-events-none absolute inset-y-0 z-20 w-28 to-transparent from-background",
+        "pointer-events-none absolute inset-y-0 z-20 w-12 to-transparent from-background sm:w-28",
         side === "left" ? "left-0 bg-gradient-to-r" : "right-0 bg-gradient-to-l",
       )}
       aria-hidden

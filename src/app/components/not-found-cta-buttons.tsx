@@ -10,11 +10,12 @@ const navChakra = "[font-family:var(--font-chakra-petch)]" as const;
 
 export function NotFoundCtaButtons() {
   return (
-    <div className="flex flex-col items-stretch gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:justify-center">
+    <div className="flex w-full flex-col items-stretch gap-3 sm:w-auto sm:flex-row sm:flex-wrap sm:items-center sm:justify-center">
       <HoverBorderGradient
         as={Link}
         href="/"
-        className={cn(navChakra, "px-6 sm:px-8")}
+        containerClassName="w-full sm:w-fit"
+        className={cn(navChakra, "flex w-full justify-center px-6 sm:w-auto sm:px-8")}
       >
         Take me home
       </HoverBorderGradient>

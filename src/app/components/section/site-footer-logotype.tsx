@@ -38,7 +38,7 @@ export function SiteFooterInteractiveLogotype() {
       >
         {/* Logotype SVG — "Connecting Dots" rendered with Chakra Petch (navbar font),
             partially clipped to peek out from the bottom */}
-        <div className="flex w-full translate-y-[30%] items-center justify-center">
+        <div className="flex w-full translate-y-[40%] items-center justify-center sm:translate-y-[30%]">
           <svg
             className="container size-full"
             viewBox="0 0 1410 258"

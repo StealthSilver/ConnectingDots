@@ -15,11 +15,11 @@ export function CtaSection() {
     <section
       id="cta"
       aria-labelledby="cta-heading"
-      className="w-screen max-w-full pb-20 pt-12 sm:pb-28 sm:pt-16"
+      className="w-screen max-w-full pb-14 pt-10 sm:pb-28 sm:pt-16"
     >
       <div className={pageContentShellClassName}>
         <GlowCard className="w-full">
-          <div className="flex flex-col items-center gap-8 px-8 py-14 text-center sm:gap-10 sm:px-12 sm:py-20 lg:px-20">
+          <div className="flex flex-col items-center gap-6 px-5 py-10 text-center sm:gap-10 sm:px-12 sm:py-20 lg:px-20">
             {/* Eyebrow */}
             <p className="text-xs font-medium uppercase tracking-[0.2em] text-zinc-500 dark:text-zinc-200/70">
               Start learning
@@ -30,25 +30,26 @@ export function CtaSection() {
               id="cta-heading"
               className={cn(
                 navChakra,
-                "max-w-2xl text-3xl font-semibold tracking-tight text-foreground sm:text-4xl lg:text-5xl",
+                "max-w-2xl text-2xl font-semibold tracking-tight text-foreground sm:text-4xl lg:text-5xl",
               )}
             >
               Ready to connect the dots?
             </h2>
 
             {/* Sub-copy */}
-            <p className="max-w-xl text-base leading-relaxed text-muted-foreground sm:text-lg sm:text-balance">
+            <p className="max-w-xl text-sm leading-relaxed text-muted-foreground sm:text-lg sm:text-balance">
               Join learners who are building real understanding one concept at a
               time. No hype, no fluff. Just clear writing and structured paths
               that actually stick.
             </p>
 
             {/* CTA buttons — mirrors hero */}
-            <div className="flex flex-col items-stretch gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:justify-center">
+            <div className="flex w-full flex-col items-stretch gap-3 sm:w-auto sm:flex-row sm:flex-wrap sm:items-center sm:justify-center">
               <HoverBorderGradient
                 as={Link}
                 href="/sign-up"
-                className={cn(navChakra, "px-6 sm:px-8")}
+                containerClassName="w-full sm:w-fit"
+                className={cn(navChakra, "flex w-full justify-center px-6 sm:w-auto sm:px-8")}
               >
                 Sign up — it&apos;s free
               </HoverBorderGradient>
@@ -64,8 +65,6 @@ export function CtaSection() {
                 Browse the blogs
               </Link>
             </div>
-
-          
           </div>
         </GlowCard>
       </div>
