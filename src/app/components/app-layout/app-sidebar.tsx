@@ -16,7 +16,6 @@ import {
   IconSun,
   IconTerminal2,
   IconUserCircle,
-  IconX,
 } from "@tabler/icons-react"
 import { AnimatePresence, motion } from "motion/react"
 import { useEffect, useRef, useState } from "react"
@@ -191,17 +190,23 @@ function SidebarNavItem({
 interface AppSidebarProps {
   expanded: boolean
   onToggle: () => void
+  mobileOpen: boolean
+  onMobileClose: () => void
 }
 
-export function AppSidebar({ expanded, onToggle }: AppSidebarProps) {
+export function AppSidebar({
+  expanded,
+  onToggle,
+  mobileOpen,
+  onMobileClose,
+}: AppSidebarProps) {
   const pathname = usePathname()
   const [userOpen, setUserOpen] = useState(false)
-  const [mobileOpen, setMobileOpen] = useState(false)
   const userTriggerRef = useRef<HTMLButtonElement>(null)
 
   useEffect(() => {
-    setMobileOpen(false)
-  }, [pathname])
+    onMobileClose()
+  }, [pathname, onMobileClose])
 
   return (
     <>
@@ -215,41 +220,10 @@ export function AppSidebar({ expanded, onToggle }: AppSidebarProps) {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.15 }}
             className="fixed inset-0 z-30 bg-black/40 backdrop-blur-[2px] lg:hidden"
-            onClick={() => setMobileOpen(false)}
+            onClick={onMobileClose}
           />
         )}
       </AnimatePresence>
-
-      {/* Mobile toggle button */}
-      <button
-        type="button"
-        onClick={() => setMobileOpen((o) => !o)}
-        aria-label={mobileOpen ? "Close sidebar" : "Open sidebar"}
-        className={cn(
-          "fixed left-4 top-4 z-50 lg:hidden",
-          "inline-flex h-9 w-9 items-center justify-center rounded-full",
-          "border border-[color:var(--color-line)] bg-background/90 backdrop-blur-md",
-          "text-muted-foreground shadow-sm transition-colors hover:text-foreground",
-        )}
-      >
-        {mobileOpen ? (
-          <IconX className="size-4" />
-        ) : (
-          <svg
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            className="size-4"
-            aria-hidden
-          >
-            <line x1="4" y1="7" x2="20" y2="7" />
-            <line x1="4" y1="12" x2="20" y2="12" />
-            <line x1="4" y1="17" x2="20" y2="17" />
-          </svg>
-        )}
-      </button>
 
       {/* Sidebar */}
       <aside
