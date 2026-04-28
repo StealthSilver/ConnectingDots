@@ -170,6 +170,7 @@ export function Navbar() {
 
   return (
     <header
+      data-grid-start
       className={cn(
         "sticky top-0 z-40 w-full transition-colors duration-200",
         scrolled || mobileOpen

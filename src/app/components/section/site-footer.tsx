@@ -17,8 +17,8 @@ const navItems = [
 
 export function Footer() {
   return (
-    <footer role="contentinfo" className="w-screen max-w-full">
-      <div className={`${pageContentShellClassName} flex flex-col gap-10 py-12 sm:py-16`}>
+      <footer role="contentinfo" data-grid-stop className="w-screen max-w-full">
+      <div className={`${pageContentShellClassName} flex flex-col gap-10 py-12 sm:py-8`}>
 
         {/* Top row: brand + nav */}
         <div className="flex w-full min-w-0 flex-col gap-10 sm:flex-row sm:items-start sm:justify-between sm:gap-8 lg:gap-12">
