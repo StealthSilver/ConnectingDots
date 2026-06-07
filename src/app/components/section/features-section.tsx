@@ -10,7 +10,7 @@ import {
 } from "@tabler/icons-react"
 import Link from "next/link"
 
-import { GlowCard, GlowCardGrid } from "@/components/glow-card-grid"
+import { GlowCardGrid } from "@/components/glow-card-grid"
 import { appRoutes } from "@/lib/app-routes"
 import { fundamentalsFrontendNote } from "@/lib/learning-notes"
 import { pageContentShellClassName } from "@/lib/page-content-shell"
@@ -121,7 +121,7 @@ function CardArrow() {
       aria-hidden
       className={cn(
         navChakra,
-        "inline-flex size-8 items-center justify-center rounded-full border border-chrome-border bg-background/70",
+        "inline-flex size-8 items-center justify-center rounded-full border border-chrome-border bg-background",
         "text-muted-foreground transition-all duration-300",
         "group-hover:border-foreground/20 group-hover:bg-foreground group-hover:text-background",
         "group-hover:-translate-y-0.5 group-hover:translate-x-0.5",
@@ -132,24 +132,21 @@ function CardArrow() {
   )
 }
 
-function BentoCardBackground({ variant }: { variant: "hero" | "standard" }) {
-  if (variant === "standard") {
-    return null
-  }
-
+function FeatureCard({
+  className,
+  children,
+}: {
+  className?: string
+  children: React.ReactNode
+}) {
   return (
-    <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden">
-      <div
-        className="absolute inset-0 opacity-[0.22] dark:opacity-[0.12]"
-        style={{
-          backgroundImage:
-            "radial-gradient(circle, var(--color-muted) 1px, transparent 1px)",
-          backgroundSize: "22px 22px",
-        }}
-      />
-      <div className="absolute -right-24 -top-24 size-72 rounded-full bg-gradient-to-br from-zinc-300/30 via-zinc-200/10 to-transparent dark:from-zinc-600/20 dark:via-zinc-700/5" />
-      <div className="absolute -bottom-16 -left-16 size-56 rounded-full bg-gradient-to-tr from-zinc-400/15 to-transparent dark:from-zinc-500/10" />
-      <div className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-chrome-border/60 to-transparent" />
+    <div
+      className={cn(
+        "relative h-full overflow-hidden rounded-2xl border border-[color:var(--color-line)] bg-card transition-transform duration-300 group-hover:-translate-y-1",
+        className,
+      )}
+    >
+      {children}
     </div>
   )
 }
@@ -213,8 +210,7 @@ export function FeaturesSection() {
               badge,
             }) => (
               <FeatureCardWrapper key={title} href={href} className={bentoClass}>
-                <GlowCard className="relative h-full overflow-hidden transition-transform duration-300 group-hover:-translate-y-1">
-                  <BentoCardBackground variant={variant} />
+                <FeatureCard>
                   {variant === "hero" ? (
                     <HeroCardContent
                       title={title}
@@ -230,7 +226,7 @@ export function FeaturesSection() {
                       badge={badge}
                     />
                   )}
-                </GlowCard>
+                </FeatureCard>
               </FeatureCardWrapper>
             ),
           )}
@@ -254,7 +250,7 @@ function HeroCardContent({
   return (
     <div className="relative z-10 flex h-full flex-col p-4 sm:p-7 lg:p-8">
       <div className="mb-4 flex items-start justify-between gap-3 sm:mb-6 sm:gap-4">
-        <div className="flex size-11 items-center justify-center rounded-2xl border border-chrome-border bg-background/80 shadow-sm backdrop-blur-sm sm:size-12">
+        <div className="flex size-11 items-center justify-center rounded-2xl border border-chrome-border bg-background sm:size-12">
           <Icon className="size-5 shrink-0 text-foreground" aria-hidden />
         </div>
         <div className="flex items-center gap-2">
@@ -279,7 +275,7 @@ function HeroCardContent({
         <div className="grid grid-cols-2 gap-2 sm:flex sm:flex-wrap sm:items-center sm:gap-x-2 sm:gap-y-2">
           {roadmapSteps.map((step, i) => (
             <div key={step} className="contents sm:flex sm:items-center sm:gap-2">
-              <span className="rounded-full border border-chrome-border/80 bg-background/70 px-2 py-0.5 text-center text-[10px] font-medium text-muted-foreground backdrop-blur-sm sm:px-3 sm:py-1 sm:text-xs">
+              <span className="rounded-full border border-chrome-border bg-background px-2 py-0.5 text-center text-[10px] font-medium text-muted-foreground sm:px-3 sm:py-1 sm:text-xs">
                 {step}
               </span>
               {i < roadmapSteps.length - 1 && (
@@ -312,7 +308,7 @@ function StandardCardContent({
   return (
     <div className="relative z-10 flex h-full flex-col p-4 sm:p-5 lg:p-6">
       <div className="mb-3 flex items-start justify-between gap-3 sm:mb-4">
-        <div className="flex size-9 items-center justify-center rounded-xl border border-chrome-border bg-background/75 shadow-sm sm:size-10">
+        <div className="flex size-9 items-center justify-center rounded-xl border border-chrome-border bg-background sm:size-10">
           <Icon className="size-4 shrink-0 text-muted-foreground" aria-hidden />
         </div>
         <CardArrow />

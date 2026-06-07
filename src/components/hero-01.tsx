@@ -53,13 +53,12 @@ function MainContent() {
         id="hero-heading"
         className="font-heading text-3xl leading-[1.08] font-semibold tracking-tight text-foreground sm:text-5xl md:text-6xl lg:text-6xl xl:text-7xl"
       >
-        Connect what you learn.
+        A companion to learning.
       </h1>
 
       <p className="!leading-relaxed text-[0.9375rem] text-muted-foreground sm:text-lg sm:text-balance lg:text-xl">
-        Connecting Dots is the written companion to the channel blogs and notes
-        when a topic needs room to breathe, and courses when it helps to learn
-        step by step.
+        Ideas, lessons, and experiences shared as articles, notes, and
+        courses.
       </p>
 
       <Hero01CtaButtons />
