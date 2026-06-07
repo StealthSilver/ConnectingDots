@@ -233,7 +233,7 @@ function MobileLink({
       className={cn(
         navChakra,
         subtleNavLinkClass,
-        "w-full justify-center px-4 py-3 text-base text-center",
+        "w-full justify-start px-3 py-3 text-base text-left",
       )}
     >
       {children}
@@ -277,9 +277,11 @@ export function Navbar() {
       data-grid-start
       className={cn(
         "sticky top-0 z-40 w-full border-b border-[color:var(--color-line)] transition-colors duration-200 relative",
-        scrolled || mobileOpen
-          ? "bg-background/80 backdrop-blur-md supports-[backdrop-filter]:bg-background/65"
-          : "bg-transparent",
+        mobileOpen
+          ? "bg-background"
+          : scrolled
+            ? "bg-background/80 backdrop-blur-md supports-[backdrop-filter]:bg-background/65"
+            : "bg-transparent",
       )}
     >
       <div className={cn(pageContentShellClassName, "py-2 sm:py-2.5")}>
@@ -349,7 +351,7 @@ export function Navbar() {
         {mobileOpen ? (
           <motion.div
             id="mobile-nav-panel"
-            className="absolute inset-x-0 top-full z-30 border-b border-[color:var(--color-line)] bg-background/92 backdrop-blur-md supports-[backdrop-filter]:bg-background/78 lg:hidden"
+            className="absolute inset-x-0 top-full z-30 border-b border-[color:var(--color-line)] bg-background lg:hidden"
             initial={{ opacity: 0, y: -10, scale: 0.985 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: -8, scale: 0.99 }}

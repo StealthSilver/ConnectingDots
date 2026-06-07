@@ -79,19 +79,23 @@ export function Footer() {
           </div>
 
           {/* Site nav */}
-          <div className="shrink-0 sm:text-right">
+          <div className="shrink-0 text-left sm:text-right">
             <p className="mb-3 text-xs font-medium uppercase tracking-[0.2em] text-muted-foreground sm:mb-4">
               On this site
             </p>
             <nav
               aria-label="Footer"
-              className="flex flex-col gap-1 sm:items-end"
+              className="flex flex-col items-start gap-1 sm:items-end"
             >
               {navItems.map((item) => (
                 <Link
                   key={item.href}
                   href={item.href}
-                  className={cn(navChakra, heroPairedCtaClass, "tracking-tight sm:justify-end")}
+                  className={cn(
+                    navChakra,
+                    heroPairedCtaClass,
+                    "justify-start tracking-tight sm:justify-end",
+                  )}
                 >
                   {item.label}
                 </Link>
