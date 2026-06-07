@@ -110,7 +110,7 @@ function BlogCard({ post }: { post: BlogPost }) {
             </span>
           </div>
           <Link
-            href={`/blogs/${post.slug}`}
+            href={`/blog/${post.slug}`}
             className={cn(
               navChakra,
               "inline-flex items-center gap-1.5 text-xs font-semibold tracking-tight text-foreground transition-opacity hover:opacity-70",

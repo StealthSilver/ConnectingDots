@@ -76,9 +76,6 @@ export function FeaturesSection() {
       <div className={pageContentShellClassName}>
         {/* Section header */}
         <div className="mb-7 sm:mb-11">
-          <p className="mb-2 text-xs font-medium uppercase tracking-[0.2em] text-zinc-500 dark:text-zinc-200/70 sm:mb-3">
-            What&apos;s inside
-          </p>
           <h2
             id="features-heading"
             className={cn(

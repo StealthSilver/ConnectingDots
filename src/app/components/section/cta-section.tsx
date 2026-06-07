@@ -20,11 +20,6 @@ export function CtaSection() {
       <div className={pageContentShellClassName}>
         <GlowCard className="w-full">
           <div className="flex flex-col items-center gap-6 px-5 py-10 text-center sm:gap-10 sm:px-12 sm:py-20 lg:px-20">
-            {/* Eyebrow */}
-            <p className="text-xs font-medium uppercase tracking-[0.2em] text-zinc-500 dark:text-zinc-200/70">
-              Start learning
-            </p>
-
             {/* Headline */}
             <h2
               id="cta-heading"

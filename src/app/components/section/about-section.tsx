@@ -23,23 +23,30 @@ export function AboutSection() {
             className={`${letterFont} min-w-0 max-w-2xl text-base leading-relaxed text-muted-foreground sm:text-xl sm:leading-relaxed lg:max-w-none`}
           >
             <p className="mb-5 sm:mb-8">
-              I built this site as a quiet companion to my YouTube channel somewhere
-              the same ideas can settle into words, with a little more room to breathe
-              than a video title or a comment box allows.
+              I built this website as a companion to my teaching and learning
+              journey a place to collect, organize, and share the ideas,
+              lessons, and experiences I have gathered along the way.
             </p>
             <p className="mb-5 sm:mb-8">
-              Here, I want to share what I learn in a more formal, lasting way: articles
-              and notes when a topic needs depth, and down the line structured courses
-              when it helps to learn step by step. The channel starts the conversation;
-              this place is for the slower, written half of that story.
+              Over the years, I have learned from classrooms, projects,
+              mentors, mistakes, experiments, and countless hours of
+              exploration. This space is where I document those learnings in a
+              form that is easier to revisit, reflect on, and build upon.
+            </p>
+            <p className="mb-5 sm:mb-8">
+              You will find articles, notes, explanations, and practical
+              insights drawn from real experiences. As this journey continues, I
+              also plan to create structured courses for topics that deserve a
+              more guided, step-by-step approach.
             </p>
             <p>
-              I am not promising a flood of posts overnight. This is a commitment in
-              small pieces over time: show up, write clearly, and add what is useful
-              as I go. If that sounds like your pace too, I am glad you are here.
+              This is not a destination with a finish line. It is an evolving
+              record of continuous learning, teaching, and sharing. If you are
+              curious, enjoy learning deeply, and believe that knowledge grows
+              when it is shared, I am glad you are here.
             </p>
             <p className="mt-5 text-sm text-muted-foreground/80 sm:mt-8 sm:text-lg">
-              — Silver
+              — Rajat Saraswat
             </p>
           </div>
           <div className="relative mx-auto w-full max-w-xs shrink-0 sm:max-w-md lg:mx-0 lg:max-w-none lg:justify-self-end">

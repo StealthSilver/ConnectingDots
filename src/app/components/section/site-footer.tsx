@@ -9,9 +9,10 @@ import { cn } from "@/lib/utils";
 const navChakra = "[font-family:var(--font-chakra-petch)]" as const;
 
 const navItems = [
-  { href: "/blogs", label: "Blogs" },
+  { href: "/blog", label: "Blog" },
   { href: "/learning", label: "Learning" },
-  { href: "/courses", label: "Courses" },
+  { href: "/community", label: "Community" },
+  { href: "/connect", label: "Connect" },
   { href: "/#about", label: "About" },
 ] as const;
 
@@ -23,7 +24,7 @@ export function Footer() {
         {/* Top row: brand + nav */}
         <div className="flex w-full min-w-0 flex-col gap-8 sm:flex-row sm:items-start sm:justify-between sm:gap-8 lg:gap-12">
 
-          {/* Brand + tagline */}
+          {/* Brand + connect */}
           <div className="flex min-w-0 flex-1 flex-col gap-3 sm:gap-4">
             <Link
               href="/"
@@ -56,10 +57,27 @@ export function Footer() {
               </div>
             </Link>
 
-            <p className="max-w-sm text-sm leading-relaxed text-muted-foreground sm:text-base">
-              Learn computer science by connecting the dots — notes, stories,
-              and courses with room to think.
-            </p>
+            <div className="flex flex-col gap-3">
+              <p className="text-xs font-medium uppercase tracking-[0.2em] text-muted-foreground">
+                Connect
+              </p>
+              <div className="flex flex-wrap items-center gap-2 sm:gap-3">
+                {socialConnectItems.map(({ label, href, icon: Icon }) => (
+                  <a
+                    key={label}
+                    href={href}
+                    {...newTabProps}
+                    className={pillChromeClass}
+                  >
+                    <Icon
+                      className="h-[0.9rem] w-[0.9rem] shrink-0 text-muted-foreground transition group-hover:text-foreground sm:h-[1.1rem] sm:w-[1.1rem]"
+                      aria-hidden
+                    />
+                    <span className="truncate">{label}</span>
+                  </a>
+                ))}
+              </div>
+            </div>
           </div>
 
           {/* Site nav */}
@@ -81,29 +99,6 @@ export function Footer() {
                 </Link>
               ))}
             </nav>
-          </div>
-        </div>
-
-        {/* Social links row */}
-        <div>
-          <p className="mb-3 text-xs font-medium uppercase tracking-[0.2em] text-muted-foreground sm:mb-4">
-            Connect
-          </p>
-          <div className="flex flex-wrap items-center gap-2 sm:gap-3">
-            {socialConnectItems.map(({ label, href, icon: Icon }) => (
-              <a
-                key={label}
-                href={href}
-                {...newTabProps}
-                className={pillChromeClass}
-              >
-                <Icon
-                  className="h-[0.9rem] w-[0.9rem] shrink-0 text-muted-foreground transition group-hover:text-foreground sm:h-[1.1rem] sm:w-[1.1rem]"
-                  aria-hidden
-                />
-                <span className="truncate">{label}</span>
-              </a>
-            ))}
           </div>
         </div>
 

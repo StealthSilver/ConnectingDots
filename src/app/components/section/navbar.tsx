@@ -8,10 +8,12 @@ import { IconMenu2, IconX } from "@tabler/icons-react";
 import { AnimatePresence, motion } from "motion/react";
 import Image from "next/image";
 import Link from "next/link";
+import { Inter } from "next/font/google";
 import { useTheme } from "@/lib/theme";
 import {
   useCallback,
   useEffect,
+  useRef,
   useState,
   type ReactNode,
   type SVGProps,
@@ -19,13 +21,105 @@ import {
 
 const navChakra = "[font-family:var(--font-chakra-petch)]" as const;
 
+const navInter = Inter({
+  subsets: ["latin"],
+  display: "swap",
+  weight: ["500", "600"],
+});
+
+const signUpButtonClass = cn(
+  navInter.className,
+  "px-3.5 py-1.5 text-xs font-semibold sm:px-4 sm:py-2 sm:text-sm",
+);
+
 const navItems = [
-  { name: "Blogs", link: "/blogs" },
+  { name: "Blog", link: "/blog" },
   { name: "Learning", link: "/learning" },
-  { name: "Courses", link: "/courses" },
+  { name: "Community", link: "/community" },
+  { name: "Connect", link: "/connect" },
 ] as const;
 
-const navLinkClass = cn(navChakra, subtleNavLinkClass);
+const navLinkClass = cn(
+  navChakra,
+  subtleNavLinkClass,
+  "relative z-10 min-h-9 px-3.5 py-2 hover:bg-transparent dark:hover:bg-transparent",
+);
+
+function DesktopNavLinks() {
+  const navRef = useRef<HTMLElement>(null);
+  const itemRefs = useRef<(HTMLAnchorElement | null)[]>([]);
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+  const [slider, setSlider] = useState({ left: 0, width: 0, opacity: 0 });
+
+  const updateSlider = useCallback((index: number) => {
+    const el = itemRefs.current[index];
+    const nav = navRef.current;
+    if (!el || !nav) return;
+
+    const navRect = nav.getBoundingClientRect();
+    const elRect = el.getBoundingClientRect();
+    setSlider({
+      left: elRect.left - navRect.left,
+      width: elRect.width,
+      opacity: 1,
+    });
+  }, []);
+
+  const handleMouseEnter = useCallback(
+    (index: number) => {
+      setHoveredIndex(index);
+      updateSlider(index);
+    },
+    [updateSlider],
+  );
+
+  const handleMouseLeave = useCallback(() => {
+    setHoveredIndex(null);
+    setSlider((prev) => ({ ...prev, opacity: 0 }));
+  }, []);
+
+  useEffect(() => {
+    if (hoveredIndex === null) return;
+
+    const onResize = () => updateSlider(hoveredIndex);
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
+  }, [hoveredIndex, updateSlider]);
+
+  return (
+    <nav
+      ref={navRef}
+      aria-label="Main"
+      className="relative hidden min-w-0 items-center justify-center gap-0.5 lg:flex"
+      onMouseLeave={handleMouseLeave}
+    >
+      <motion.div
+        aria-hidden
+        className="pointer-events-none absolute top-1/2 h-9 -translate-y-1/2 rounded-full bg-black/[0.04] dark:bg-white/[0.06]"
+        initial={false}
+        animate={{
+          left: slider.left,
+          width: slider.width,
+          opacity: slider.opacity,
+        }}
+        transition={{ type: "spring", stiffness: 420, damping: 36, mass: 0.75 }}
+      />
+      {navItems.map((item, index) => (
+        <Link
+          key={item.link}
+          ref={(el) => {
+            itemRefs.current[index] = el;
+          }}
+          href={item.link}
+          className={navLinkClass}
+          onMouseEnter={() => handleMouseEnter(index)}
+        >
+          {item.name}
+        </Link>
+      ))}
+    </nav>
+  );
+}
 
 function SunGlyph(props: SVGProps<SVGSVGElement>) {
   return (
@@ -80,7 +174,7 @@ function ThemeToggle() {
     <button
       type="button"
       onClick={() => setTheme(isDark ? "light" : "dark")}
-      className={cn(mobileMenuButtonClass, "shrink-0")}
+      className={cn(mobileMenuButtonClass, "h-9 w-9 shrink-0")}
       aria-label={isDark ? "Switch to light theme" : "Switch to dark theme"}
       title={isDark ? "Switch to light theme" : "Switch to dark theme"}
     >
@@ -100,13 +194,13 @@ function BrandLink({ className }: { className?: string }) {
       className={className}
       aria-label="Home — Connecting Dots"
     >
-      <div className="flex min-w-0 items-center gap-2 sm:gap-3">
+      <div className="flex min-w-0 items-center justify-center gap-1.5 sm:gap-2">
         <Image
           src="/light.png"
           alt=""
           width={200}
           height={52}
-          className="h-8 w-auto shrink-0 dark:hidden sm:h-11"
+          className="h-6 w-auto shrink-0 dark:hidden sm:h-8"
           priority
         />
         <Image
@@ -114,11 +208,11 @@ function BrandLink({ className }: { className?: string }) {
           alt=""
           width={200}
           height={52}
-          className="hidden h-8 w-auto shrink-0 dark:block sm:h-11"
+          className="hidden h-6 w-auto shrink-0 dark:block sm:h-8"
           priority
         />
         <span
-          className={`${navChakra} hidden truncate text-lg font-normal tracking-tight text-foreground sm:inline sm:text-2xl md:text-3xl`}
+          className={`${navChakra} hidden truncate text-sm font-normal tracking-tight text-foreground sm:inline sm:text-lg md:text-xl`}
         >
           Connecting Dots
         </span>
@@ -143,7 +237,7 @@ function MobileLink({
       className={cn(
         navChakra,
         subtleNavLinkClass,
-        "w-full justify-start px-4 py-3 text-base text-left",
+        "w-full justify-center px-4 py-3 text-base text-center",
       )}
     >
       {children}
@@ -183,24 +277,17 @@ export function Navbar() {
           : "bg-transparent",
       )}
     >
-      <div className={cn(pageContentShellClassName, "py-3 sm:py-4")}>
-        <div className="relative z-20 flex w-full min-h-12 items-center justify-between gap-3">
-          <div className="min-w-0 shrink">
+      <div className={cn(pageContentShellClassName, "py-2 sm:py-2.5")}>
+        <div className="relative z-20 grid w-full min-h-10 grid-cols-[1fr_auto_1fr] items-center gap-3">
+          <div className="min-w-0 justify-self-start">
             <BrandLink className="inline-flex max-w-full" />
           </div>
 
-          <nav
-            aria-label="Main"
-            className="hidden min-w-0 items-center justify-center gap-0.5 lg:flex"
-          >
-            {navItems.map((item) => (
-              <Link key={item.link} href={item.link} className={navLinkClass}>
-                {item.name}
-              </Link>
-            ))}
-          </nav>
+          <div className="justify-self-center">
+            <DesktopNavLinks />
+          </div>
 
-          <div className="flex shrink-0 items-center justify-end gap-2">
+          <div className="flex shrink-0 items-center justify-end justify-self-end gap-2">
             <div className="hidden lg:block">
               <ThemeToggle />
             </div>
@@ -208,7 +295,7 @@ export function Navbar() {
               <HoverBorderGradient
                 as={Link}
                 href="/sign-up"
-                className={navChakra}
+                className={signUpButtonClass}
               >
                 Sign up
               </HoverBorderGradient>
@@ -219,7 +306,7 @@ export function Navbar() {
                 type="button"
                 className={cn(
                   mobileMenuButtonClass,
-                  "h-10 w-10 border border-[color:var(--color-line)] bg-background supports-[backdrop-filter]:bg-background/95 backdrop-blur-md text-foreground hover:text-foreground",
+                  "h-9 w-9 border border-[color:var(--color-line)] bg-background supports-[backdrop-filter]:bg-background/95 backdrop-blur-md text-foreground hover:text-foreground",
                   mobileOpen &&
                     "bg-background text-foreground",
                 )}
@@ -270,7 +357,7 @@ export function Navbar() {
             transition={{ type: "spring", stiffness: 520, damping: 42, mass: 0.8 }}
           >
             <div className={cn(pageContentShellClassName, "pb-3 pt-3")}>
-              <nav aria-label="Main" className="flex flex-col gap-1">
+              <nav aria-label="Main" className="flex flex-col items-center gap-1">
                 {navItems.map((item) => (
                   <MobileLink
                     key={item.link}
@@ -287,7 +374,7 @@ export function Navbar() {
                   href="/sign-up"
                   onClick={closeMobile}
                   containerClassName="w-full"
-                  className={`${navChakra} flex w-full justify-center`}
+                  className={cn(signUpButtonClass, "flex w-full justify-center")}
                 >
                   Sign up
                 </HoverBorderGradient>
