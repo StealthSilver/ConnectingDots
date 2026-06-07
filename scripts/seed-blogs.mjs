@@ -11,6 +11,8 @@ const blogSeedData = [
   {
     slug: "what-is-flat-design",
     title: "What Is Flat Design?",
+    subheading:
+      "The design approach that aged better than almost anything else in UI — and what it takes to get it right.",
     excerpt:
       "The design approach that aged better than almost anything else in UI. Here's why, and what it takes to get it right.",
     date: "June 7, 2026",
@@ -20,6 +22,8 @@ const blogSeedData = [
   {
     slug: "what-are-breadcrumbs-in-web-design",
     title: "What Are Breadcrumbs in Web Design and Why Your Site Needs Them",
+    subheading:
+      "Give users a visible trail back through your hierarchy — fewer dead ends, less frustration, stronger SEO signals.",
     excerpt:
       "Make navigation effortless with breadcrumbs. Give users clear paths, reduce backtracking, and support stronger UX and SEO.",
     date: "June 7, 2026",

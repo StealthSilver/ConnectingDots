@@ -21,10 +21,14 @@ export function AppMiniFooter() {
   return (
     <footer
       role="contentinfo"
-      className="flex h-14 items-center justify-between border-t border-[color:var(--color-line)] px-5 sm:px-6"
+      className={cn(
+        "flex min-h-14 flex-col items-center justify-center gap-3",
+        "border-t border-[color:var(--color-line)] px-4 py-4",
+        "sm:flex-row sm:justify-between sm:px-6 sm:py-3",
+      )}
     >
       {/* Social links */}
-      <div className="flex flex-wrap items-center gap-2">
+      <div className="flex max-w-full flex-wrap items-center justify-center gap-2 sm:justify-start">
         {socialItems.map(({ label, href, icon: Icon }) => (
           <a
             key={label}
@@ -32,7 +36,7 @@ export function AppMiniFooter() {
             {...newTabProps}
             aria-label={label}
             className={cn(
-              "inline-flex h-8 w-8 items-center justify-center rounded-full",
+              "inline-flex h-9 w-9 items-center justify-center rounded-full sm:h-8 sm:w-8",
               "border border-[color:var(--color-line)] bg-background/60",
               "text-muted-foreground transition-colors duration-200 hover:text-foreground",
             )}
@@ -43,7 +47,7 @@ export function AppMiniFooter() {
       </div>
 
       {/* Copyright */}
-      <p className="text-xs text-muted-foreground">
+      <p className="text-center text-[11px] leading-relaxed text-muted-foreground sm:text-right sm:text-xs">
         &copy; 2026 Connecting Dots. All rights reserved.
       </p>
     </footer>

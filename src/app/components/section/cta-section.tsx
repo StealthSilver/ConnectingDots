@@ -4,7 +4,7 @@ import { appRoutes } from "@/lib/app-routes"
 import Link from "next/link"
 
 import { GlowCard } from "@/components/glow-card-grid"
-import { HoverBorderGradient } from "@/components/ui/hover-border-gradient"
+import { AuthCtaLink } from "@/components/auth-cta-link"
 import { pageContentShellClassName } from "@/lib/page-content-shell"
 import { heroPairedCtaClass } from "@/lib/pill-chrome"
 import { cn } from "@/lib/utils"
@@ -41,14 +41,11 @@ export function CtaSection() {
 
             {/* CTA buttons — mirrors hero */}
             <div className="flex w-full flex-col items-stretch gap-3 sm:w-auto sm:flex-row sm:flex-wrap sm:items-center sm:justify-center">
-              <HoverBorderGradient
-                as={Link}
-                href="/sign-up"
+              <AuthCtaLink
+                signedOutLabel="Sign up — it's free"
                 containerClassName="w-full sm:w-fit"
                 className={cn(navChakra, "flex w-full justify-center px-6 sm:w-auto sm:px-8")}
-              >
-                Sign up — it&apos;s free
-              </HoverBorderGradient>
+              />
 
               <Link
         href={appRoutes.blog}

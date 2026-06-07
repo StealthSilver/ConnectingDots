@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Chakra_Petch, Geist_Mono, Kalam, Noto_Sans } from "next/font/google";
+import { AuthSessionProvider } from "./components/providers/session-provider";
 import { NavigationLoader } from "./components/navigation-loader";
 import { PageGridLines } from "./components/page-grid-lines";
 import { ThemeProvider } from "./components/theme-provider";
@@ -59,8 +60,10 @@ export default function RootLayout({
         <PageGridLines />
         <div className="relative z-10 flex min-h-full w-full flex-1 flex-col">
           <ThemeProvider>
-            <NavigationLoader />
-            {children}
+            <AuthSessionProvider>
+              <NavigationLoader />
+              {children}
+            </AuthSessionProvider>
           </ThemeProvider>
         </div>
       </body>  

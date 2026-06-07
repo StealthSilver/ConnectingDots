@@ -1,6 +1,6 @@
 "use client";
 
-import { HoverBorderGradient } from "@/components/ui/hover-border-gradient";
+import { AuthCtaLink } from "@/components/auth-cta-link";
 import { landingNavItems } from "@/lib/app-routes";
 import { pageContentShellClassName } from "@/lib/page-content-shell";
 import { mobileMenuButtonClass, subtleNavLinkClass } from "@/lib/pill-chrome";
@@ -288,13 +288,7 @@ export function Navbar() {
               <ThemeToggle />
             </div>
             <div className="hidden lg:block">
-              <HoverBorderGradient
-                as={Link}
-                href="/sign-up"
-                className={signUpButtonClass}
-              >
-                Sign up
-              </HoverBorderGradient>
+              <AuthCtaLink className={signUpButtonClass} />
             </div>
             <div className="flex items-center gap-1 lg:hidden">
               <ThemeToggle />
@@ -365,15 +359,11 @@ export function Navbar() {
                 ))}
               </nav>
               <div className="mt-3 border-t border-[color:var(--color-line)] pt-4">
-                <HoverBorderGradient
-                  as={Link}
-                  href="/sign-up"
+                <AuthCtaLink
                   onClick={closeMobile}
                   containerClassName="w-full"
                   className={cn(signUpButtonClass, "flex w-full justify-center")}
-                >
-                  Sign up
-                </HoverBorderGradient>
+                />
               </div>
             </div>
           </motion.div>

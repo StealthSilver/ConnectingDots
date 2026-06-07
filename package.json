@@ -11,20 +11,24 @@
   "dependencies": {
     "@radix-ui/react-slot": "^1.2.4",
     "@tabler/icons-react": "^3.41.1",
+    "bcryptjs": "^3.0.3",
     "clsx": "^2.1.1",
     "lucide-react": "^1.11.0",
     "mongodb": "^7.2.0",
     "motion": "^12.38.0",
     "next": "16.2.4",
+    "next-auth": "^5.0.0-beta.31",
     "next-themes": "^1.0.0-beta.0",
     "react": "19.2.4",
     "react-dom": "19.2.4",
     "react-fast-marquee": "^1.6.5",
     "tailwind-merge": "^3.5.0",
-    "three": "^0.184.0"
+    "three": "^0.184.0",
+    "zod": "^4.4.3"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
+    "@types/bcryptjs": "^2.4.6",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",

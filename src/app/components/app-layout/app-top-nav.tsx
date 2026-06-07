@@ -81,8 +81,9 @@ export function AppTopNav({
   return (
     <header
       className={cn(
-        "sticky top-0 z-30 flex h-12 items-center gap-2 border-b border-[color:var(--color-line)]",
-        "bg-background/85 px-5 backdrop-blur-md supports-[backdrop-filter]:bg-background/70 sm:gap-3 sm:px-8",
+        "sticky top-0 z-30 flex min-h-12 items-center gap-2 border-b border-[color:var(--color-line)]",
+        "bg-background/85 px-4 backdrop-blur-md supports-[backdrop-filter]:bg-background/70",
+        "sm:gap-3 sm:px-6 lg:px-8",
       )}
     >
       {/* Mobile sidebar toggle */}
@@ -125,10 +126,10 @@ export function AppTopNav({
       {showSearch && (
         <div
           className={cn(
-            "group relative flex h-9 items-center gap-2 rounded-full border border-[color:var(--color-line)]",
+            "group relative flex h-9 min-w-0 items-center gap-2 rounded-full border border-[color:var(--color-line)]",
             "bg-background/70 px-3 text-sm text-muted-foreground",
             "focus-within:border-foreground/30 focus-within:text-foreground",
-            "w-40 sm:w-72",
+            "w-[7.5rem] min-[480px]:w-36 sm:w-56 md:w-72",
           )}
         >
           <IconSearch className="size-4 shrink-0 opacity-70" aria-hidden />

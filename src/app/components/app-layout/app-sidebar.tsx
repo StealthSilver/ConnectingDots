@@ -2,6 +2,7 @@
 
 import Image from "next/image"
 import Link from "next/link"
+import { signOut, useSession } from "next-auth/react"
 import { usePathname } from "next/navigation"
 import {
   IconArticle,
@@ -14,14 +15,16 @@ import {
   IconSchool,
   IconSun,
   IconTerminal2,
+  IconLogout,
   IconUserCircle,
   IconUsersGroup,
 } from "@tabler/icons-react"
 import { AnimatePresence, motion } from "motion/react"
 import { useEffect, useRef, useState } from "react"
 
-import { HoverBorderGradient } from "@/components/ui/hover-border-gradient"
+import { AuthCtaLink } from "@/components/auth-cta-link"
 import { appRoutes } from "@/lib/app-routes"
+import { authRoutes } from "@/lib/auth-routes"
 import { useTheme } from "@/lib/theme"
 import { cn } from "@/lib/utils"
 
@@ -79,6 +82,8 @@ function UserPopover({
   onClose: () => void
   triggerRef: React.RefObject<HTMLButtonElement | null>
 }) {
+  const { data: session, status } = useSession()
+  const isAuthenticated = status === "authenticated"
   const popoverRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
@@ -113,21 +118,48 @@ function UserPopover({
         "p-2",
       )}
     >
-      {/* Sign up */}
-      <div className="px-1 pb-2 pt-1">
-        <HoverBorderGradient
-          as={Link}
-          href="/sign-up"
-          containerClassName="w-full"
-          className={cn(navChakra, "flex w-full justify-center text-xs")}
-          onClick={onClose}
-        >
-          Sign up
-        </HoverBorderGradient>
-      </div>
-
-      {/* Divider */}
-      <div className="mx-1 mb-1 h-px bg-[color:var(--color-line)]" />
+      {isAuthenticated ? (
+        <>
+          <div className="px-3 py-2">
+            <p className={cn(navChakra, "truncate text-xs font-semibold text-foreground")}>
+              {session?.user?.name ?? "Account"}
+            </p>
+            {session?.user?.email && (
+              <p className="truncate text-[11px] text-muted-foreground">
+                {session.user.email}
+              </p>
+            )}
+          </div>
+          <div className="mx-1 mb-1 h-px bg-[color:var(--color-line)]" />
+          <button
+            type="button"
+            onClick={() => {
+              onClose()
+              void signOut({ callbackUrl: authRoutes.signUp })
+            }}
+            className={cn(
+              "group flex w-full items-center gap-3 rounded-xl px-3 py-2.5",
+              "text-muted-foreground transition-colors duration-200",
+              "hover:bg-black/[0.04] hover:text-foreground dark:hover:bg-white/[0.06]",
+            )}
+          >
+            <IconLogout className="size-4 shrink-0" aria-hidden />
+            <span className="text-xs font-medium tracking-[0.15em]">Log out</span>
+          </button>
+          <div className="mx-1 mb-1 h-px bg-[color:var(--color-line)]" />
+        </>
+      ) : (
+        <>
+          <div className="px-1 pb-2 pt-1">
+            <AuthCtaLink
+              containerClassName="w-full"
+              className={cn(navChakra, "flex w-full justify-center text-xs")}
+              onClick={onClose}
+            />
+          </div>
+          <div className="mx-1 mb-1 h-px bg-[color:var(--color-line)]" />
+        </>
+      )}
 
       {/* Theme toggle */}
       <ThemeToggle />
@@ -206,6 +238,8 @@ export function AppSidebar({
   onMobileClose,
 }: AppSidebarProps) {
   const pathname = usePathname()
+  const { data: session, status } = useSession()
+  const isAuthenticated = status === "authenticated"
   const [userOpen, setUserOpen] = useState(false)
   const userTriggerRef = useRef<HTMLButtonElement>(null)
 
@@ -370,7 +404,7 @@ export function AppSidebar({
             {expanded && (
               <>
                 <span className={cn(navChakra, "flex-1 truncate text-left text-sm")}>
-                  Account
+                  {isAuthenticated ? (session?.user?.name ?? "Account") : "Account"}
                 </span>
                 <IconChevronUp
                   className={cn(
