@@ -2,6 +2,7 @@ import type { Metadata } from "next"
 
 import { AppPageShell } from "../../components/app-layout/app-page-shell"
 import { CourseList } from "../../courses/course-list"
+import { appPageSectionClassName } from "@/lib/page-content-shell"
 
 export const metadata: Metadata = {
   title: "Courses — Connecting Dots",
@@ -14,7 +15,7 @@ export default function HomeCoursesPage() {
     <AppPageShell title="Courses" searchPlaceholder="Search courses…">
       <section
         aria-label="Available courses"
-        className="px-5 pb-14 pt-5 sm:px-8 sm:pb-20 sm:pt-6"
+        className={appPageSectionClassName}
       >
         <CourseList />
       </section>

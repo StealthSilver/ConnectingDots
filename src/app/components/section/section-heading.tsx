@@ -12,7 +12,7 @@ export function SectionHeading({ id, children, className }: SectionHeadingProps)
     <h2
       id={id}
       className={cn(
-        "mb-8 text-center text-xs font-medium uppercase tracking-[0.2em] text-zinc-500 dark:text-zinc-200/90",
+        "mb-5 text-center text-[11px] font-medium uppercase tracking-[0.2em] text-zinc-500 sm:mb-8 sm:text-xs dark:text-zinc-200/90",
         className,
       )}
     >

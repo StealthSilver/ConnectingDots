@@ -30,7 +30,7 @@ export function SiteFooterInteractiveLogotype() {
   }
 
   return (
-    <div className="w-screen max-w-full overflow-hidden border-t border-border/40">
+    <div className="w-full overflow-hidden border-t border-border/40">
       <div
         className="overflow-hidden"
         onMouseMove={handleMouseMove}
@@ -38,7 +38,7 @@ export function SiteFooterInteractiveLogotype() {
       >
         {/* Logotype SVG — "Connecting Dots" rendered with Chakra Petch (navbar font),
             partially clipped to peek out from the bottom */}
-        <div className="flex w-full translate-y-[40%] items-center justify-center sm:translate-y-[30%]">
+        <div className="flex w-full translate-y-[48%] items-center justify-center sm:translate-y-[35%] md:translate-y-[30%]">
           <svg
             className="container size-full"
             viewBox="0 0 1410 258"

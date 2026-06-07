@@ -16,11 +16,11 @@ const navItems = [
 
 export function Footer() {
   return (
-      <footer role="contentinfo" data-grid-stop className="w-screen max-w-full">
-      <div className={`${pageContentShellClassName} flex flex-col gap-8 py-10 sm:gap-10 sm:py-8`}>
+      <footer role="contentinfo" data-grid-stop className="w-full">
+      <div className={`${pageContentShellClassName} flex flex-col gap-6 py-8 sm:gap-10 sm:py-8`}>
 
         {/* Top row: brand + nav */}
-        <div className="flex w-full min-w-0 flex-col gap-8 sm:flex-row sm:items-start sm:justify-between sm:gap-8 lg:gap-12">
+        <div className="flex w-full min-w-0 flex-col gap-6 sm:flex-row sm:items-start sm:justify-between sm:gap-8 lg:gap-12">
 
           {/* Brand + connect */}
           <div className="flex min-w-0 flex-1 flex-col gap-3 sm:gap-4">
@@ -85,7 +85,7 @@ export function Footer() {
             </p>
             <nav
               aria-label="Footer"
-              className="-ml-3 flex flex-row flex-wrap gap-0.5 sm:ml-0 sm:flex-col sm:items-end sm:gap-1"
+              className="flex flex-col gap-1 sm:items-end"
             >
               {navItems.map((item) => (
                 <Link

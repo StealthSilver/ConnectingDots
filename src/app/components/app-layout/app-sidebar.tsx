@@ -242,10 +242,20 @@ export function AppSidebar({
   const isAuthenticated = status === "authenticated"
   const [userOpen, setUserOpen] = useState(false)
   const userTriggerRef = useRef<HTMLButtonElement>(null)
+  const showLabels = expanded || mobileOpen
 
   useEffect(() => {
     onMobileClose()
   }, [pathname, onMobileClose])
+
+  useEffect(() => {
+    if (!mobileOpen) return
+    const prev = document.body.style.overflow
+    document.body.style.overflow = "hidden"
+    return () => {
+      document.body.style.overflow = prev
+    }
+  }, [mobileOpen])
 
   return (
     <>
@@ -268,7 +278,7 @@ export function AppSidebar({
       <aside
         className={cn(
           "fixed inset-y-0 left-0 z-40 flex flex-col",
-          expanded ? "w-60" : "w-16",
+          showLabels ? "w-60" : "w-16",
           "border-r border-[color:var(--color-line)] bg-background/95 backdrop-blur-md",
           "transition-[width] duration-300 ease-in-out",
           mobileOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0",
@@ -305,19 +315,19 @@ export function AppSidebar({
             <li>
               <Link
                 href={appRoutes.home}
-                title={!expanded ? "Home — Connecting Dots" : undefined}
+                title={!showLabels ? "Home — Connecting Dots" : undefined}
                 aria-label="Home — Connecting Dots"
                 className={cn(
                   navChakra,
                   "group relative flex items-center rounded-xl text-sm font-medium transition-colors duration-200",
-                  expanded ? "gap-3 px-3 py-2" : "justify-center px-3 py-2",
+                  showLabels ? "gap-3 px-3 py-2" : "justify-center px-3 py-2",
                   pathname === appRoutes.home
                     ? "bg-black/[0.06] text-foreground dark:bg-white/[0.08]"
                     : "text-muted-foreground hover:bg-black/[0.04] hover:text-foreground dark:hover:bg-white/[0.06]",
                 )}
               >
                 {/* Contracted: small cropped logo; Expanded: full logo */}
-                {expanded ? (
+                {showLabels ? (
                   <>
                     <Image
                       src="/light.png"
@@ -367,7 +377,7 @@ export function AppSidebar({
                   label={item.label}
                   icon={item.icon}
                   isActive={isNavActive(pathname, item.href)}
-                  expanded={expanded}
+                  expanded={showLabels}
                 />
               </li>
             ))}
@@ -391,17 +401,17 @@ export function AppSidebar({
             onClick={() => setUserOpen((o) => !o)}
             aria-expanded={userOpen}
             aria-label="Account menu"
-            title={!expanded ? "Account" : undefined}
+            title={!showLabels ? "Account" : undefined}
             className={cn(
               "group flex w-full items-center rounded-xl px-3 py-2 text-sm font-medium",
-              expanded ? "gap-3" : "justify-center",
+              showLabels ? "gap-3" : "justify-center",
               "text-muted-foreground transition-colors duration-200",
               "hover:bg-black/[0.04] hover:text-foreground dark:hover:bg-white/[0.06]",
               userOpen && "bg-black/[0.06] text-foreground dark:bg-white/[0.08]",
             )}
           >
             <IconUserCircle className="size-5 shrink-0" aria-hidden />
-            {expanded && (
+            {showLabels && (
               <>
                 <span className={cn(navChakra, "flex-1 truncate text-left text-sm")}>
                   {isAuthenticated ? (session?.user?.name ?? "Account") : "Account"}

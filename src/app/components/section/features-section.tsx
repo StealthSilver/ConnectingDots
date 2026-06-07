@@ -178,18 +178,18 @@ export function FeaturesSection() {
     <section
       id="features"
       aria-labelledby="features-heading"
-      className="w-full pb-12 pt-10 sm:pb-20 sm:pt-16"
+      className="w-full pb-10 pt-6 sm:pb-20 sm:pt-16"
     >
       <div className={pageContentShellClassName}>
-        <div className="mb-7 sm:mb-11">
-          <p className="mb-3 text-xs font-medium uppercase tracking-[0.2em] text-zinc-500 dark:text-zinc-400">
+        <div className="mb-5 sm:mb-11">
+          <p className="mb-2 text-[11px] font-medium uppercase tracking-[0.2em] text-zinc-500 sm:mb-3 sm:text-xs dark:text-zinc-400">
             Features
           </p>
           <h2
             id="features-heading"
             className={cn(
               navChakra,
-              "max-w-2xl text-xl font-semibold tracking-tight text-foreground sm:text-3xl",
+              "max-w-2xl text-lg font-semibold tracking-tight text-foreground sm:text-3xl",
             )}
           >
             Built for learners who mean it.
@@ -252,8 +252,8 @@ function HeroCardContent({
   badge?: Badge
 }) {
   return (
-    <div className="relative z-10 flex h-full flex-col p-5 sm:p-7 lg:p-8">
-      <div className="mb-5 flex items-start justify-between gap-4 sm:mb-6">
+    <div className="relative z-10 flex h-full flex-col p-4 sm:p-7 lg:p-8">
+      <div className="mb-4 flex items-start justify-between gap-3 sm:mb-6 sm:gap-4">
         <div className="flex size-11 items-center justify-center rounded-2xl border border-chrome-border bg-background/80 shadow-sm backdrop-blur-sm sm:size-12">
           <Icon className="size-5 shrink-0 text-foreground" aria-hidden />
         </div>
@@ -275,16 +275,16 @@ function HeroCardContent({
         {description}
       </p>
 
-      <div className="mt-auto pt-6 sm:pt-8">
-        <div className="flex flex-wrap items-center gap-x-1.5 gap-y-2 sm:gap-x-2">
+      <div className="mt-auto pt-4 sm:pt-8">
+        <div className="grid grid-cols-2 gap-2 sm:flex sm:flex-wrap sm:items-center sm:gap-x-2 sm:gap-y-2">
           {roadmapSteps.map((step, i) => (
-            <div key={step} className="flex items-center gap-1.5 sm:gap-2">
-              <span className="rounded-full border border-chrome-border/80 bg-background/70 px-2.5 py-1 text-[10px] font-medium text-muted-foreground backdrop-blur-sm sm:px-3 sm:text-xs">
+            <div key={step} className="contents sm:flex sm:items-center sm:gap-2">
+              <span className="rounded-full border border-chrome-border/80 bg-background/70 px-2 py-0.5 text-center text-[10px] font-medium text-muted-foreground backdrop-blur-sm sm:px-3 sm:py-1 sm:text-xs">
                 {step}
               </span>
               {i < roadmapSteps.length - 1 && (
                 <span
-                  className="text-[10px] text-muted-foreground/35 sm:text-xs"
+                  className="hidden text-[10px] text-muted-foreground/35 sm:inline sm:text-xs"
                   aria-hidden
                 >
                   →

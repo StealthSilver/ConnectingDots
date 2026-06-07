@@ -1,4 +1,5 @@
 import { GlowCard } from "@/components/glow-card-grid"
+import { appPageSectionClassName } from "@/lib/page-content-shell"
 import { cn } from "@/lib/utils"
 
 import { AppNotFoundCta } from "./app-not-found-cta"
@@ -24,10 +25,10 @@ export function AppNotFound({ title, backHref, backLabel }: AppNotFoundProps) {
     <AppPageShell title={title} showSearch={false}>
       <section
         aria-labelledby="app-not-found-heading"
-        className="px-5 pb-14 pt-10 sm:px-8 sm:pb-20 sm:pt-16"
+        className={appPageSectionClassName}
       >
         <GlowCard className="w-full">
-          <div className="flex flex-col items-center gap-6 px-5 py-10 text-center sm:gap-10 sm:px-12 sm:py-20 lg:px-20">
+          <div className="flex flex-col items-center gap-5 px-4 py-8 text-center sm:gap-10 sm:px-12 sm:py-20 lg:px-20">
             <p className="text-xs font-medium uppercase tracking-[0.2em] text-zinc-500 dark:text-zinc-200/70">
               404 — Lost in the network
             </p>

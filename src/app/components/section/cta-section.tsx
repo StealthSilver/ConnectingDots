@@ -16,17 +16,17 @@ export function CtaSection() {
     <section
       id="cta"
       aria-labelledby="cta-heading"
-      className="w-screen max-w-full pb-14 pt-10 sm:pb-28 sm:pt-16"
+      className="w-full pb-10 pt-6 sm:pb-28 sm:pt-16"
     >
       <div className={pageContentShellClassName}>
         <GlowCard className="w-full">
-          <div className="flex flex-col items-center gap-6 px-5 py-10 text-center sm:gap-10 sm:px-12 sm:py-20 lg:px-20">
+          <div className="flex flex-col items-center gap-5 px-4 py-8 text-center sm:gap-10 sm:px-12 sm:py-20 lg:px-20">
             {/* Headline */}
             <h2
               id="cta-heading"
               className={cn(
                 navChakra,
-                "max-w-2xl text-2xl font-semibold tracking-tight text-foreground sm:text-4xl lg:text-5xl",
+                "max-w-2xl text-xl font-semibold tracking-tight text-foreground sm:text-4xl lg:text-5xl",
               )}
             >
               Ready to connect the dots?

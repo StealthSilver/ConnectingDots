@@ -10,7 +10,7 @@ export function AboutSection() {
     <section
       id="about"
       aria-labelledby="about-heading"
-      className="w-screen max-w-full pb-10 pt-4 sm:pb-16 sm:pt-6"
+      className="w-full pb-8 pt-2 sm:pb-16 sm:pt-6"
     >
       <div
         className={`${pageContentShellClassName} text-left`}
@@ -18,22 +18,22 @@ export function AboutSection() {
         <SectionHeading id="about-heading" className="mb-6 text-left sm:mb-8">
           About
         </SectionHeading>
-        <div className="grid items-start gap-8 sm:gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:gap-12 xl:gap-14">
+        <div className="grid items-start gap-6 sm:gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:gap-12 xl:gap-14">
           <div
-            className={`${letterFont} min-w-0 max-w-2xl text-base leading-relaxed text-muted-foreground sm:text-xl sm:leading-relaxed lg:max-w-none`}
+            className={`${letterFont} min-w-0 max-w-2xl text-[0.9375rem] leading-relaxed text-muted-foreground sm:text-xl sm:leading-relaxed lg:max-w-none`}
           >
-            <p className="mb-5 sm:mb-8">
+            <p className="mb-4 sm:mb-8">
               I built this website as a companion to my teaching and learning
               journey a place to collect, organize, and share the ideas,
               lessons, and experiences I have gathered along the way.
             </p>
-            <p className="mb-5 sm:mb-8">
+            <p className="mb-4 sm:mb-8">
               Over the years, I have learned from classrooms, projects,
               mentors, mistakes, experiments, and countless hours of
               exploration. This space is where I document those learnings in a
               form that is easier to revisit, reflect on, and build upon.
             </p>
-            <p className="mb-5 sm:mb-8">
+            <p className="mb-4 sm:mb-8">
               You will find articles, notes, explanations, and practical
               insights drawn from real experiences. As this journey continues, I
               also plan to create structured courses for topics that deserve a
@@ -45,11 +45,11 @@ export function AboutSection() {
               curious, enjoy learning deeply, and believe that knowledge grows
               when it is shared, I am glad you are here.
             </p>
-            <p className="mt-5 text-sm text-muted-foreground/80 sm:mt-8 sm:text-lg">
+            <p className="mt-4 text-sm text-muted-foreground/80 sm:mt-8 sm:text-lg">
               — Rajat Saraswat
             </p>
           </div>
-          <div className="relative mx-auto w-full max-w-xs shrink-0 sm:max-w-md lg:mx-0 lg:max-w-none lg:justify-self-end">
+          <div className="relative mx-auto w-full max-w-[14rem] shrink-0 sm:max-w-xs md:max-w-md lg:mx-0 lg:max-w-none lg:justify-self-end">
             <Image
               src="/about.png"
               alt="About section illustration"

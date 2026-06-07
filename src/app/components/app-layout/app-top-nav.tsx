@@ -81,9 +81,9 @@ export function AppTopNav({
   return (
     <header
       className={cn(
-        "sticky top-0 z-30 flex min-h-12 items-center gap-2 border-b border-[color:var(--color-line)]",
-        "bg-background/85 px-4 backdrop-blur-md supports-[backdrop-filter]:bg-background/70",
-        "sm:gap-3 sm:px-6 lg:px-8",
+        "sticky top-0 z-30 flex min-h-12 flex-wrap items-center gap-2 border-b border-[color:var(--color-line)]",
+        "bg-background/85 px-4 py-2 backdrop-blur-md supports-[backdrop-filter]:bg-background/70",
+        "sm:flex-nowrap sm:gap-3 sm:px-5 sm:py-0 lg:px-6",
       )}
     >
       {/* Mobile sidebar toggle */}
@@ -110,26 +110,26 @@ export function AppTopNav({
         <h2
           className={cn(
             navChakra,
-            "min-w-0 truncate text-sm font-semibold tracking-tight text-foreground sm:text-base",
+            "min-w-0 flex-1 truncate text-sm font-semibold tracking-tight text-foreground sm:flex-none sm:text-base",
           )}
         >
           {title}
         </h2>
       ) : (
-        <span className="min-w-0" />
+        <span className="min-w-0 flex-1 sm:flex-none" />
       )}
 
-      {/* Spacer */}
-      <div className="flex-1" />
+      {/* Spacer — desktop only */}
+      <div className="hidden flex-1 sm:block" />
 
       {/* Search */}
       {showSearch && (
         <div
           className={cn(
-            "group relative flex h-9 min-w-0 items-center gap-2 rounded-full border border-[color:var(--color-line)]",
+            "group relative order-last flex h-9 w-full min-w-0 items-center gap-2 rounded-full border border-[color:var(--color-line)]",
             "bg-background/70 px-3 text-sm text-muted-foreground",
             "focus-within:border-foreground/30 focus-within:text-foreground",
-            "w-[7.5rem] min-[480px]:w-36 sm:w-56 md:w-72",
+            "sm:order-none sm:w-44 md:w-56 lg:w-64",
           )}
         >
           <IconSearch className="size-4 shrink-0 opacity-70" aria-hidden />

@@ -3,6 +3,7 @@ import type { Metadata } from "next"
 import { AppPageShell } from "../../components/app-layout/app-page-shell"
 import { BlogList } from "../../blogs/blog-list"
 import { getBlogPosts } from "@/lib/blogs"
+import { appPageSectionClassName } from "@/lib/page-content-shell"
 
 export const metadata: Metadata = {
   title: "Blog — Connecting Dots",
@@ -17,7 +18,7 @@ export default async function HomeBlogPage() {
     <AppPageShell title="Blog" searchPlaceholder="Search blog…">
       <section
         aria-label="Blog posts"
-        className="mx-auto w-full max-w-6xl px-4 pb-14 pt-5 sm:px-6 sm:pb-20 sm:pt-6 lg:px-8"
+        className={appPageSectionClassName}
       >
         <BlogList posts={posts} />
       </section>

@@ -3,6 +3,7 @@ import Link from "next/link"
 
 import type { BlogContentBlock, BlogPost } from "@/lib/blog-types"
 import { appRoutes } from "@/lib/app-routes"
+import { appPageSectionClassName } from "@/lib/page-content-shell"
 import { cn } from "@/lib/utils"
 
 const navChakra = "[font-family:var(--font-chakra-petch)]" as const
@@ -61,19 +62,19 @@ function BlogContent({ blocks }: { blocks: BlogContentBlock[] }) {
 
 export function BlogArticle({ post }: { post: BlogPost }) {
   return (
-    <article className="mx-auto w-full max-w-6xl px-4 pb-14 pt-5 sm:px-6 sm:pb-20 sm:pt-8 lg:px-8">
+    <article className={appPageSectionClassName}>
       <Link
         href={appRoutes.blog}
         className={cn(
           navChakra,
-          "mb-6 inline-flex items-center gap-2 text-xs font-medium text-muted-foreground transition-colors hover:text-foreground sm:mb-8 sm:text-sm",
+          "mb-5 inline-flex items-center gap-2 text-xs font-medium text-muted-foreground transition-colors hover:text-foreground sm:mb-8 sm:text-sm",
         )}
       >
         <IconArrowLeft className="size-4 shrink-0" aria-hidden />
         Back to blog
       </Link>
 
-      <header className="mb-8 border-b border-[color:var(--color-line)] pb-8 sm:mb-10 sm:pb-10">
+      <header className="mb-6 border-b border-[color:var(--color-line)] pb-6 sm:mb-10 sm:pb-10">
         {post.tags.length > 0 && (
           <ul
             className="mb-4 flex flex-wrap gap-2"
@@ -97,7 +98,7 @@ export function BlogArticle({ post }: { post: BlogPost }) {
         <h1
           className={cn(
             navChakra,
-            "max-w-4xl text-2xl font-semibold leading-tight tracking-tight text-foreground sm:text-3xl lg:text-4xl lg:leading-[1.15]",
+            "max-w-4xl text-xl font-semibold leading-tight tracking-tight text-foreground sm:text-3xl lg:text-4xl lg:leading-[1.15]",
           )}
         >
           {post.title}

@@ -22,11 +22,11 @@ export default function NotFound() {
       <main className="w-full min-w-0">
         <section
           aria-labelledby="not-found-heading"
-          className="w-screen max-w-full pb-14 pt-10 sm:pb-28 sm:pt-16"
+          className="w-full pb-10 pt-6 sm:pb-28 sm:pt-16"
         >
           <div className={pageContentShellClassName}>
             <GlowCard className="w-full">
-              <div className="flex flex-col items-center gap-6 px-5 py-10 text-center sm:gap-10 sm:px-12 sm:py-20 lg:px-20">
+              <div className="flex flex-col items-center gap-5 px-4 py-8 text-center sm:gap-10 sm:px-12 sm:py-20 lg:px-20">
                 <p className="text-xs font-medium uppercase tracking-[0.2em] text-zinc-500 dark:text-zinc-200/70">
                   404 — Lost in the network
                 </p>
@@ -35,7 +35,7 @@ export default function NotFound() {
                   id="not-found-heading"
                   className={cn(
                     navChakra,
-                    "max-w-2xl text-2xl font-semibold tracking-tight text-foreground sm:text-4xl lg:text-5xl",
+                    "max-w-2xl text-xl font-semibold tracking-tight text-foreground sm:text-4xl lg:text-5xl",
                   )}
                 >
                   This dot isn&apos;t connected.

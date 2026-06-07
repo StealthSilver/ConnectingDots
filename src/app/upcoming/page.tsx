@@ -1,6 +1,7 @@
 import type { Metadata } from "next"
 
 import { AppPageShell } from "../components/app-layout/app-page-shell"
+import { appPageSectionClassName } from "@/lib/page-content-shell"
 import { UpcomingList } from "./upcoming-list"
 
 export const metadata: Metadata = {
@@ -17,7 +18,7 @@ export default function UpcomingPage() {
     >
       <section
         aria-label="Planned features"
-        className="px-5 pb-14 pt-5 sm:px-8 sm:pb-20 sm:pt-6"
+        className={appPageSectionClassName}
       >
         <UpcomingList />
       </section>

@@ -257,6 +257,15 @@ export function Navbar() {
   }, [mobileOpen]);
 
   useEffect(() => {
+    if (!mobileOpen) return;
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = prev;
+    };
+  }, [mobileOpen]);
+
+  useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
@@ -274,16 +283,16 @@ export function Navbar() {
       )}
     >
       <div className={cn(pageContentShellClassName, "py-2 sm:py-2.5")}>
-        <div className="relative z-20 grid w-full min-h-10 grid-cols-[1fr_auto_1fr] items-center gap-3">
-          <div className="min-w-0 justify-self-start">
+        <div className="relative z-20 flex w-full min-h-10 items-center justify-between gap-2 lg:grid lg:grid-cols-[1fr_auto_1fr] lg:gap-3">
+          <div className="min-w-0 lg:justify-self-start">
             <BrandLink className="inline-flex max-w-full" />
           </div>
 
-          <div className="justify-self-center">
+          <div className="hidden justify-self-center lg:block">
             <DesktopNavLinks />
           </div>
 
-          <div className="flex shrink-0 items-center justify-end justify-self-end gap-2">
+          <div className="flex shrink-0 items-center justify-end gap-1.5 sm:gap-2 lg:justify-self-end">
             <div className="hidden lg:block">
               <ThemeToggle />
             </div>
@@ -346,8 +355,8 @@ export function Navbar() {
             exit={{ opacity: 0, y: -8, scale: 0.99 }}
             transition={{ type: "spring", stiffness: 520, damping: 42, mass: 0.8 }}
           >
-            <div className={cn(pageContentShellClassName, "pb-3 pt-3")}>
-              <nav aria-label="Main" className="flex flex-col items-center gap-1">
+            <div className={cn(pageContentShellClassName, "max-h-[min(70vh,24rem)] overflow-y-auto pb-4 pt-3")}>
+              <nav aria-label="Main" className="flex flex-col items-stretch gap-1">
                 {navItems.map((item) => (
                   <MobileLink
                     key={item.link}

@@ -96,12 +96,12 @@ export function AuthForm({ googleEnabled = false }: { googleEnabled?: boolean })
 
   return (
     <GlowCard className="mx-auto w-full max-w-md">
-      <div className="px-6 py-8 sm:px-8 sm:py-10">
-        <div className="mb-8 text-center">
+      <div className="px-4 py-6 sm:px-8 sm:py-10">
+        <div className="mb-6 text-center sm:mb-8">
           <h1
             className={cn(
               navChakra,
-              "text-2xl font-semibold tracking-tight text-foreground sm:text-3xl",
+              "text-xl font-semibold tracking-tight text-foreground sm:text-3xl",
             )}
           >
             {mode === "sign-up" ? "Create your account" : "Welcome back"}

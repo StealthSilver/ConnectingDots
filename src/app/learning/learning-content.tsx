@@ -33,7 +33,7 @@ export function LearningContent() {
   }
 
   return (
-    <GlowCardGrid className="grid-cols-1 gap-3 sm:max-w-md sm:gap-4">
+    <GlowCardGrid className="grid-cols-1 gap-3 sm:gap-4 lg:max-w-md">
       <ContentPreviewCard
         title={fundamentalsFrontendNote.title}
         excerpt={fundamentalsFrontendNote.excerpt}

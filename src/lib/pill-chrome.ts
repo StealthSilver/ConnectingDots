@@ -7,7 +7,7 @@ const focusRing =
  * Pilled chrome: soft card fill, neutral border — hero “Connect” social links only.
  */
 export const pillChromeClass = cn(
-  "group inline-flex min-h-9 min-w-0 max-w-full items-center justify-center gap-1.5 rounded-full border border-chrome-border bg-card/50 px-3 py-1.5 text-xs font-medium text-muted-foreground shadow-sm transition will-change-transform hover:-translate-y-0.5 hover:text-foreground dark:bg-card/40",
+  "group inline-flex min-h-8 min-w-0 max-w-full items-center justify-center gap-1.5 rounded-full border border-chrome-border bg-card/50 px-2.5 py-1 text-[11px] font-medium text-muted-foreground shadow-sm transition will-change-transform hover:-translate-y-0.5 hover:text-foreground dark:bg-card/40",
   "sm:min-h-11 sm:gap-2 sm:px-4 sm:py-2.5 sm:text-sm",
   focusRing,
 );

@@ -21,7 +21,7 @@ export default async function SignUpPage() {
     <>
       <Navbar />
       <main className="w-full min-w-0 flex-1">
-        <section className="w-screen max-w-full py-14 sm:py-20">
+        <section className="w-full py-10 sm:py-20">
           <div className={cn(pageContentShellClassName, "flex justify-center")}>
             <Suspense fallback={null}>
               <AuthForm

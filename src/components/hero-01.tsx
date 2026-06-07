@@ -7,29 +7,40 @@ import { socialConnectItems } from "@/lib/social-connect-items";
 
 export function Hero01() {
   return (
-    <div className="w-screen max-w-full pb-10 pt-6 sm:pb-16 sm:pt-10">
+    <div className="w-full pb-8 pt-4 sm:pb-16 sm:pt-10">
       <div
-        className={`${pageContentShellClassName} grid min-h-[min(60vh,52rem)] grid-cols-1 items-center gap-10 py-8 text-left sm:gap-14 sm:py-16 lg:min-h-[min(70vh,52rem)] lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:gap-10 lg:py-20 xl:gap-14`}
+        className={`${pageContentShellClassName} grid grid-cols-1 items-center gap-8 py-6 text-left sm:gap-12 sm:py-12 lg:min-h-[min(70vh,52rem)] lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:gap-10 lg:py-20 xl:gap-14`}
       >
         <div className="min-w-0 max-w-[min(100%,38rem)] xl:max-w-[42rem]">
           <MainContent />
         </div>
 
-        <NeuronsVisual />
+        <NeuronsVisual variant="desktop" />
+        <NeuronsVisual variant="mobile" />
       </div>
     </div>
   );
 }
 
-function NeuronsVisual() {
+function NeuronsVisual({ variant }: { variant: "desktop" | "mobile" }) {
+  const isDesktop = variant === "desktop";
+
   return (
     <div
       aria-hidden
-      className="pointer-events-none relative hidden h-full min-h-[28rem] w-full overflow-hidden lg:block"
+      className={
+        isDesktop
+          ? "pointer-events-none relative hidden h-full min-h-[28rem] w-full overflow-hidden lg:block"
+          : "pointer-events-none relative -mx-2 h-44 w-[calc(100%+1rem)] overflow-hidden rounded-2xl sm:mx-0 sm:h-56 sm:w-full lg:hidden"
+      }
     >
       <NeuronsBackground className="absolute inset-0" />
       <div
-        className="absolute inset-y-0 left-0 w-1/3 bg-gradient-to-r from-background via-background/60 to-transparent"
+        className={
+          isDesktop
+            ? "absolute inset-y-0 left-0 w-1/3 bg-gradient-to-r from-background via-background/60 to-transparent"
+            : "absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-background via-background/70 to-transparent"
+        }
       />
     </div>
   );
@@ -37,15 +48,15 @@ function NeuronsVisual() {
 
 function MainContent() {
   return (
-    <div className="flex flex-col justify-center gap-6 sm:gap-9">
+    <div className="flex flex-col justify-center gap-5 sm:gap-9">
       <h1
         id="hero-heading"
-        className="font-heading text-4xl leading-[1.05] font-semibold tracking-tight text-foreground sm:text-5xl md:text-6xl lg:text-6xl xl:text-7xl"
+        className="font-heading text-3xl leading-[1.08] font-semibold tracking-tight text-foreground sm:text-5xl md:text-6xl lg:text-6xl xl:text-7xl"
       >
         Connect what you learn.
       </h1>
 
-      <p className="!leading-relaxed text-base text-muted-foreground sm:text-lg sm:text-balance lg:text-xl">
+      <p className="!leading-relaxed text-[0.9375rem] text-muted-foreground sm:text-lg sm:text-balance lg:text-xl">
         Connecting Dots is the written companion to the channel blogs and notes
         when a topic needs room to breathe, and courses when it helps to learn
         step by step.
@@ -54,7 +65,7 @@ function MainContent() {
       <Hero01CtaButtons />
 
       <div
-        className="mt-10 flex flex-col gap-4 text-left sm:mt-20 sm:gap-5 lg:mt-28"
+        className="mt-6 flex flex-col gap-3 text-left sm:mt-16 sm:gap-5 lg:mt-28"
         aria-label="Connect"
       >
         <h2
