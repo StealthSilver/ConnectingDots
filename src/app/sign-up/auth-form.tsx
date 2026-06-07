@@ -26,8 +26,10 @@ export function AuthForm({ googleEnabled = false }: { googleEnabled?: boolean })
   const router = useRouter()
   const searchParams = useSearchParams()
   const callbackUrl = searchParams.get("callbackUrl") ?? appRoutes.home
+  const initialMode =
+    searchParams.get("mode") === "sign-in" ? "sign-in" : "sign-up"
 
-  const [mode, setMode] = useState<AuthMode>("sign-up")
+  const [mode, setMode] = useState<AuthMode>(initialMode)
   const [username, setUsername] = useState("")
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
@@ -151,7 +153,11 @@ export function AuthForm({ googleEnabled = false }: { googleEnabled?: boolean })
               )}
             >
               <IconBrandGoogle className="size-4" aria-hidden />
-              {googleLoading ? "Redirecting…" : "Continue with Google"}
+              {googleLoading
+                ? "Redirecting…"
+                : mode === "sign-up"
+                  ? "Sign up with Google"
+                  : "Sign in with Google"}
             </button>
 
             <div className="mb-5 flex items-center gap-3">

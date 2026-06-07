@@ -1,5 +1,6 @@
 export const authRoutes = {
   signUp: "/sign-up",
+  signIn: "/sign-in",
   home: "/home",
 } as const
 
