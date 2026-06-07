@@ -20,7 +20,7 @@ interface AppPageShellProps {
 }
 
 /**
- * Full-page shell used by /blogs, /learning, /courses and /upcoming.
+ * Full-page shell used by /home and /home/* routes.
  * Renders the persistent left sidebar, a thin top navbar (title + search),
  * the scrollable content area, and the mini footer below it.
  */

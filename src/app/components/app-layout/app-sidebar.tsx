@@ -5,34 +5,37 @@ import Link from "next/link"
 import { usePathname } from "next/navigation"
 import {
   IconArticle,
-  IconBookmark,
-  IconBrain,
   IconChevronLeft,
   IconChevronRight,
   IconChevronUp,
   IconMoon,
+  IconNotebook,
   IconRocket,
   IconSchool,
   IconSun,
-  IconTerminal2,
   IconUserCircle,
+  IconUsersGroup,
 } from "@tabler/icons-react"
 import { AnimatePresence, motion } from "motion/react"
 import { useEffect, useRef, useState } from "react"
 
 import { HoverBorderGradient } from "@/components/ui/hover-border-gradient"
+import { appRoutes } from "@/lib/app-routes"
 import { useTheme } from "@/lib/theme"
 import { cn } from "@/lib/utils"
 
 const navChakra = "[font-family:var(--font-chakra-petch)]" as const
 
 const navItems = [
-  { label: "Blogs", href: "/blogs", icon: IconArticle },
-  { label: "Learning", href: "/learning", icon: IconBrain },
-  { label: "Courses", href: "/courses", icon: IconSchool },
-  { label: "Bookmarks", href: "/bookmarks", icon: IconBookmark },
-  { label: "Playground", href: "/playground", icon: IconTerminal2 },
+  { label: "Blog", href: appRoutes.blog, icon: IconArticle },
+  { label: "Learning", href: appRoutes.learning, icon: IconNotebook },
+  { label: "Community", href: appRoutes.community, icon: IconUsersGroup },
+  { label: "Courses", href: appRoutes.courses, icon: IconSchool },
 ] as const
+
+function isNavActive(pathname: string, href: string) {
+  return pathname === href || pathname.startsWith(`${href}/`)
+}
 
 function ThemeToggle() {
   const { resolvedTheme, setTheme } = useTheme()
@@ -265,14 +268,16 @@ export function AppSidebar({
             {/* Logo / Home — styled like a nav item */}
             <li>
               <Link
-                href="/"
+                href={appRoutes.home}
                 title={!expanded ? "Home — Connecting Dots" : undefined}
                 aria-label="Home — Connecting Dots"
                 className={cn(
                   navChakra,
                   "group relative flex items-center rounded-xl text-sm font-medium transition-colors duration-200",
                   expanded ? "gap-3 px-3 py-2" : "justify-center px-3 py-2",
-                  "text-muted-foreground hover:bg-black/[0.04] hover:text-foreground dark:hover:bg-white/[0.06]",
+                  pathname === appRoutes.home
+                    ? "bg-black/[0.06] text-foreground dark:bg-white/[0.08]"
+                    : "text-muted-foreground hover:bg-black/[0.04] hover:text-foreground dark:hover:bg-white/[0.06]",
                 )}
               >
                 {/* Contracted: small cropped logo; Expanded: full logo */}
@@ -325,7 +330,7 @@ export function AppSidebar({
                   href={item.href}
                   label={item.label}
                   icon={item.icon}
-                  isActive={pathname === item.href}
+                  isActive={isNavActive(pathname, item.href)}
                   expanded={expanded}
                 />
               </li>

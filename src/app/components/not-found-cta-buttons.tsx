@@ -2,6 +2,8 @@
 
 import Link from "next/link";
 
+import { appRoutes } from "@/lib/app-routes";
+
 import { HoverBorderGradient } from "@/components/ui/hover-border-gradient";
 import { heroPairedCtaClass } from "@/lib/pill-chrome";
 import { cn } from "@/lib/utils";
@@ -21,7 +23,7 @@ export function NotFoundCtaButtons() {
       </HoverBorderGradient>
 
       <Link
-        href="/blogs"
+        href={appRoutes.blog}
         className={cn(
           heroPairedCtaClass,
           navChakra,

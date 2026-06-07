@@ -1,5 +1,6 @@
 "use client"
 
+import { appRoutes } from "@/lib/app-routes"
 import Link from "next/link"
 
 import { GlowCard } from "@/components/glow-card-grid"
@@ -50,7 +51,7 @@ export function CtaSection() {
               </HoverBorderGradient>
 
               <Link
-                href="/blogs"
+        href={appRoutes.blog}
                 className={cn(
                   heroPairedCtaClass,
                   navChakra,

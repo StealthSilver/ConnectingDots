@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { landingNavItems } from "@/lib/app-routes";
 import { newTabProps, siteLinks } from "@/lib/site-links";
 import { pageContentShellClassName } from "@/lib/page-content-shell";
 import { heroPairedCtaClass, pillChromeClass } from "@/lib/pill-chrome";
@@ -9,10 +10,7 @@ import { cn } from "@/lib/utils";
 const navChakra = "[font-family:var(--font-chakra-petch)]" as const;
 
 const navItems = [
-  { href: "/blog", label: "Blog" },
-  { href: "/learning", label: "Learning" },
-  { href: "/community", label: "Community" },
-  { href: "/connect", label: "Connect" },
+  ...landingNavItems.map(({ name, link }) => ({ href: link, label: name })),
   { href: "/#about", label: "About" },
 ] as const;
 

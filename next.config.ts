@@ -9,10 +9,18 @@ const nextConfig: NextConfig = {
   },
   async redirects() {
     return [
-      { source: "/blogs", destination: "/blog", permanent: true },
-      { source: "/blogs/:path*", destination: "/blog/:path*", permanent: true },
-      { source: "/courses", destination: "/connect", permanent: true },
-      { source: "/courses/:path*", destination: "/connect/:path*", permanent: true },
+      { source: "/blog", destination: "/home/blog", permanent: true },
+      { source: "/blog/:path*", destination: "/home/blog/:path*", permanent: true },
+      { source: "/blogs", destination: "/home/blog", permanent: true },
+      { source: "/blogs/:path*", destination: "/home/blog/:path*", permanent: true },
+      { source: "/learning", destination: "/home/learning", permanent: true },
+      { source: "/learning/:path*", destination: "/home/learning/:path*", permanent: true },
+      { source: "/community", destination: "/home/community", permanent: true },
+      { source: "/community/:path*", destination: "/home/community/:path*", permanent: true },
+      { source: "/connect", destination: "/home/courses", permanent: true },
+      { source: "/connect/:path*", destination: "/home/courses/:path*", permanent: true },
+      { source: "/courses", destination: "/home/courses", permanent: true },
+      { source: "/courses/:path*", destination: "/home/courses/:path*", permanent: true },
     ];
   },
 };

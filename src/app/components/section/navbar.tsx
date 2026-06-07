@@ -1,6 +1,7 @@
 "use client";
 
 import { HoverBorderGradient } from "@/components/ui/hover-border-gradient";
+import { landingNavItems } from "@/lib/app-routes";
 import { pageContentShellClassName } from "@/lib/page-content-shell";
 import { mobileMenuButtonClass, subtleNavLinkClass } from "@/lib/pill-chrome";
 import { cn } from "@/lib/utils";
@@ -32,12 +33,7 @@ const signUpButtonClass = cn(
   "px-3.5 py-1.5 text-xs font-semibold sm:px-4 sm:py-2 sm:text-sm",
 );
 
-const navItems = [
-  { name: "Blog", link: "/blog" },
-  { name: "Learning", link: "/learning" },
-  { name: "Community", link: "/community" },
-  { name: "Connect", link: "/connect" },
-] as const;
+const navItems = landingNavItems;
 
 const navLinkClass = cn(
   navChakra,

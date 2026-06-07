@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
 
-import { AppPageShell } from "../components/app-layout/app-page-shell"
-import { CourseList } from "./course-list"
+import { AppPageShell } from "../../components/app-layout/app-page-shell"
+import { CourseList } from "../../courses/course-list"
 
 export const metadata: Metadata = {
   title: "Courses — Connecting Dots",
@@ -9,7 +9,7 @@ export const metadata: Metadata = {
     "Structured learning paths from first principles to job-ready. No guessing, no dead ends.",
 }
 
-export default function CoursesPage() {
+export default function HomeCoursesPage() {
   return (
     <AppPageShell title="Courses" searchPlaceholder="Search courses…">
       <section

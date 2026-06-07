@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
 
-import { AppPageShell } from "../components/app-layout/app-page-shell"
-import { CommunityContent } from "./community-content"
+import { AppPageShell } from "../../components/app-layout/app-page-shell"
+import { CommunityContent } from "../../community/community-content"
 
 export const metadata: Metadata = {
   title: "Community — Connecting Dots",
@@ -9,7 +9,7 @@ export const metadata: Metadata = {
     "Study together, share what you're building, and join discussions around notes, blog posts, and courses.",
 }
 
-export default function CommunityPage() {
+export default function HomeCommunityPage() {
   return (
     <AppPageShell title="Community" searchPlaceholder="Search community…">
       <section

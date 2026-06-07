@@ -1,6 +1,7 @@
 "use client"
 
 import { IconArrowLeft, IconHome } from "@tabler/icons-react"
+import { appRoutes } from "@/lib/app-routes"
 import Link from "next/link"
 
 import { HoverBorderGradient } from "@/components/ui/hover-border-gradient"
@@ -19,7 +20,7 @@ export function AppNotFoundCta({ backHref, backLabel }: AppNotFoundCtaProps) {
     <div className="flex w-full flex-col items-stretch gap-3 sm:w-auto sm:flex-row sm:flex-wrap sm:items-center sm:justify-center">
       <HoverBorderGradient
         as={Link}
-        href="/"
+        href={appRoutes.home}
         containerClassName="w-full sm:w-fit"
         className={cn(
           navChakra,
