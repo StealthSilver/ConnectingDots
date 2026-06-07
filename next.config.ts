@@ -21,6 +21,8 @@ const nextConfig: NextConfig = {
       { source: "/connect/:path*", destination: "/home/courses/:path*", permanent: true },
       { source: "/courses", destination: "/home/courses", permanent: true },
       { source: "/courses/:path*", destination: "/home/courses/:path*", permanent: true },
+      { source: "/playground", destination: "/home/playground", permanent: true },
+      { source: "/playground/:path*", destination: "/home/playground/:path*", permanent: true },
     ];
   },
 };

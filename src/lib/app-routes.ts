@@ -4,6 +4,7 @@ export const appRoutes = {
   learning: "/home/learning",
   community: "/home/community",
   courses: "/home/courses",
+  playground: "/home/playground",
 } as const
 
 export const landingNavItems = [

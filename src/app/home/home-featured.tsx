@@ -6,10 +6,8 @@ import { useMemo } from "react"
 import { ContentPreviewCard } from "@/components/content-preview-card"
 import { GlowCardGrid } from "@/components/glow-card-grid"
 import { appRoutes } from "@/lib/app-routes"
-import { blogPosts } from "@/lib/blog-posts"
-import {
-  fundamentalsFrontendNote,
-} from "@/lib/learning-notes"
+import type { BlogPost } from "@/lib/blog-types"
+import { fundamentalsFrontendNote } from "@/lib/learning-notes"
 import { cn } from "@/lib/utils"
 
 const navChakra = "[font-family:var(--font-chakra-petch)]" as const
@@ -25,34 +23,37 @@ type FeaturedItem = {
   meta: string
 }
 
-const featuredItems: FeaturedItem[] = [
-  ...blogPosts.map((post) => ({
-    id: `blog-${post.slug}`,
-    section: "Featured blogs" as const,
-    title: post.title,
-    excerpt: post.excerpt,
-    href: `${appRoutes.blog}/${post.slug}`,
-    meta: post.readingTime,
-  })),
-  {
-    id: "note-fundamentals",
-    section: "Featured notes",
-    title: fundamentalsFrontendNote.title,
-    excerpt: fundamentalsFrontendNote.excerpt,
-    href: fundamentalsFrontendNote.href,
-    meta: fundamentalsFrontendNote.meta,
-  },
-]
-
 const sectionOrder: FeaturedSection[] = [
   "Featured blogs",
   "Featured notes",
   "News",
 ]
 
-export function HomeFeatured() {
+export function HomeFeatured({ blogPosts }: { blogPosts: BlogPost[] }) {
   const searchParams = useSearchParams()
   const q = (searchParams.get("q") ?? "").trim().toLowerCase()
+
+  const featuredItems = useMemo<FeaturedItem[]>(
+    () => [
+      ...blogPosts.map((post) => ({
+        id: `blog-${post.slug}`,
+        section: "Featured blogs" as const,
+        title: post.title,
+        excerpt: post.excerpt,
+        href: `${appRoutes.blog}/${post.slug}`,
+        meta: post.readingTime,
+      })),
+      {
+        id: "note-fundamentals",
+        section: "Featured notes",
+        title: fundamentalsFrontendNote.title,
+        excerpt: fundamentalsFrontendNote.excerpt,
+        href: fundamentalsFrontendNote.href,
+        meta: fundamentalsFrontendNote.meta,
+      },
+    ],
+    [blogPosts],
+  )
 
   const filtered = useMemo(() => {
     if (!q) return featuredItems
@@ -64,7 +65,7 @@ export function HomeFeatured() {
         item.meta.toLowerCase().includes(q)
       )
     })
-  }, [q])
+  }, [featuredItems, q])
 
   const grouped = useMemo(() => {
     return sectionOrder.map((section) => ({

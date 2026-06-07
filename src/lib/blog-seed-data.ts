@@ -1,6 +1,7 @@
-import type { BlogPost } from "@/app/blogs/blog-list"
+import type { BlogPost } from "@/lib/blog-types"
 
-export const blogPosts: BlogPost[] = [
+/** Default blog posts used by the seed script when the collection is empty. */
+export const blogSeedData: BlogPost[] = [
   {
     slug: "what-is-flat-design",
     title: "What Is Flat Design?",

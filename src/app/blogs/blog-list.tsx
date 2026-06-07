@@ -5,19 +5,13 @@ import { useMemo } from "react"
 
 import { ContentPreviewCard } from "@/components/content-preview-card"
 import { GlowCardGrid } from "@/components/glow-card-grid"
+import type { BlogPost } from "@/lib/blog-types"
 import { appRoutes } from "@/lib/app-routes"
 import { cn } from "@/lib/utils"
 
 const navChakra = "[font-family:var(--font-chakra-petch)]" as const
 
-export type BlogPost = {
-  slug: string
-  title: string
-  excerpt: string
-  date: string
-  readingTime: string
-  tags: string[]
-}
+export type { BlogPost } from "@/lib/blog-types"
 
 interface BlogListProps {
   posts: BlogPost[]

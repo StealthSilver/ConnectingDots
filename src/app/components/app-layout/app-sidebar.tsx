@@ -13,6 +13,7 @@ import {
   IconRocket,
   IconSchool,
   IconSun,
+  IconTerminal2,
   IconUserCircle,
   IconUsersGroup,
 } from "@tabler/icons-react"
@@ -31,6 +32,7 @@ const navItems = [
   { label: "Learning", href: appRoutes.learning, icon: IconNotebook },
   { label: "Community", href: appRoutes.community, icon: IconUsersGroup },
   { label: "Courses", href: appRoutes.courses, icon: IconSchool },
+  { label: "Playground", href: appRoutes.playground, icon: IconTerminal2 },
 ] as const
 
 function isNavActive(pathname: string, href: string) {
