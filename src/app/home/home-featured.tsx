@@ -7,7 +7,7 @@ import { ContentPreviewCard } from "@/components/content-preview-card"
 import { GlowCardGrid } from "@/components/glow-card-grid"
 import { appRoutes } from "@/lib/app-routes"
 import type { BlogPost } from "@/lib/blog-types"
-import { fundamentalsFrontendNote } from "@/lib/learning-notes"
+import { learningNotes } from "@/lib/learning-notes"
 import { cn } from "@/lib/utils"
 
 const navChakra = "[font-family:var(--font-chakra-petch)]" as const
@@ -24,10 +24,16 @@ type FeaturedItem = {
 }
 
 const sectionOrder: FeaturedSection[] = [
-  "Featured blogs",
   "Featured notes",
+  "Featured blogs",
   "News",
 ]
+
+function latestBlogPosts(posts: BlogPost[], limit = 3) {
+  return [...posts]
+    .sort((a, b) => Date.parse(b.date) - Date.parse(a.date))
+    .slice(0, limit)
+}
 
 export function HomeFeatured({ blogPosts }: { blogPosts: BlogPost[] }) {
   const searchParams = useSearchParams()
@@ -35,7 +41,15 @@ export function HomeFeatured({ blogPosts }: { blogPosts: BlogPost[] }) {
 
   const featuredItems = useMemo<FeaturedItem[]>(
     () => [
-      ...blogPosts.map((post) => ({
+      ...learningNotes.map((note) => ({
+        id: `note-${note.href}`,
+        section: "Featured notes" as const,
+        title: note.title,
+        excerpt: note.excerpt,
+        href: note.href,
+        meta: note.meta,
+      })),
+      ...latestBlogPosts(blogPosts).map((post) => ({
         id: `blog-${post.slug}`,
         section: "Featured blogs" as const,
         title: post.title,
@@ -43,14 +57,6 @@ export function HomeFeatured({ blogPosts }: { blogPosts: BlogPost[] }) {
         href: `${appRoutes.blog}/${post.slug}`,
         meta: post.readingTime,
       })),
-      {
-        id: "note-fundamentals",
-        section: "Featured notes",
-        title: fundamentalsFrontendNote.title,
-        excerpt: fundamentalsFrontendNote.excerpt,
-        href: fundamentalsFrontendNote.href,
-        meta: fundamentalsFrontendNote.meta,
-      },
     ],
     [blogPosts],
   )

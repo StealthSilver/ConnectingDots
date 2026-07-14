@@ -30,6 +30,29 @@ const blogSeedData = [
     readingTime: "7 min read",
     tags: ["Design", "UX", "SEO"],
   },
+  {
+    slug: "complete-guide-to-buttons-in-web-design",
+    title: "Complete Guide to Buttons in Web Design",
+    subheading:
+      "How to choose between buttons and links, build a clear hierarchy, and make every control look — and feel — clickable.",
+    excerpt:
+      "Buttons trigger actions. Links navigate. Get the semantics, hierarchy, and clickability right, and users know what to do before they click.",
+    date: "July 1, 2026",
+    readingTime: "10 min read",
+    tags: ["Design", "UX", "Frontend"],
+  },
+  {
+    slug: "beyond-stillness-navigating-motion-design",
+    title:
+      "Beyond Stillness: Navigating Motion Design with Fundamental Principles",
+    subheading:
+      "A beginner's guide to motion design principles — purpose, timing, continuity, and rhythm that help people decide faster.",
+    excerpt:
+      "Motion is more than decoration. Learn the fundamentals of purpose, time, and spatial continuity so interfaces feel clear, intentional, and trustworthy.",
+    date: "June 26, 2026",
+    readingTime: "9 min read",
+    tags: ["Design", "UX", "Motion"],
+  },
 ]
 
 const client = new MongoClient(uri)
