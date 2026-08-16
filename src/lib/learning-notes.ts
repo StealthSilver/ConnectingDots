@@ -14,4 +14,12 @@ export const dsaCppNote = {
   href: "https://patch-umbrella-c3a.notion.site/DATA-STRUCTURES-AND-ALGORITHMS-C-39c5af667d9680f89f71dcba73e98d2c",
 } as const
 
-export const learningNotes = [fundamentalsFrontendNote, dsaCppNote] as const
+export const dsaJavaNote = {
+  title: "Data structures and algorithms - Java",
+  excerpt:
+    "Pattern-first notes on arrays, trees, graphs, recursion, and classic algorithms — built in Java to strengthen problem-solving for interviews and competitive programming.",
+  meta: "DSA · Java",
+  href: "https://patch-umbrella-c3a.notion.site/DATA-STRUCTURES-AND-ALGORITHMS-JAVA-3b85af667d968054bbb2d2f8df75c595",
+} as const
+
+export const learningNotes = [dsaJavaNote, fundamentalsFrontendNote, dsaCppNote] as const
