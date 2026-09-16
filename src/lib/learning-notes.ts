@@ -1,3 +1,11 @@
+export const appliedAiNote = {
+  title: "Applied AI - ML and Gen AI",
+  excerpt:
+    "Hands-on notes on machine learning and generative AI — covering core models, workflows, and how to build practical applied AI systems.",
+  meta: "AI · ML · Gen AI",
+  href: "https://patch-umbrella-c3a.notion.site/AI-ML-Introduction-to-GenAI-3db5af667d9680c482b8d7eb4ed5881e?pvs=74",
+} as const
+
 export const fundamentalsFrontendNote = {
   title: "Fundamentals of Design and Frontend Engineering",
   excerpt:
@@ -22,4 +30,9 @@ export const dsaJavaNote = {
   href: "https://patch-umbrella-c3a.notion.site/DATA-STRUCTURES-AND-ALGORITHMS-JAVA-3b85af667d968054bbb2d2f8df75c595",
 } as const
 
-export const learningNotes = [dsaJavaNote, fundamentalsFrontendNote, dsaCppNote] as const
+export const learningNotes = [
+  appliedAiNote,
+  dsaJavaNote,
+  fundamentalsFrontendNote,
+  dsaCppNote,
+] as const

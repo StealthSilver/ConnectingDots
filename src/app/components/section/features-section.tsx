@@ -2,6 +2,7 @@ import type { TablerIcon } from "@tabler/icons-react"
 import {
   IconArrowUpRight,
   IconArticle,
+  IconBrain,
   IconNotebook,
   IconRoad,
   IconSchool,
@@ -12,8 +13,9 @@ import Link from "next/link"
 
 import { GlowCardGrid } from "@/components/glow-card-grid"
 import { appRoutes } from "@/lib/app-routes"
-import { fundamentalsFrontendNote } from "@/lib/learning-notes"
+import { appliedAiNote, fundamentalsFrontendNote } from "@/lib/learning-notes"
 import { pageContentShellClassName } from "@/lib/page-content-shell"
+import { newTabProps } from "@/lib/site-links"
 import { cn } from "@/lib/utils"
 
 const navChakra = "[font-family:var(--font-chakra-petch)]" as const
@@ -40,6 +42,15 @@ const badgeStyles: Record<Badge, string> = {
 }
 
 const features: FeatureDef[] = [
+  {
+    title: appliedAiNote.title,
+    description: appliedAiNote.excerpt,
+    icon: IconBrain,
+    href: appliedAiNote.href,
+    bentoClass: "md:col-span-1 lg:col-span-5",
+    variant: "standard",
+    badge: "Live",
+  },
   {
     title: "Learning Roadmaps",
     description:
@@ -160,11 +171,19 @@ function FeatureCardWrapper({
   className?: string
   children: React.ReactNode
 }) {
+  const wrapperClassName = cn("group block h-full min-h-0 min-w-0", className)
+  const isExternal = href.startsWith("http")
+
+  if (isExternal) {
+    return (
+      <a href={href} className={wrapperClassName} {...newTabProps}>
+        {children}
+      </a>
+    )
+  }
+
   return (
-    <Link
-      href={href}
-      className={cn("group block h-full min-h-0 min-w-0", className)}
-    >
+    <Link href={href} className={wrapperClassName}>
       {children}
     </Link>
   )
